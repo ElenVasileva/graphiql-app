@@ -1,0 +1,4 @@
+{
+  "pattern": "^(fix|feat|refactor|chore)\/RSS-REACT_[0-9]{1,2}\/[a-zA-Z_]+$",
+  "errorMsg": "Branch name must follow the format: <type>/<issue-id>/<description>"
+}  
