@@ -1,0 +1,12 @@
+.response-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30%;
+}
+
+.h2 {
+  font: var(--text-header-l);
+  color: var(--color-secondary);
+  align-self: center;
+}

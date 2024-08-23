@@ -1,0 +1,19 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  // gap: 40px;
+}
+
+.input {
+  width: 100%;
+  max-width: 400px;
+  background-color: #b7c2d712;
+  color: var(--color-neutral);
+  border: none;
+  font: var(--text-s);
+}
+
+.label {
+  font: var(--text-s);
+}
