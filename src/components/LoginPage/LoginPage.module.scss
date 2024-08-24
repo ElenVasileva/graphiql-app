@@ -1,0 +1,98 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-base);
+  color: var(--color-neutral);
+}
+
+.title {
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  padding: 20px;
+  border: 1px solid var(--color-neutral);
+  border-radius: 7px;
+}
+
+.control {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+
+  label {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  input {
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    border: 1px solid var(--color-neutral);
+    border-radius: 5px;
+
+    &:focus {
+      outline: 1px solid var(--color-tertiary);
+    }
+
+    &.errorInput {
+      outline: 1px solid var(--color-error);
+    }
+  }
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.showPassword {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  display: flex;
+
+  &:hover {
+    color: var(--color-tertiary);
+  }
+}
+
+.error {
+  position: absolute;
+  color: var(--color-error);
+  font-size: 10px;
+}
+
+.submit {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: var(--color-tertiary);
+  color: var(--color-base);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-secondary);
+  }
+
+  &:disabled {
+    background-color: var(--color-neutral);
+  }
+}
