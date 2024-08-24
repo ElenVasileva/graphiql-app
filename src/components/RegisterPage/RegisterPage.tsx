@@ -125,13 +125,13 @@ export const RegisterPage: FC = () => {
                 alt={showPassword ? 'Hide password' : 'Show password'}
               />
             </button>
+
+            {password && <PasswordStrength password={password} />}
           </div>
 
           {errors.password && (
             <p className={styles.error}>{errors.password.message}</p>
           )}
-
-          {password && <PasswordStrength password={password} />}
         </div>
 
         <div className={styles.control}>
