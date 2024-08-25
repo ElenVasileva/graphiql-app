@@ -51,7 +51,7 @@ export default function RestPageComponent({
         <button onClick={onSubmit}>Send</button>
       </div>
 
-      <textarea value={response} />
+      <textarea readOnly value={response} />
     </div>
   );
 }
