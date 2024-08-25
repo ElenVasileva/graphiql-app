@@ -15,22 +15,7 @@ const evaluatePasswordStrength = (password: string) => {
   if (/\d/.test(password)) score += 1;
   if (/[^A-Za-z0-9]/.test(password)) score += 1;
 
-  switch (score) {
-    case 0:
-      return 0;
-    case 1:
-      return 20;
-    case 2:
-      return 40;
-    case 3:
-      return 60;
-    case 4:
-      return 80;
-    case 5:
-      return 100;
-    default:
-      return 0;
-  }
+  return score * 20;
 };
 
 const R = 9;
