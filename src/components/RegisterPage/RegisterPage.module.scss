@@ -96,3 +96,14 @@
     background-color: var(--color-neutral);
   }
 }
+
+.link {
+  color: var(--color-tertiary);
+  text-decoration: none;
+  margin-top: 16px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

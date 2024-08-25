@@ -9,6 +9,7 @@ import eye from '../../assets/icons/eye.svg';
 import eyeOff from '../../assets/icons/eye-off.svg';
 import Image from 'next/image';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 type Inputs = {
   email: string;
@@ -100,6 +101,10 @@ export const LoginPage: FC = () => {
         >
           Submit
         </button>
+
+        <Link href="/auth/sign-up" className={styles.link}>
+          Don&apos;t have an account?
+        </Link>
       </form>
     </div>
   );

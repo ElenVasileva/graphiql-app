@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PasswordStrength } from 'components/PasswordStrength';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 type Inputs = {
   name: string;
@@ -156,6 +157,10 @@ export const RegisterPage: FC = () => {
         >
           Submit
         </button>
+
+        <Link href="/auth" className={styles.link}>
+          Already have an account?
+        </Link>
       </form>
     </div>
   );
