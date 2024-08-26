@@ -1,16 +1,13 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styles from './RegisterPage.module.scss';
-import Image from 'next/image';
 import * as yup from 'yup';
-import eye from '../../assets/icons/eye.svg';
-import eyeOff from '../../assets/icons/eye-off.svg';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PasswordStrength } from 'components/PasswordStrength';
-import classNames from 'classnames';
 import Link from 'next/link';
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
 
 type Inputs = {
   name: string;
@@ -33,7 +30,7 @@ const ValidationSchema = yup.object().shape({
     ),
   password: yup
     .string()
-    .required('Confirm password is required')
+    .required('Password is required')
     .min(8, 'Password must be at least 8 characters long')
     .matches(/(?=.*\d)/, 'Password must contain at least one digit')
     .matches(
@@ -61,7 +58,6 @@ export const RegisterPage: FC = () => {
   } = useForm<Inputs>({
     resolver: yupResolver(ValidationSchema),
   });
-  const [showPassword, setShowPassword] = useState(false);
   const password = watch('password');
 
   const onSubmit = (data: Inputs) => {};
@@ -75,88 +71,46 @@ export const RegisterPage: FC = () => {
         className={styles.form}
         noValidate
       >
-        <div className={styles.control}>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            {...register('name')}
-            id="name"
-            autoComplete="off"
-            className={classNames({
-              [styles.errorInput]: errors.name,
-            })}
-          />
-          {errors.name && <p className={styles.error}>{errors.name.message}</p>}
-        </div>
+        <Input
+          name="name"
+          register={register}
+          error={errors.name}
+          type="text"
+          label="Name:"
+          autoComplete="off"
+        />
 
-        <div className={styles.control}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            {...register('email')}
-            id="email"
-            className={classNames({
-              [styles.errorInput]: errors.email,
-            })}
-          />
-          {errors.email && (
-            <p className={styles.error}>{errors.email.message}</p>
-          )}
-        </div>
+        <Input
+          name="email"
+          register={register}
+          error={errors.email}
+          type="email"
+          label="Email:"
+          autoComplete="off"
+        />
 
-        <div className={styles.control}>
-          <label htmlFor="password">Password:</label>
-          <div className={styles.passwordWrapper}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              {...register('password')}
-              id="password"
-              className={classNames({
-                [styles.errorInput]: errors.password,
-              })}
-            />
+        <Input
+          name="password"
+          register={register}
+          error={errors.password}
+          type="password"
+          label="Password:"
+          password={password}
+        />
 
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className={styles.showPassword}
-            >
-              <Image
-                src={showPassword ? eyeOff : eye}
-                alt={showPassword ? 'Hide password' : 'Show password'}
-              />
-            </button>
+        <Input
+          name="confirmPassword"
+          register={register}
+          error={errors.confirmPassword}
+          type="password"
+          label="Confirm password:"
+        />
 
-            {password && <PasswordStrength password={password} />}
-          </div>
-
-          {errors.password && (
-            <p className={styles.error}>{errors.password.message}</p>
-          )}
-        </div>
-
-        <div className={styles.control}>
-          <label htmlFor="confirmPassword">Confirm password:</label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            {...register('confirmPassword')}
-            id="confirmPassword"
-            className={classNames({
-              [styles.errorInput]: errors.confirmPassword,
-            })}
-          />
-          {errors.confirmPassword && (
-            <p className={styles.error}>{errors.confirmPassword.message}</p>
-          )}
-        </div>
-
-        <button
-          className={styles.submit}
+        <Button
           type="submit"
+          text="Submit"
           disabled={Object.keys(errors).length > 0}
-        >
-          Submit
-        </button>
+        />
 
         <Link href="/auth" className={styles.link}>
           Already have an account?

@@ -1,0 +1,22 @@
+.button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-tertiary);
+  color: var(--color-base);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-secondary);
+  }
+
+  &:disabled {
+    background-color: var(--color-neutral);
+    cursor: not-allowed;
+  }
+}
+
+.submit {
+  width: 100%;
+  margin-top: 10px;
+}

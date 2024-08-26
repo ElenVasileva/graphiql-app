@@ -1,15 +1,13 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styles from './LoginPage.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import eye from '../../assets/icons/eye.svg';
-import eyeOff from '../../assets/icons/eye-off.svg';
-import Image from 'next/image';
-import classNames from 'classnames';
 import Link from 'next/link';
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
 
 type Inputs = {
   email: string;
@@ -38,7 +36,6 @@ export const LoginPage: FC = () => {
   } = useForm<Inputs>({
     resolver: yupResolver(ValidationSchema),
   });
-  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (data: Inputs) => {};
 
@@ -51,56 +48,28 @@ export const LoginPage: FC = () => {
         className={styles.form}
         noValidate
       >
-        <div className={styles.control}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            {...register('email')}
-            id="email"
-            className={classNames({
-              [styles.errorInput]: errors.email,
-            })}
-          />
-          {errors.email && (
-            <p className={styles.error}>{errors.email.message}</p>
-          )}
-        </div>
+        <Input
+          name="email"
+          register={register}
+          error={errors.email}
+          type="email"
+          label="Email:"
+          autoComplete="off"
+        />
 
-        <div className={styles.control}>
-          <label htmlFor="password">Password:</label>
-          <div className={styles.passwordWrapper}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              {...register('password')}
-              id="password"
-              className={classNames({
-                [styles.errorInput]: errors.password,
-              })}
-            />
+        <Input
+          name="password"
+          type="password"
+          register={register}
+          error={errors.password}
+          label="Password:"
+        />
 
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className={styles.showPassword}
-            >
-              <Image
-                src={showPassword ? eyeOff : eye}
-                alt={showPassword ? 'Hide password' : 'Show password'}
-              />
-            </button>
-          </div>
-          {errors.password && (
-            <p className={styles.error}>{errors.password.message}</p>
-          )}
-        </div>
-
-        <button
-          className={styles.submit}
+        <Button
           type="submit"
+          text="Submit"
           disabled={Object.keys(errors).length > 0}
-        >
-          Submit
-        </button>
+        />
 
         <Link href="/auth/sign-up" className={styles.link}>
           Don&apos;t have an account?

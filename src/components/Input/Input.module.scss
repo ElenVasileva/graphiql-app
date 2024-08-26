@@ -1,0 +1,50 @@
+.wrapper {
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  border: 1px solid var(--color-neutral);
+  border-radius: 5px;
+
+  &:focus {
+    outline: 1px solid var(--color-tertiary);
+  }
+
+  &.errorInput {
+    outline: 1px solid var(--color-error);
+  }
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.error {
+  position: absolute;
+  color: var(--color-error);
+  font-size: 10px;
+  bottom: -14px;
+}
+
+.passwordEye {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  display: flex;
+
+  &:hover {
+    color: var(--color-tertiary);
+  }
+}
