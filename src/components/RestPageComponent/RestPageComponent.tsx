@@ -6,6 +6,7 @@ import styles from './RestPageComponent.module.scss';
 import { useRouter } from 'next/navigation';
 import { RestResponse } from 'types/RestResponse';
 import { RestRequest } from 'types/RestRequest';
+import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
 
 export default function RestPageComponent({
   params: { method },
@@ -15,6 +16,10 @@ export default function RestPageComponent({
   const [url, setUrl] = useState('');
   const [methodType, setMethodType] = useState<HttpMethod>(method);
   const [response, setResponse] = useState<RestResponse | undefined>(undefined);
+  const [variables, setVariables] = useState<Record<string, string>>({
+    'a': 'aaa',
+    'b': 'bbb',
+  });
 
   const router = useRouter();
 
@@ -26,6 +31,10 @@ export default function RestPageComponent({
 
   const onRootChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
+  };
+
+  const onVariablesChanged = (variables: Record<string, string>) => {
+    setVariables(variables);
   };
 
   const onSubmit = async () => {
@@ -67,6 +76,8 @@ export default function RestPageComponent({
           Send
         </button>
       </div>
+
+      <KeyValueEditor defaultValues={variables} onChange={onVariablesChanged} />
 
       <textarea
         readOnly
