@@ -3,14 +3,19 @@
   background-color: var(--color-base);
 
   input {
-    padding: 10px;
+    padding: 3px;
     width: 100%;
-    outline: none;
-    border: 1px solid var(--color-neutral);
-    border-radius: 5px;
+    outline: 1px solid var(--color-base);
+    border: 1px solid var(--color-base);
+    background-color: var(--color-base);
+    color: var(--color-neutral);
 
-    &:focus {
+    &:focus:not(:read-only) {
+      background-color: white;
+      color: black;
       outline: 1px solid var(--color-tertiary);
+      border: 1px solid var(--color-neutral);
+      border-radius: 5px;
     }
 
     &.errorInput {
@@ -20,13 +25,47 @@
 
   &__row {
     display: flex;
+    border: 1px solid var(--color-neutral);
+    border-top: none;
+
+    &__value,
+    &__key {
+      padding: 3px;
+      width: 47%;
+    }
 
     &__key {
-      width: 50%;
+      border-right: 1px solid var(--color-neutral);
     }
 
-    &__value {
-      width: 50%;
+    &__trash {
+      width: 5%;
+      padding: 2px;
+
+      button {
+        width: 22px;
+        padding: 3px 3px 0px 3px;
+        border: none;
+        border-radius: 3px;
+        background-color: var(--color-tertiary);
+        color: var(--color-base);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--color-secondary);
+        }
+      }
     }
+  }
+
+  &__row:first-child {
+    border: 1px solid var(--color-neutral);
+  }
+
+  &__row:last-child button {
+    display: none;
+  }
+  &__row:not(:hover) button {
+    display: none;
   }
 }
