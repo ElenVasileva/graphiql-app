@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 20px;
+  background-color: var(--color-base);
 
   &__row {
     width: 500px;
@@ -64,5 +65,28 @@
     padding: 8px 6px;
     width: 400px;
     margin-right: 10px;
+  }
+
+  &__sectionSelector button {
+    border-radius: 0;
+    padding: 0;
+    padding-bottom: 5px;
+    margin: 10px;
+    border: none;
+    color: var(--color-tertiary);
+    background-color: transparent;
+  }
+
+  &__sectionSelector {
+    display: flex;
+  }
+
+  &__sectionSelector button:hover {
+    background-color: transparent;
+    color: var(--color-secondary);
+  }
+  &__sectionSelector button.active {
+    color: var(--color-secondary);
+    border-bottom: 1px solid var(--color-secondary);
   }
 }

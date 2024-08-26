@@ -11,11 +11,15 @@ interface KeyValueEditable {
 
 const addEmptyToTheEnd = (valuesArray: KeyValueEditable[], id?: number) => {
   if (
+    valuesArray.length === 0 ||
     valuesArray[valuesArray.length - 1].key ||
     valuesArray[valuesArray.length - 1].value
   ) {
     valuesArray.push({
-      id: id || Math.max(...valuesArray.map((v) => v.id)) + 1,
+      id:
+        id || valuesArray.length
+          ? Math.max(...valuesArray.map((v) => v.id)) + 1
+          : 0,
       key: '',
       value: '',
     });

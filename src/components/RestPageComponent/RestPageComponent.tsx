@@ -8,6 +8,20 @@ import { RestResponse } from 'types/RestResponse';
 import { RestRequest } from 'types/RestRequest';
 import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
 
+enum RequestSection {
+  QueryParams = 'Query parameters',
+  Headers = 'Headers',
+  Body = 'Body',
+  Variables = 'Variables',
+}
+
+const sectionList: RequestSection[] = [
+  RequestSection.QueryParams,
+  RequestSection.Headers,
+  RequestSection.Body,
+  RequestSection.Variables,
+];
+
 export default function RestPageComponent({
   params: { method },
 }: {
@@ -16,10 +30,15 @@ export default function RestPageComponent({
   const [url, setUrl] = useState('');
   const [methodType, setMethodType] = useState<HttpMethod>(method);
   const [response, setResponse] = useState<RestResponse | undefined>(undefined);
-  const [variables, setVariables] = useState<Record<string, string>>({
-    'a': 'aaa',
-    'b': 'bbb',
-  });
+
+  const [queryParams, setQueryParams] = useState<Record<string, string>>({});
+  const [headers, setHeaders] = useState<Record<string, string>>({});
+  const [body, setBody] = useState<string>('');
+  const [variables, setVariables] = useState<Record<string, string>>({});
+
+  const [section, setSection] = useState<RequestSection>(
+    RequestSection.QueryParams,
+  );
 
   const router = useRouter();
 
@@ -31,6 +50,22 @@ export default function RestPageComponent({
 
   const onRootChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
+  };
+
+  const onSectionClick = (sec: RequestSection) => {
+    setSection(sec);
+  };
+
+  const onQueryParamsChanged = (queryParams: Record<string, string>) => {
+    setVariables(queryParams);
+  };
+
+  const onHeadersChanged = (headers: Record<string, string>) => {
+    setVariables(headers);
+  };
+
+  const onBodyChanged = (body: string) => {
+    setBody(body);
   };
 
   const onVariablesChanged = (variables: Record<string, string>) => {
@@ -76,8 +111,39 @@ export default function RestPageComponent({
           Send
         </button>
       </div>
-
-      <KeyValueEditor defaultValues={variables} onChange={onVariablesChanged} />
+      <div className={styles.rest__sectionSelector}>
+        {sectionList.map((sec) => (
+          <div key={sec}>
+            <button
+              className={section === sec ? styles.active : ''}
+              onClick={() => onSectionClick(sec)}
+            >
+              {sec.toString()}
+            </button>
+          </div>
+        ))}
+      </div>
+      {section === RequestSection.QueryParams && (
+        <KeyValueEditor
+          defaultValues={queryParams}
+          onChange={onQueryParamsChanged}
+        />
+      )}
+      {section === RequestSection.Headers && (
+        <KeyValueEditor defaultValues={headers} onChange={onHeadersChanged} />
+      )}
+      {section === RequestSection.Body && (
+        <textarea
+          value={body}
+          onChange={(e) => onBodyChanged(e.target.value)}
+        />
+      )}
+      {section === RequestSection.Variables && (
+        <KeyValueEditor
+          defaultValues={variables}
+          onChange={onVariablesChanged}
+        />
+      )}
 
       <textarea
         readOnly

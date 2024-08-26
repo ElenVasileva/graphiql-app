@@ -23,6 +23,11 @@
     }
   }
 
+  input:read-only {
+    font-weight: bold;
+    padding-left: 6px;
+  }
+
   &__row {
     display: flex;
     border: 1px solid var(--color-neutral);
