@@ -57,11 +57,11 @@ export default function RestPageComponent({
   };
 
   const onQueryParamsChanged = (queryParams: Record<string, string>) => {
-    setVariables(queryParams);
+    setQueryParams(queryParams);
   };
 
   const onHeadersChanged = (headers: Record<string, string>) => {
-    setVariables(headers);
+    setHeaders(headers);
   };
 
   const onBodyChanged = (body: string) => {
