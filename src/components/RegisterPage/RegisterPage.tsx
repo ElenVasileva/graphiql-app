@@ -110,6 +110,7 @@ export const RegisterPage: FC = () => {
           type="submit"
           text="Submit"
           disabled={Object.keys(errors).length > 0}
+          className={styles.submitButton}
         />
 
         <Link href="/auth" className={styles.link}>

@@ -22,13 +22,22 @@ type Props<T extends FieldValues> = {
   placeholder?: string;
   autoComplete?: string;
   password?: string;
+  className?: string;
+  defaultValue?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  readOnly?: boolean;
 };
 
 export const Input = <T extends FieldValues>(props: Props<T>) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={classNames({
+        [styles.wrapper]: true,
+        [props.className as string]: !!props.className,
+      })}
+    >
       {props.label && (
         <label htmlFor={props.name} className={styles.label}>
           {props.label}
@@ -45,6 +54,9 @@ export const Input = <T extends FieldValues>(props: Props<T>) => {
           })}
           placeholder={props.placeholder}
           autoComplete={props.autoComplete}
+          defaultValue={props.defaultValue}
+          onChange={props.onChange}
+          readOnly={props.readOnly}
           {...props.register?.(props.name)}
         />
 

@@ -7,6 +7,7 @@ type Props = {
   type?: 'submit' | 'reset' | 'button';
   onClick?: () => void;
   disabled?: boolean;
+  className?: string;
 };
 
 export const Button: FC<Props> = (props) => {
@@ -14,7 +15,7 @@ export const Button: FC<Props> = (props) => {
     <button
       className={classNames({
         [styles.button]: true,
-        [styles.submit]: props.type === 'submit',
+        [props.className as string]: !!props.className,
       })}
       type={props.type}
       onClick={props.onClick}

@@ -69,6 +69,7 @@ export const LoginPage: FC = () => {
           type="submit"
           text="Submit"
           disabled={Object.keys(errors).length > 0}
+          className={styles.submitButton}
         />
 
         <Link href="/auth/sign-up" className={styles.link}>
