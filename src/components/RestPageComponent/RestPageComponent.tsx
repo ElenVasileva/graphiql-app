@@ -6,6 +6,9 @@ import styles from './RestPageComponent.module.scss';
 import { useRouter } from 'next/navigation';
 import { RestResponse } from 'types/RestResponse';
 import { RestRequest } from 'types/RestRequest';
+export default function RestPageComponent({
+  params: { method },
+}: {
   params: { method: HttpMethod };
 }) {
   const [url, setUrl] = useState('');
