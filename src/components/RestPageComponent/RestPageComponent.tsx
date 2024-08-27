@@ -30,7 +30,6 @@ export default function RestPageComponent({
   const [url, setUrl] = useState('');
   const [methodType, setMethodType] = useState<HttpMethod>(method);
   const [response, setResponse] = useState<RestResponse | undefined>(undefined);
-
   const [queryParams, setQueryParams] = useState<Record<string, string>>({});
   const [headers, setHeaders] = useState<Record<string, string>>({});
   const [body, setBody] = useState<string>('');
