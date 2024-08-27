@@ -3,28 +3,41 @@ import { HttpMethod, httpMethodsList } from 'constants/methodTypes';
 import { ChangeEvent, useState } from 'react';
 
 import styles from './RestPageComponent.module.scss';
-
+import { useRouter } from 'next/navigation';
+import { RestResponse } from 'types/RestResponse';
+import { RestRequest } from 'types/RestRequest';
 export default function RestPageComponent({
   params: { method },
 }: {
-  params: { method: HttpMethod | string };
+  params: { method: HttpMethod };
 }) {
-  const [root, setRoot] = useState('');
-  const [methodType, setMethodType] = useState(method);
-  const [response, setResponse] = useState('');
+  const [url, setUrl] = useState('');
+  const [methodType, setMethodType] = useState<HttpMethod>(method);
+  const [response, setResponse] = useState<RestResponse | undefined>(undefined);
+
+  const router = useRouter();
 
   const onMethodChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setMethodType(e.target.value);
+    const methodType = e.target.value as HttpMethod;
+    setMethodType(methodType);
+    router.push(`/restful/${methodType}`.toLowerCase());
   };
 
   const onRootChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRoot(e.target.value);
+    setUrl(e.target.value);
   };
 
   const onSubmit = async () => {
-    const response = await fetch(root);
-    const json = await response.json();
-    setResponse(JSON.stringify(json));
+    const requestData: RestRequest = {
+      method: methodType,
+      url,
+    };
+    const rawResponse = await fetch('/api', {
+      method: 'POST',
+      body: JSON.stringify(requestData),
+    });
+    const response = (await rawResponse.json()) as RestResponse;
+    setResponse(response);
   };
 
   return (
@@ -44,14 +57,22 @@ export default function RestPageComponent({
         <input
           type="text"
           className={styles.rest__url}
-          value={root}
+          name="requestUrl"
+          value={url}
           onChange={onRootChange}
           placeholder="Enter URL or paste the text"
         />
-        <button onClick={onSubmit}>Send</button>
+        <button onClick={onSubmit} disabled={!url}>
+          Send
+        </button>
       </div>
 
-      <textarea readOnly value={response} />
+      <textarea
+        readOnly
+        value={
+          response && `Status: ${response.status}\n\n${response.body || ''}`
+        }
+      />
     </div>
   );
 }
