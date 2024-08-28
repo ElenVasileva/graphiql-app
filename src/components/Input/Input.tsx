@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './Input.module.scss';
 import classNames from 'classnames';
 import { PasswordStrength } from 'components/PasswordStrength';
