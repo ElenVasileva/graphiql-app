@@ -2,9 +2,7 @@ import { HttpMethod } from 'constants/methodTypes';
 import { RestRequest } from 'types/RestRequest';
 import { RestResponse } from 'types/RestResponse';
 
-export const callFetch = async (
-  request: RestRequest,
-): Promise<RestResponse> => {
+const callFetch = async (request: RestRequest): Promise<RestResponse> => {
   const url = request.url;
   const init: RequestInit = {
     method: request.method,
