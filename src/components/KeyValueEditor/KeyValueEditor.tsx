@@ -79,7 +79,7 @@ const KeyValueEditor = ({
     const index = newValues.findIndex((p) => p.id === id);
     newValues.splice(index, 1);
     setValues(newValues);
-    onChange(array2Record(values));
+    onChange(array2Record(newValues));
   };
 
   const rows = values.map((pair) => (

@@ -2,10 +2,8 @@
 import { HttpMethod, httpMethodsList } from 'constants/methodTypes';
 import { ChangeEvent, useState } from 'react';
 
-import styles from './RestPageComponent.module.scss';
-import { useRouter } from 'next/navigation';
-import { RestResponse } from 'types/RestResponse';
-import { RestRequest } from 'types/RestRequest';
+import styles from './RestQueryComponent.module.scss';
+import { usePathname, useRouter } from 'next/navigation';
 import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
 
 enum RequestSection {
@@ -22,19 +20,43 @@ const sectionList: RequestSection[] = [
   RequestSection.Variables,
 ];
 
-export default function RestPageComponent({
-  params: { method },
-}: {
-  params: { method: HttpMethod };
-}) {
-  const [url, setUrl] = useState('');
-  const [methodType, setMethodType] = useState<HttpMethod>(method);
-  const [response, setResponse] = useState<RestResponse | undefined>(undefined);
-  const [queryParams, setQueryParams] = useState<Record<string, string>>({});
-  const [headers, setHeaders] = useState<Record<string, string>>({});
-  const [body, setBody] = useState<string>('');
-  const [variables, setVariables] = useState<Record<string, string>>({});
+const b64EncodeUnicode = (str: string) => {
+  return encodeURIComponent(btoa(str));
+};
 
+const b64DecodeUnicode = (str: string) => {
+  return atob(decodeURIComponent(str));
+};
+
+const getRequestDataFromUrl = (originUrl: string) => {
+  const pathNames = originUrl.split('/');
+  const method = (pathNames[2] as HttpMethod) || HttpMethod.get;
+  const urlAndQueryParam = b64DecodeUnicode(pathNames[3] || '');
+  const url = urlAndQueryParam.split('?')[0];
+
+  const urlSearchParams = new URLSearchParams(
+    urlAndQueryParam.split('?')[1] || '',
+  );
+  const queryParams = Object.fromEntries(urlSearchParams.entries());
+
+  const body = b64DecodeUnicode(pathNames[4] || '');
+
+  return { method, url, queryParams, body };
+};
+
+export default function RestQueryComponent({}: {}) {
+  const pathName = usePathname();
+  const requestData = getRequestDataFromUrl(pathName);
+
+  const [url, setUrl] = useState(requestData.url);
+  const [methodType, setMethodType] = useState<HttpMethod>(requestData.method);
+  const [queryParams, setQueryParams] = useState<Record<string, string>>(
+    requestData.queryParams,
+  );
+
+  const [headers, setHeaders] = useState<Record<string, string>>({});
+  const [body, setBody] = useState<string>(requestData.body);
+  const [variables, setVariables] = useState<Record<string, string>>({});
   const [section, setSection] = useState<RequestSection>(
     RequestSection.QueryParams,
   );
@@ -44,10 +66,9 @@ export default function RestPageComponent({
   const onMethodChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const methodType = e.target.value as HttpMethod;
     setMethodType(methodType);
-    router.push(`/restful/${methodType}`.toLowerCase());
   };
 
-  const onRootChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   };
 
@@ -71,17 +92,18 @@ export default function RestPageComponent({
     setVariables(variables);
   };
 
-  const onSubmit = async () => {
-    const requestData: RestRequest = {
-      method: methodType,
-      url,
-    };
-    const rawResponse = await fetch('/api', {
-      method: 'POST',
-      body: JSON.stringify(requestData),
-    });
-    const response = (await rawResponse.json()) as RestResponse;
-    setResponse(response);
+  const onSubmit = () => {
+    const urlSearchParams = new URLSearchParams();
+    for (const key in queryParams) {
+      urlSearchParams.append(key, queryParams[key]);
+    }
+
+    const queryParamString = urlSearchParams
+      ? '?' + urlSearchParams.toString()
+      : '';
+    router.push(
+      `/restful/${methodType}/${b64EncodeUnicode(url + queryParamString)}/${b64EncodeUnicode(body)}`,
+    );
   };
 
   return (
@@ -90,11 +112,11 @@ export default function RestPageComponent({
         <select
           className={styles.rest__method}
           onChange={onMethodChange}
-          defaultValue={method}
+          defaultValue={methodType}
         >
           {httpMethodsList.map((method) => (
             <option value={method} key={method}>
-              {method}
+              {method.toUpperCase()}
             </option>
           ))}
         </select>
@@ -103,7 +125,7 @@ export default function RestPageComponent({
           className={styles.rest__url}
           name="requestUrl"
           value={url}
-          onChange={onRootChange}
+          onChange={onUrlChange}
           placeholder="Enter URL or paste the text"
         />
         <button onClick={onSubmit} disabled={!url}>
@@ -143,13 +165,6 @@ export default function RestPageComponent({
           onChange={onVariablesChanged}
         />
       )}
-
-      <textarea
-        readOnly
-        value={
-          response && `Status: ${response.status}\n\n${response.body || ''}`
-        }
-      />
     </div>
   );
 }
