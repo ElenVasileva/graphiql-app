@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  padding: 20px;
+  border: 1px solid var(--color-neutral);
+  border-radius: 7px;
+  gap: 16px;
+}
+
+.link {
+  color: var(--color-tertiary);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: 10px;
+}
