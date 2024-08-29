@@ -2,14 +2,14 @@ import ResponseComponent from 'components/ResponseComponent/ResponseComponent';
 import { HttpMethod } from 'constants/methodTypes';
 
 export default function Page({
-  params: { method },
+  params: { method, encodedUrl },
 }: {
-  params: { method: string };
+  params: { method: string; encodedUrl: string };
 }) {
   const httpMethod = (method as HttpMethod) || HttpMethod.get;
   return (
     <>
-      <ResponseComponent method={httpMethod} />
+      <ResponseComponent method={httpMethod} url={encodedUrl} />
     </>
   );
 }

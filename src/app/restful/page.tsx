@@ -1,12 +1,10 @@
-import RestPageComponent from 'components/RestPageComponent/RestPageComponent';
+import ResponseComponent from 'components/ResponseComponent/ResponseComponent';
 import { HttpMethod } from 'constants/methodTypes';
 
 export default function Page() {
   return (
-    <RestPageComponent
-      params={{
-        method: HttpMethod.GET,
-      }}
-    />
+    <>
+      <ResponseComponent method={HttpMethod.get} />
+    </>
   );
 }

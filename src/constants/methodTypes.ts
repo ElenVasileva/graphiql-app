@@ -1,19 +1,19 @@
 export enum HttpMethod {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
-  PATCH = 'PATCH',
-  HEAD = 'HEAD',
-  OPTIONS = 'OPTIONS',
+  get = 'get',
+  post = 'post',
+  put = 'put',
+  delete = 'delete',
+  patch = 'patch',
+  head = 'head',
+  options = 'options',
 }
 
 export const httpMethodsList: HttpMethod[] = [
-  HttpMethod.GET,
-  HttpMethod.POST,
-  HttpMethod.PUT,
-  HttpMethod.DELETE,
-  HttpMethod.PATCH,
-  HttpMethod.OPTIONS,
-  HttpMethod.HEAD,
+  HttpMethod.get,
+  HttpMethod.post,
+  HttpMethod.put,
+  HttpMethod.delete,
+  HttpMethod.patch,
+  HttpMethod.options,
+  HttpMethod.head,
 ];
