@@ -1,5 +1,7 @@
 'use client';
 
+import prettyPrintJson from 'utils/prettyPrintJson';
+
 import Textarea from 'components/Textarea/Textarea';
 
 import styles from './ResponseSection.module.scss';
@@ -14,13 +16,23 @@ interface IResponseSectionProps {
 
 export default function ResponseSection(props: IResponseSectionProps) {
   const { response } = props;
-  const { data, error } = response;
-  const str = data || error || '';
+  const { data, statusCode, error } = response;
+  let str = '';
+
+  if (data) {
+    str = `data statusCode: ${statusCode} \n${prettyPrintJson(data)}`;
+  }
+
+  if (error) {
+    str = `statusCode: ${statusCode} \n${prettyPrintJson(error)}`;
+  }
 
   return (
     <div className={styles['response-section']}>
-      <h2 className={styles.h2}>Response</h2>
-      <Textarea value={str} readOnly={true} />
+      <div className={styles['wrapper-inputs']}>
+        <h2 className={styles.h2}>Response</h2>
+        <Textarea value={str} readOnly={true} />
+      </div>
     </div>
   );
 }
