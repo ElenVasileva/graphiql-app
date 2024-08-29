@@ -28,16 +28,11 @@
   --text-bold-xl: bold 36px /1.5 var(--font-rubik), sans-serif;
 
   /* header text */
-  --text-header-xs: bold 18px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-s: bold 24px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-m: bold 36px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-l: bold 48px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-xl: bold 64px /1.5 var(--font-league-gothic),
-    sans-serif;
+  --text-header-xs: bold 18px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-s: bold 24px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-m: bold 36px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-l: bold 48px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-xl: bold 64px /1.5 var(--font-league-gothic), sans-serif;
 }
 
 * {
