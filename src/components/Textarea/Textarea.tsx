@@ -32,6 +32,7 @@ export default function Textarea(props: ITextareaProps) {
       value={text}
       readOnly={readOnly || false}
       rows={rows || 10}
+      data-testid="documentation-textarea"
     />
   );
 }

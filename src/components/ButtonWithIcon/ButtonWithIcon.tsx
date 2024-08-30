@@ -19,7 +19,7 @@ export default function ButtonWithIcon(props: IButtonWithIcon) {
       type="button"
       disabled={disabled}
     >
-      <Image width="25" src={icon} alt={alt} />
+      <Image width="25" height="25" src={icon} alt={alt} />
     </button>
   );
 }

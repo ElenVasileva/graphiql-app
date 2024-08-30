@@ -1,0 +1,35 @@
+.table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 2fr;
+  grid-gap: 5px;
+
+  background-color: var(--color-neutral);
+  width: 100%;
+}
+
+.header {
+  padding: 5px;
+  font: var(--text-bold-m);
+  color: var(--color-secondary);
+  text-align: center;
+  background-color: var(--color-base);
+}
+
+.table div:not(.header) {
+  padding: 5px;
+  background-color: var(--color-base);
+  font: var(--text-s);
+}
+
+.text {
+  font: var(--text-s);
+}
+
+.link {
+  color: var(--color-secondary);
+  font: var(--text-s);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}

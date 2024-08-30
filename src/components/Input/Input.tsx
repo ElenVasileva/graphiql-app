@@ -26,7 +26,7 @@ type Props<T extends FieldValues> = {
   password?: string;
   className?: string;
   defaultValue?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: () => void;
   readOnly?: boolean;
 };
 

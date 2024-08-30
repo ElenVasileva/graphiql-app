@@ -4,17 +4,15 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import SimpleInput from 'components/SimpleInput/SimpleInput';
-import NavigationRequest from 'components/NavigationRequest/NavigationRequest';
-import QueryEditorGraphQl from './QueryEditorGraphQl/QueryEditorGraphQl';
-import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
+import { Button } from 'components/Button/Button';
+
 import Documentation from './Documentation/Documentation';
 
 import generateUrlGraphQl from 'utils/generateUrlGraphQl';
 import useUrl from 'hooks/useUrl';
 
 import styles from './FormGraphQl.module.scss';
-
-type Section = 'query' | 'headers' | 'variables' | undefined;
+import ParameterSection from './ParameterSection/ParameterSection';
 
 type FormData = {
   endpoint: string;
@@ -34,7 +32,17 @@ function initHeaders(headers: Record<string, string>) {
     : headers;
 }
 
-export default function FormGraphQl() {
+interface IFormGraphQlProps {
+  onSubmit: (
+    endpoint: string,
+    query: string,
+    variables: Record<string, string>,
+    headers: Record<string, string>,
+  ) => void;
+}
+
+export default function FormGraphQl(props: IFormGraphQlProps) {
+  const { onSubmit } = props;
   const router = useRouter();
   const { endpoint, query, variables, headers } = useUrl();
   const [formData, setFormData] = useState<FormData>({
@@ -44,7 +52,7 @@ export default function FormGraphQl() {
     variables,
     headers: initHeaders(headers),
   });
-  const [visibleSection, setVisibleSection] = useState<Section>('query');
+
   const goPage = useCallback(
     function () {
       if (!formData.endpoint) {
@@ -76,56 +84,34 @@ export default function FormGraphQl() {
       }
     };
   }
-  function handlerClickNavigation(event: React.MouseEvent<HTMLButtonElement>) {
-    if (
-      event.target instanceof HTMLButtonElement &&
-      (event.target.name === 'query' ||
-        event.target.name === 'headers' ||
-        event.target.name === 'variables')
-    ) {
-      setVisibleSection(event.target.name);
-    }
-  }
+
   return (
     <form className={styles.form} autoComplete="off">
       <div className={styles['wrapper-inputs']}>
-        <SimpleInput
-          name="endpoint"
-          label="Endpoint URL:"
-          value={formData.endpoint}
-          onBlur={setForm('endpoint')}
-        ></SimpleInput>
-        <NavigationRequest
-          visibleSection={visibleSection}
-          onClick={handlerClickNavigation}
-        />
-        <div className={styles['param-section']}>
-          {visibleSection === 'headers' && (
-            <KeyValueEditor
-              defaultValues={formData.headers}
-              onChange={setForm('headers')}
-            />
-          )}
-          {visibleSection === 'query' && (
-            <QueryEditorGraphQl
-              formData={formData}
-              setForm={setForm('query')}
-            />
-          )}
-          {visibleSection === 'variables' && (
-            <KeyValueEditor
-              defaultValues={formData.variables}
-              onChange={setForm('variables')}
-            />
-          )}
+        <div className={styles['wrapper-url']}>
+          <SimpleInput
+            name="endpoint"
+            label="Endpoint URL:"
+            value={formData.endpoint}
+            onBlur={setForm('endpoint')}
+          ></SimpleInput>
+          <Button
+            onClick={() => {
+              onSubmit(
+                formData.endpoint,
+                formData.query,
+                formData.variables,
+                formData.headers,
+              );
+            }}
+            type="button"
+            className={styles['btn-send']}
+          >
+            Send
+          </Button>
         </div>
-        <SimpleInput
-          name="sdl"
-          label="SDL URL:"
-          value={formData.sdl}
-          onBlur={setForm('sdl')}
-        ></SimpleInput>
-        <Documentation endpoint={formData.sdl} />
+        <ParameterSection formData={formData} setForm={setForm} />
+        <Documentation sdl={formData.sdl} setFormSdl={setForm('sdl')} />
       </div>
     </form>
   );

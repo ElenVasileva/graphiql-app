@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Rubik } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import './globals.css';
 import { cookies } from 'next/headers';
@@ -8,10 +8,19 @@ import { Header } from 'components/Header';
 import StoreProvider from 'app/storeProvider';
 import { Footer } from 'components/Footer';
 
-const rubik = Rubik({
-  subsets: ['latin', 'cyrillic'],
-  variable: '--font-rubik',
-  display: 'swap',
+const myFont = localFont({
+  src: [
+    {
+      path: '../assets/fonts/Rubik-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/Rubik-Bold.woff',
+      weight: '700',
+      style: 'bold',
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +36,7 @@ export default function RootLayout({
   const session = cookies().get(SESSION_COOKIE_NAME)?.value || null;
 
   return (
-    <html lang="en" className={rubik.variable}>
+    <html lang="en" className={myFont.className}>
       <body>
         <StoreProvider>
           <Header session={session} />

@@ -1,4 +1,6 @@
 :root {
+  --font-rubik: 'RubikLocal', sans-serif;
+
   --color-primary: #ff5794;
   --color-secondary: #908aff;
   --color-tertiary: #00c2e0;

@@ -3,6 +3,7 @@
   flex-grow: 1;
   flex-direction: row;
   justify-content: flex-end;
+  font: var(--text-xl);
 
   & button {
     width: 60px;

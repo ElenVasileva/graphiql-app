@@ -4,42 +4,61 @@ import { useState } from 'react';
 
 import FunctionalEditor from './FunctionalEditorGraphQl/FunctionalEditor';
 import ResponseSection from './ResponseSectionGraphQl/ResponseSection';
-import { Button } from 'components/Button/Button';
-import { Loader } from 'components/Loader/Loader';
+
+import LSName from 'constants/LSName';
 
 import fetchGraphQL from 'services/fetchGraphQL';
+import useLocalStorage from 'hooks/useLocalStorage';
 
-import useUrl from 'hooks/useUrl';
-
-import styles from './GraphQl.module.scss';
+import generateUrlGraphQl from 'utils/generateUrlGraphQl';
 
 export default function GraphQl() {
-  const { endpoint, query, variables, headers } = useUrl();
-
   const [response, setResponse] = useState<{
     statusCode: number | null;
     data: string | null;
     error: string | null;
   }>({ statusCode: null, data: null, error: null });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setItems] = useLocalStorage<{
+    time: number;
+    url: string;
+    type: string;
+  }>(LSName);
 
-  async function handleSubmit() {
-    setIsLoading(true);
+  function saveToLS(
+    endpoint: string,
+    query: string,
+    variables: Record<string, string>,
+    headers: Record<string, string>,
+  ) {
+    const time = new Date().getTime();
+    const body = JSON.stringify({
+      query,
+      variables,
+    });
+    setItems({
+      type: 'GRAPHQL',
+      url: generateUrlGraphQl({ endpoint, body, headers }),
+      time,
+    });
+  }
+
+  async function handleSubmit(
+    endpoint: string,
+    query: string,
+    variables: Record<string, string>,
+    headers: Record<string, string>,
+  ) {
     const response = await fetchGraphQL(endpoint, query, variables, headers);
     setResponse(response);
-    setIsLoading(false);
+    if (!response.error && response.data) {
+      saveToLS(endpoint, query, variables, headers);
+    }
   }
 
   return (
     <>
-      <FunctionalEditor />
-      <div className={styles['wrapper-button']}>
-        <Button onClick={handleSubmit} disabled={!endpoint}>
-          Send
-        </Button>
-        {isLoading && <Loader />}
-      </div>
+      <FunctionalEditor onSubmit={handleSubmit} />
       <ResponseSection response={response} />
     </>
   );
