@@ -11,6 +11,7 @@ import { LoginValidationSchema } from './LoginValidationSchema';
 import { auth, logInWithEmailAndPassword } from 'services/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { redirect } from 'next/navigation';
+import { Loader } from 'components/Loader';
 
 type Inputs = {
   email: string;
@@ -40,6 +41,8 @@ export const LoginForm: FC = () => {
   const onSubmit = (data: Inputs) => {
     logInWithEmailAndPassword(data.email, data.password);
   };
+
+  if (loading) return <Loader />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>

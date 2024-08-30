@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { auth, registerWithEmailAndPassword } from 'services/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { redirect } from 'next/navigation';
+import { Loader } from 'components/Loader';
 
 type Inputs = {
   name: string;
@@ -40,6 +41,8 @@ export const RegisterForm: FC = () => {
   const onSubmit = (data: Inputs) => {
     registerWithEmailAndPassword(data.name, data.email, data.password);
   };
+
+  if (loading) return <Loader />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>
