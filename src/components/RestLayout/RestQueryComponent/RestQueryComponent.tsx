@@ -5,6 +5,8 @@ import { ChangeEvent, useState } from 'react';
 import styles from './RestQueryComponent.module.scss';
 import { usePathname, useRouter } from 'next/navigation';
 import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
+import { Input } from 'components/Input';
+import { Button } from 'components/Button';
 
 enum RequestSection {
   QueryParams = 'Query parameters',
@@ -44,7 +46,7 @@ const getRequestDataFromUrl = (originUrl: string) => {
   return { method, url, queryParams, body };
 };
 
-export default function RestQueryComponent({}: {}) {
+const RestQueryComponent = () => {
   const pathName = usePathname();
   const requestData = getRequestDataFromUrl(pathName);
 
@@ -120,17 +122,17 @@ export default function RestQueryComponent({}: {}) {
             </option>
           ))}
         </select>
-        <input
+        <Input
           type="text"
           className={styles.rest__url}
           name="requestUrl"
-          value={url}
+          defaultValue={url}
           onChange={onUrlChange}
           placeholder="Enter URL or paste the text"
         />
-        <button onClick={onSubmit} disabled={!url}>
+        <Button onClick={onSubmit} disabled={!url}>
           Send
-        </button>
+        </Button>
       </div>
       <div className={styles.rest__sectionSelector}>
         {sectionList.map((sec) => (
@@ -144,27 +146,31 @@ export default function RestQueryComponent({}: {}) {
           </div>
         ))}
       </div>
-      {section === RequestSection.QueryParams && (
-        <KeyValueEditor
-          defaultValues={queryParams}
-          onChange={onQueryParamsChanged}
-        />
-      )}
-      {section === RequestSection.Headers && (
-        <KeyValueEditor defaultValues={headers} onChange={onHeadersChanged} />
-      )}
-      {section === RequestSection.Body && (
-        <textarea
-          value={body}
-          onChange={(e) => onBodyChanged(e.target.value)}
-        />
-      )}
-      {section === RequestSection.Variables && (
-        <KeyValueEditor
-          defaultValues={variables}
-          onChange={onVariablesChanged}
-        />
-      )}
+      <div className={styles.rest__tabContainer}>
+        {section === RequestSection.QueryParams && (
+          <KeyValueEditor
+            defaultValues={queryParams}
+            onChange={onQueryParamsChanged}
+          />
+        )}
+        {section === RequestSection.Headers && (
+          <KeyValueEditor defaultValues={headers} onChange={onHeadersChanged} />
+        )}
+        {section === RequestSection.Body && (
+          <textarea
+            value={body}
+            onChange={(e) => onBodyChanged(e.target.value)}
+          />
+        )}
+        {section === RequestSection.Variables && (
+          <KeyValueEditor
+            defaultValues={variables}
+            onChange={onVariablesChanged}
+          />
+        )}
+      </div>
     </div>
   );
 }
+
+export default RestQueryComponent;
