@@ -1,5 +1,5 @@
 import RestQueryComponent from './RestQueryComponent/RestQueryComponent';
-import styles from './RestLayout.module.scss'
+import styles from './RestLayout.module.scss';
 import PageHeader from 'components/PageHeader/PageHeader';
 
 const RestLayout = () => {

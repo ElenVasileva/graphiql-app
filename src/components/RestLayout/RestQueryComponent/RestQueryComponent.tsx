@@ -171,6 +171,6 @@ const RestQueryComponent = () => {
       </div>
     </div>
   );
-}
+};
 
 export default RestQueryComponent;
