@@ -6,7 +6,7 @@ import styles from './ResponseComponent.module.scss';
 import { RestResponse } from 'types/RestResponse';
 
 const callFetch = async (request: RestRequest): Promise<RestResponse> => {
-  const url = request.url;
+  const { url } = request;
   const init: RequestInit = {
     method: request.method,
     headers: request.headers,

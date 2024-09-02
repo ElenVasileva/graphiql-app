@@ -1,4 +1,7 @@
+/* eslint-disable max-lines-per-function*/
+
 'use client';
+
 import { HttpMethod, httpMethodsList } from 'constants/methodTypes';
 import { ChangeEvent, useState } from 'react';
 
@@ -32,7 +35,7 @@ const getRequestDataFromUrl = (originUrl: string) => {
   const pathNames = originUrl.split('/');
   const method = (pathNames[2] as HttpMethod) || HttpMethod.get;
   const urlAndQueryParam = b64DecodeUnicode(pathNames[3] || '');
-  const url = urlAndQueryParam.split('?')[0];
+  const [url] = urlAndQueryParam.split('?');
 
   const urlSearchParams = new URLSearchParams(
     urlAndQueryParam.split('?')[1] || '',
@@ -44,7 +47,7 @@ const getRequestDataFromUrl = (originUrl: string) => {
   return { method, url, queryParams, body };
 };
 
-export default function RestQueryComponent({}: {}) {
+export default function RestQueryComponent() {
   const pathName = usePathname();
   const requestData = getRequestDataFromUrl(pathName);
 

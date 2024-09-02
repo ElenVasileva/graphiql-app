@@ -23,7 +23,7 @@ export const LoginForm: FC = () => {
     resolver: yupResolver(LoginValidationSchema),
   });
 
-  const onSubmit = (data: Inputs) => {};
+  const onSubmit = () => {};
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>

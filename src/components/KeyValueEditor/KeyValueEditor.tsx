@@ -38,7 +38,7 @@ const record2Array = (values: Record<string, string>): KeyValueEditable[] => {
 };
 
 const array2Record = (array: KeyValueEditable[]): Record<string, string> => {
-  let record: Record<string, string> = {};
+  const record: Record<string, string> = {};
   array.forEach((pair: KeyValueEditable) => {
     if (pair.key) record[pair.key] = pair.value;
   });

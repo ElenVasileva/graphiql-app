@@ -1,2 +1,2 @@
-npx prettier --write ./src
+npx prettier --check ./src
 npx next lint
