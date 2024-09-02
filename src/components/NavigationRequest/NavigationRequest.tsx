@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import styles from './NavigationRequest.module.scss';
 
 const navigationList: {

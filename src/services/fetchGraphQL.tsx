@@ -1,24 +1,49 @@
 export default async function fetchGraphQL(
   endpoint: string,
-  body: string,
+  query: string,
+  variables: { [key: string]: string },
   headers: { [key: string]: string },
-) {
+): Promise<{
+  statusCode: number | null;
+  data: string | null;
+  error: string | null;
+}> {
   const requestOptions: RequestInit = {
     method: 'POST',
     headers: new Headers(headers),
     body: JSON.stringify({
-      query:
-        '{\r\n  allFilms {\r\n    films {\r\n      title\r\n    }\r\n  }\r\n}',
-      variables: {},
+      query,
+      variables,
     }),
     redirect: 'follow',
   };
 
+  let statusCode = null;
   try {
+    if (!endpoint) {
+      throw new Error('Invalid endpoint specified');
+    }
     const response = await fetch(endpoint, requestOptions);
-    const result = await response.text();
-    return result;
+
+    statusCode = response.status;
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+
+    const data = await response.text();
+    return { data, statusCode, error: null };
   } catch (error) {
-    // console.error('Error', error);
+    if (error instanceof Error) {
+      return {
+        error: error.message,
+        statusCode: statusCode,
+        data: null,
+      };
+    }
+    return {
+      error: `{"errors":[{"message":"Something went wrong."}]}`,
+      statusCode,
+      data: null,
+    };
   }
 }

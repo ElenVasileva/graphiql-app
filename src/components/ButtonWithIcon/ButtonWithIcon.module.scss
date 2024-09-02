@@ -10,4 +10,9 @@
   &:hover {
     background-color: var(--color-secondary);
   }
+
+  &:disabled {
+    background-color: var(--color-neutral);
+    cursor: not-allowed;
+  }
 }

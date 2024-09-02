@@ -1,5 +1,5 @@
 export default function base64ToString(str: string) {
-  let uint8Array = new Uint8Array(
+  const uint8Array = new Uint8Array(
     atob(str)
       .split('')
       .map((c) => c.charCodeAt(0)),

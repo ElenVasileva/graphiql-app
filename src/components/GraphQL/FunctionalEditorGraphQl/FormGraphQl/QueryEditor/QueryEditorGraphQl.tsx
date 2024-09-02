@@ -6,14 +6,14 @@ type FormData = {
   endpoint: string;
   sdl: string;
   query: string;
-  variables: {};
+  variables: Record<string, string>;
   headers: Record<string, string>;
 };
 
 interface IQueryEditorGraphQlProps {
   visibleSection: 'headers' | 'query' | 'variables' | undefined;
   formData: FormData;
-  setForm: (name: string, value: string) => void;
+  setForm: (value: string | Record<string, string>) => void;
 }
 
 export default function QueryEditorGraphQl(props: IQueryEditorGraphQlProps) {
@@ -22,7 +22,7 @@ export default function QueryEditorGraphQl(props: IQueryEditorGraphQlProps) {
   if (visibleSection !== 'query') return null;
 
   function saveQueryToState(text: string) {
-    setForm('query', prettyPrintGraphQl(text));
+    setForm(prettyPrintGraphQl(text));
   }
 
   return (

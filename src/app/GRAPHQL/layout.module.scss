@@ -8,6 +8,7 @@
 
   width: 100%;
   height: 100%;
+  max-width: 1440px;
 
   background-color: var(--color-base);
   color: var(--color-neutral);
@@ -17,4 +18,10 @@
 .h1 {
   font: var(--text-header-xl);
   color: var(--color-primary);
+}
+
+@media (width< 800px) {
+  .content {
+    flex-direction: column;
+  }
 }

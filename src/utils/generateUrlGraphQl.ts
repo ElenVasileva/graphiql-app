@@ -8,8 +8,8 @@ interface IGenerateUrlGraphQlParams {
 
 export default function generateUrlGraphQl(params: IGenerateUrlGraphQlParams) {
   let headers = '';
-  for (let key in params.headers) {
+  for (const key in params.headers) {
     headers += `${encodeURIComponent(key)}=${encodeURIComponent(params.headers[key])}&`;
   }
-  return `${encodeURIComponent(bytesToBase64(params.endpoint))}/${encodeURIComponent(bytesToBase64(params.body))}/?${headers.slice(0, -1)}`;
+  return `/${encodeURIComponent(bytesToBase64(params.endpoint))}/${encodeURIComponent(bytesToBase64(params.body))}/?${headers.slice(0, -1)}`;
 }
