@@ -1,8 +1,4 @@
 :root {
-  --color: #ddd;
-  --border-color: #7e7e7e;
-  --background-color: #222022;
-
   --color-primary: #ff5794;
   --color-secondary: #908aff;
   --color-tertiary: #00c2e0;
@@ -47,7 +43,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--color);
-  border-color: var(--border-color);
-  background-color: var(--background-color);
+  color: var(--color-neutral);
+  background-color: var(--color-base);
 }

@@ -5,6 +5,7 @@
   background-color: var(--color-tertiary);
   color: var(--color-base);
   cursor: pointer;
+  transition: 0.3s;
 
   &:hover {
     background-color: var(--color-secondary);

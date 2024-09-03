@@ -1,11 +1,10 @@
 'use client';
-import RestQueryComponent from 'components/RestQueryComponent/RestQueryComponent';
+import RestLayout from 'components/RestLayout/RestLayout';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div>REST client</div>
-      <RestQueryComponent />
+      <RestLayout />
       {children}
     </>
   );
