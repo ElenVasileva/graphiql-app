@@ -1,6 +1,7 @@
 'use client';
-import { HttpMethod, httpMethodsList } from 'constants/methodTypes';
-import { ChangeEvent, useEffect, useState } from 'react';
+
+import { httpMethodsList } from 'constants/methodTypes';
+import { useEffect, useState } from 'react';
 import styles from './RestQueryComponent.module.scss';
 import { usePathname, useRouter } from 'next/navigation';
 import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';

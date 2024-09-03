@@ -27,7 +27,7 @@ export const RegisterForm: FC = () => {
   });
   const password = watch('password');
 
-  const onSubmit = (data: Inputs) => {};
+  const onSubmit = () => {};
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>
