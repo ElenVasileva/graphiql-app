@@ -34,7 +34,7 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
   const router = useRouter();
   useEffect(() => {
     router.push(restRequest2Url(restRequest));
-  }, [restRequest]);
+  }, [restRequest, router]);
 
   const onValueChange = (newValue: object) => {
     setRestRequest({ ...restRequest, ...newValue });
