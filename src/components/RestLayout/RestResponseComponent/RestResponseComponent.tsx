@@ -21,9 +21,11 @@ const RestResponseComponent = ({
           <div className={styles.response__status}>
             Status: {response.status}
           </div>
-          <div>
-            <textarea readOnly value={body} />
-          </div>
+          {!!body && (
+            <div>
+              <textarea readOnly value={body} />
+            </div>
+          )}
         </>
       )}
     </div>

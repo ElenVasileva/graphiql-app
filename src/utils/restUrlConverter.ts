@@ -30,7 +30,10 @@ export const restRequest2Url = (request: RestRequest): string => {
   return `/restful/${method}/${b64EncodeUnicode(url + queryParamString)}/${b64EncodeUnicode(body)}`;
 };
 
-export const url2RestRequest = (originUrl: string): RestRequest => {
+export const url2RestRequest = (
+  originUrl: string,
+  extractQueryParams?: boolean,
+): RestRequest => {
   const pathNames = originUrl.split('/');
   const method = (pathNames[2] as HttpMethod) || HttpMethod.get;
   const urlAndQueryParam = b64DecodeUnicode(pathNames[3] || '');
@@ -42,6 +45,9 @@ export const url2RestRequest = (originUrl: string): RestRequest => {
   const queryParams = Object.fromEntries(urlSearchParams.entries());
 
   const body = b64DecodeUnicode(pathNames[4]);
+  if (extractQueryParams) {
+    return { method, url: urlAndQueryParam, body };
+  }
 
   return { method, url, queryParams, body };
 };

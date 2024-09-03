@@ -12,7 +12,7 @@ const RestLayout = () => {
   const [response, setResponse] = useState<RestResponse | undefined>(undefined);
 
   const onSubmit = async () => {
-    const requestFromUrl = url2RestRequest(path);
+    const requestFromUrl = url2RestRequest(path, true);
 
     const rawResponse = await fetch(`/api`, {
       method: 'POST',

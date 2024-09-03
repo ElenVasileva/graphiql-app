@@ -36,32 +36,12 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
     router.push(restRequest2Url(restRequest));
   }, [restRequest]);
 
-  const onMethodChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setRestRequest({ ...restRequest, method: e.target.value as HttpMethod });
-  };
-
-  const onUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRestRequest({ ...restRequest, url: e.target.value });
+  const onValueChange = (newValue: object) => {
+    setRestRequest({ ...restRequest, ...newValue });
   };
 
   const onSectionClick = (sec: TabSection) => {
     setSection(sec);
-  };
-
-  const onQueryParamsChanged = (queryParams: Record<string, string>) => {
-    setRestRequest({ ...restRequest, queryParams });
-  };
-
-  const onHeadersChanged = (headers: Record<string, string>) => {
-    setRestRequest({ ...restRequest, headers });
-  };
-
-  const onBodyChanged = (body: string) => {
-    setRestRequest({ ...restRequest, body });
-  };
-
-  const onVariablesChanged = (variables: Record<string, string>) => {
-    setRestRequest({ ...restRequest, variables });
   };
 
   return (
@@ -69,7 +49,7 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
       <div className={styles.rest__row}>
         <select
           className={styles.rest__method}
-          onChange={onMethodChange}
+          onChange={(e) => onValueChange({ method: e.target.value })}
           defaultValue={restRequest.method}
         >
           {httpMethodsList.map((method) => (
@@ -83,7 +63,7 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
           className={styles.rest__url}
           name="requestUrl"
           defaultValue={restRequest.url}
-          onChange={onUrlChange}
+          onChange={(e) => onValueChange({ url: e.target.value })}
           placeholder="Enter URL or paste the text"
         />
         <Button onClick={onSubmit}>Send</Button>
@@ -104,25 +84,25 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
         {section === TabSection.QueryParams && (
           <KeyValueEditor
             defaultValues={restRequest.queryParams}
-            onChange={onQueryParamsChanged}
+            onChange={(queryParams) => onValueChange({ queryParams })}
           />
         )}
         {section === TabSection.Headers && (
           <KeyValueEditor
             defaultValues={restRequest.headers}
-            onChange={onHeadersChanged}
+            onChange={(headers) => onValueChange({ headers })}
           />
         )}
         {section === TabSection.Body && (
           <textarea
             value={restRequest.body}
-            onChange={(e) => onBodyChanged(e.target.value)}
+            onChange={(e) => onValueChange({ body: e.target.value })}
           />
         )}
         {section === TabSection.Variables && (
           <KeyValueEditor
             defaultValues={restRequest.variables}
-            onChange={onVariablesChanged}
+            onChange={(variables) => onValueChange({ variables })}
           />
         )}
       </div>
