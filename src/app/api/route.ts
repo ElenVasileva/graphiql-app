@@ -7,6 +7,7 @@ const callFetch = async (request: RestRequest): Promise<RestResponse> => {
     const { url, method, headers } = request;
     const init: RequestInit = { method, headers };
     const methods = [HttpMethod.post, HttpMethod.put, HttpMethod.patch];
+
     if (methods.includes(request.method)) {
       init.body = request.body;
     }
