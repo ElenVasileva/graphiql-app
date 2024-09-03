@@ -1,8 +1,4 @@
 :root {
-  --color: #ddd;
-  --border-color: #7e7e7e;
-  --background-color: #222022;
-
   --color-primary: #ff5794;
   --color-secondary: #908aff;
   --color-tertiary: #00c2e0;
@@ -28,16 +24,11 @@
   --text-bold-xl: bold 36px /1.5 var(--font-rubik), sans-serif;
 
   /* header text */
-  --text-header-xs: bold 18px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-s: bold 24px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-m: bold 36px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-l: bold 48px /1.5 var(--font-league-gothic),
-    sans-serif;
-  --text-header-xl: bold 64px /1.5 var(--font-league-gothic),
-    sans-serif;
+  --text-header-xs: bold 18px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-s: bold 24px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-m: bold 36px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-l: bold 48px /1.5 var(--font-league-gothic), sans-serif;
+  --text-header-xl: bold 64px /1.5 var(--font-league-gothic), sans-serif;
 }
 
 * {
@@ -52,7 +43,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--color);
-  border-color: var(--border-color);
-  background-color: var(--background-color);
+  color: var(--color-neutral);
+  background-color: var(--color-base);
 }
