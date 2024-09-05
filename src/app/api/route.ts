@@ -3,15 +3,12 @@ import { RestRequest } from 'types/RestRequest';
 import { RestResponse } from 'types/RestResponse';
 
 const callFetch = async (request: RestRequest): Promise<RestResponse> => {
-  const url =
-    request.method === HttpMethod.GET
-      ? `${request.url}?${new URLSearchParams(request.parameters)}`
-      : request.url;
+  const { url } = request;
   const init: RequestInit = {
     method: request.method,
     headers: request.headers,
   };
-  const methods = [HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH];
+  const methods = [HttpMethod.post, HttpMethod.put, HttpMethod.patch];
   if (methods.includes(request.method)) {
     init.body = request.body;
   }
