@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import styles from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { RegisterValidationSchema } from './RegisterValidationSchema';
@@ -8,10 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import Link from 'next/link';
-import { auth, registerWithEmailAndPassword } from 'services/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { redirect } from 'next/navigation';
-import { Loader } from 'components/Loader';
+import { createSession, registerWithEmailAndPassword } from 'services/firebase';
 
 type Inputs = {
   name: string;
@@ -21,8 +18,6 @@ type Inputs = {
 };
 
 export const RegisterForm: FC = () => {
-  const [user, loading, error] = useAuthState(auth);
-
   const {
     register,
     handleSubmit,
@@ -33,16 +28,17 @@ export const RegisterForm: FC = () => {
   });
   const password = watch('password');
 
-  useEffect(() => {
-    if (loading) return;
-    if (user) redirect('/');
-  }, [user, loading]);
+  const onSubmit = async (data: Inputs) => {
+    const userUid = await registerWithEmailAndPassword(
+      data.name,
+      data.email,
+      data.password,
+    );
 
-  const onSubmit = (data: Inputs) => {
-    registerWithEmailAndPassword(data.name, data.email, data.password);
+    if (userUid) {
+      return createSession(userUid);
+    }
   };
-
-  if (loading) return <Loader />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>

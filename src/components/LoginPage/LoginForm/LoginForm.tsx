@@ -3,15 +3,12 @@
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import Link from 'next/link';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import styles from './LoginForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginValidationSchema } from './LoginValidationSchema';
-import { auth, logInWithEmailAndPassword } from 'services/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { redirect } from 'next/navigation';
-import { Loader } from 'components/Loader';
+import { createSession, logInWithEmailAndPassword } from 'services/firebase';
 
 type Inputs = {
   email: string;
@@ -19,8 +16,6 @@ type Inputs = {
 };
 
 export const LoginForm: FC = () => {
-  const [user, loading, error] = useAuthState(auth);
-
   const {
     register,
     handleSubmit,
@@ -29,20 +24,13 @@ export const LoginForm: FC = () => {
     resolver: yupResolver(LoginValidationSchema),
   });
 
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    if (user) {
-      redirect('/');
-    }
-  }, [user, loading]);
+  const onSubmit = async (data: Inputs) => {
+    const userUid = await logInWithEmailAndPassword(data.email, data.password);
 
-  const onSubmit = (data: Inputs) => {
-    logInWithEmailAndPassword(data.email, data.password);
+    if (userUid) {
+      return createSession(userUid);
+    }
   };
-
-  if (loading) return <Loader />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>

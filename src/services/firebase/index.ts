@@ -1,8 +1,10 @@
 export {
-  auth,
-  db,
+  firebaseAuth,
+  firebaseDb,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
-  sendPasswordReset,
   logout,
+  onAuthStateChanged,
 } from './firebase';
+
+export { createSession, removeSession } from './authActions';
