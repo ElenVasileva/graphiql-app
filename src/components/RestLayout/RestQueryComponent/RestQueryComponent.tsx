@@ -2,14 +2,14 @@
 
 'use client';
 
-import { HttpMethod, httpMethodsList } from 'constants/methodTypes';
+import { HttpMethod, httpMethodsList } from '@/constants/methodTypes';
 import { ChangeEvent, useState } from 'react';
 
 import styles from './RestQueryComponent.module.scss';
 import { usePathname, useRouter } from 'next/navigation';
-import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
-import { Input } from 'components/Input';
-import { Button } from 'components/Button';
+import KeyValueEditor from '@/components/KeyValueEditor/KeyValueEditor';
+import { Input } from '@/components/Input';
+import { Button } from '@/components/Button';
 
 enum RequestSection {
   QueryParams = 'Query parameters',

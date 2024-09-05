@@ -106,7 +106,7 @@ const KeyValueEditor = ({
       </div>
       <div className={styles.keyValue__row__trash}>
         <button onClick={() => onDeleteClick(pair.id)}>
-          <Image width="16" src={trash} alt="Delete" />
+          <Image width="16" height="16" src={trash} alt="Delete" />
         </button>
       </div>
     </div>
@@ -114,12 +114,8 @@ const KeyValueEditor = ({
   return (
     <div className={styles.keyValue}>
       <div className={styles.keyValue__row}>
-        <div className={styles.keyValue__row__key}>
-          <input value="Key" readOnly />
-        </div>
-        <div className={styles.keyValue__row__value}>
-          <input value="Value" readOnly />
-        </div>
+        <div className={styles.keyValue__row__keyHeader}>Key</div>
+        <div className={styles.keyValue__row__valueHeader}>Value</div>
         <div className={styles.keyValue__row__trash}></div>
       </div>
       {rows}
