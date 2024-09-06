@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   type User,
@@ -61,7 +60,7 @@ export const registerWithEmailAndPassword = async (
       email,
       password,
     );
-    const user = res.user;
+    const { user } = res;
 
     await addDoc(collection(firebaseDb, 'users'), {
       uid: user.uid,
