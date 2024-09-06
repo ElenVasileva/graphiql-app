@@ -1,0 +1,29 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-neutral);
+  border-radius: 5px;
+  padding: 30px;
+
+  &__projectAndCourse {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__project, &__course{
+    width: 50%;
+    height: 150px;
+    border: 1px solid var(--color-neutral);
+    border-radius: 5px;
+  }
+
+  &__developers {
+    height: 150px;
+    border: 1px solid var(--color-neutral);
+    border-radius: 5px;
+  }
+
+  h3{
+    text-align: center;
+  }
+}

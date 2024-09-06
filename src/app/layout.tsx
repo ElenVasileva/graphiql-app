@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Rubik, League_Gothic } from 'next/font/google';
 
 import './globals.css';
+import StoreProvider from 'app/storeProvider';
 
 const rubik = Rubik({
   subsets: ['latin', 'cyrillic'],
@@ -27,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${rubik.variable} ${league_gothic.variable}`}>
-      <body>{children}</body>
+      <body>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }
