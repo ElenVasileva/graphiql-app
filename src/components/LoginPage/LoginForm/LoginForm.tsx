@@ -8,6 +8,7 @@ import styles from './LoginForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginValidationSchema } from './LoginValidationSchema';
+import { createSession, logInWithEmailAndPassword } from 'services/firebase';
 
 type Inputs = {
   email: string;
@@ -23,7 +24,13 @@ export const LoginForm: FC = () => {
     resolver: yupResolver(LoginValidationSchema),
   });
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: Inputs) => {
+    const userUid = await logInWithEmailAndPassword(data.email, data.password);
+
+    if (userUid) {
+      return createSession(userUid);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>
