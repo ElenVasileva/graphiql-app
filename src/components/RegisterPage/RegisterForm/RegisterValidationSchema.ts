@@ -15,6 +15,9 @@ export const RegisterValidationSchema = yup.object().shape({
   password: yup
     .string()
     .required('Password is required')
+    .matches(/^[^а-яА-ЯЁё]*$/, {
+      message: 'Password must not contain cyrillic letters',
+    })
     .min(8, 'Password must be at least 8 characters long')
     .matches(/(?=.*\d)/, 'Password must contain at least one digit')
     .matches(
