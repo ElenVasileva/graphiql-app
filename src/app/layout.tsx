@@ -5,6 +5,7 @@ import './globals.css';
 import { cookies } from 'next/headers';
 import { SESSION_COOKIE_NAME } from 'constants/sessionCookie';
 import { Header } from 'components/Header';
+import StoreProvider from 'app/storeProvider';
 
 const rubik = Rubik({
   subsets: ['latin', 'cyrillic'],
@@ -33,8 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${rubik.variable} ${league_gothic.variable}`}>
       <body>
-        <Header session={session} />
-        {children}
+        <StoreProvider>
+          <Header session={session} />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );

@@ -7,7 +7,7 @@ import ContentLinks from 'components/MainPage/ContentLinks/ContentLinks';
 const MainPage = ({ session }: { session: string | null }) => {
   return (
     <div className={styles.mainPage}>
-      <Greeting session={session} />
+      <Greeting />
       <SignLinks session={session} />
       <ContentLinks session={session} />
       <InformationBlock />
