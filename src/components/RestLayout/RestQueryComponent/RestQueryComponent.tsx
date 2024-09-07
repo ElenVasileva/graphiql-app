@@ -1,114 +1,48 @@
-/* eslint-disable max-lines-per-function*/
-
 'use client';
 
-import { HttpMethod, httpMethodsList } from '@/constants/methodTypes';
-import { ChangeEvent, useState } from 'react';
-
+import { httpMethodsList } from '@/constants/methodTypes';
+import { useEffect, useState } from 'react';
 import styles from './RestQueryComponent.module.scss';
 import { usePathname, useRouter } from 'next/navigation';
 import KeyValueEditor from '@/components/KeyValueEditor/KeyValueEditor';
 import { Input } from '@/components/Input';
+import { RestRequest } from '@/types/RestRequest';
+import { restRequest2Url, url2RestRequest } from 'utils/restUrlConverter';
 import { Button } from '@/components/Button';
 
-enum RequestSection {
+enum TabSection {
   QueryParams = 'Query parameters',
   Headers = 'Headers',
   Body = 'Body',
   Variables = 'Variables',
 }
 
-const sectionList: RequestSection[] = [
-  RequestSection.QueryParams,
-  RequestSection.Headers,
-  RequestSection.Body,
-  RequestSection.Variables,
+const sectionList: TabSection[] = [
+  TabSection.QueryParams,
+  TabSection.Headers,
+  TabSection.Body,
+  TabSection.Variables,
 ];
 
-const b64EncodeUnicode = (str: string) => {
-  return encodeURIComponent(btoa(str));
-};
+const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
+  const path = usePathname();
+  const requestFromUrl = url2RestRequest(path);
 
-const b64DecodeUnicode = (str: string) => {
-  return atob(decodeURIComponent(str));
-};
+  const [restRequest, setRestRequest] = useState<RestRequest>(requestFromUrl);
 
-const getRequestDataFromUrl = (originUrl: string) => {
-  const pathNames = originUrl.split('/');
-  const method = (pathNames[2] as HttpMethod) || HttpMethod.get;
-  const urlAndQueryParam = b64DecodeUnicode(pathNames[3] || '');
-  const [url] = urlAndQueryParam.split('?');
-
-  const urlSearchParams = new URLSearchParams(
-    urlAndQueryParam.split('?')[1] || '',
-  );
-  const queryParams = Object.fromEntries(urlSearchParams.entries());
-
-  const body = b64DecodeUnicode(pathNames[4] || '');
-
-  return { method, url, queryParams, body };
-};
-
-const RestQueryComponent = () => {
-  const pathName = usePathname();
-  const requestData = getRequestDataFromUrl(pathName);
-
-  const [url, setUrl] = useState(requestData.url);
-  const [methodType, setMethodType] = useState<HttpMethod>(requestData.method);
-  const [queryParams, setQueryParams] = useState<Record<string, string>>(
-    requestData.queryParams,
-  );
-
-  const [headers, setHeaders] = useState<Record<string, string>>({});
-  const [body, setBody] = useState<string>(requestData.body);
-  const [variables, setVariables] = useState<Record<string, string>>({});
-  const [section, setSection] = useState<RequestSection>(
-    RequestSection.QueryParams,
-  );
+  const [section, setSection] = useState<TabSection>(TabSection.QueryParams);
 
   const router = useRouter();
+  useEffect(() => {
+    router.push(restRequest2Url(restRequest));
+  }, [restRequest, router]);
 
-  const onMethodChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const methodType = e.target.value as HttpMethod;
-    setMethodType(methodType);
+  const onValueChange = (newValue: object) => {
+    setRestRequest({ ...restRequest, ...newValue });
   };
 
-  const onUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUrl(e.target.value);
-  };
-
-  const onSectionClick = (sec: RequestSection) => {
+  const onSectionClick = (sec: TabSection) => {
     setSection(sec);
-  };
-
-  const onQueryParamsChanged = (queryParams: Record<string, string>) => {
-    setQueryParams(queryParams);
-  };
-
-  const onHeadersChanged = (headers: Record<string, string>) => {
-    setHeaders(headers);
-  };
-
-  const onBodyChanged = (body: string) => {
-    setBody(body);
-  };
-
-  const onVariablesChanged = (variables: Record<string, string>) => {
-    setVariables(variables);
-  };
-
-  const onSubmit = () => {
-    const urlSearchParams = new URLSearchParams();
-    for (const key in queryParams) {
-      urlSearchParams.append(key, queryParams[key]);
-    }
-
-    const queryParamString = urlSearchParams
-      ? '?' + urlSearchParams.toString()
-      : '';
-    router.push(
-      `/restful/${methodType}/${b64EncodeUnicode(url + queryParamString)}/${b64EncodeUnicode(body)}`,
-    );
   };
 
   return (
@@ -116,8 +50,8 @@ const RestQueryComponent = () => {
       <div className={styles.rest__row}>
         <select
           className={styles.rest__method}
-          onChange={onMethodChange}
-          defaultValue={methodType}
+          onChange={(e) => onValueChange({ method: e.target.value })}
+          defaultValue={restRequest.method}
         >
           {httpMethodsList.map((method) => (
             <option value={method} key={method}>
@@ -129,13 +63,11 @@ const RestQueryComponent = () => {
           type="text"
           className={styles.rest__url}
           name="requestUrl"
-          defaultValue={url}
-          onChange={onUrlChange}
+          defaultValue={restRequest.url}
+          onChange={(e) => onValueChange({ url: e.target.value })}
           placeholder="Enter URL or paste the text"
         />
-        <Button onClick={onSubmit} disabled={!url}>
-          Send
-        </Button>
+        <Button onClick={onSubmit}>Send</Button>
       </div>
       <div className={styles.rest__sectionSelector}>
         {sectionList.map((sec) => (
@@ -150,25 +82,28 @@ const RestQueryComponent = () => {
         ))}
       </div>
       <div className={styles.rest__tabContainer}>
-        {section === RequestSection.QueryParams && (
+        {section === TabSection.QueryParams && (
           <KeyValueEditor
-            defaultValues={queryParams}
-            onChange={onQueryParamsChanged}
+            defaultValues={restRequest.queryParams}
+            onChange={(queryParams) => onValueChange({ queryParams })}
           />
         )}
-        {section === RequestSection.Headers && (
-          <KeyValueEditor defaultValues={headers} onChange={onHeadersChanged} />
+        {section === TabSection.Headers && (
+          <KeyValueEditor
+            defaultValues={restRequest.headers}
+            onChange={(headers) => onValueChange({ headers })}
+          />
         )}
-        {section === RequestSection.Body && (
+        {section === TabSection.Body && (
           <textarea
-            value={body}
-            onChange={(e) => onBodyChanged(e.target.value)}
+            value={restRequest.body}
+            onChange={(e) => onValueChange({ body: e.target.value })}
           />
         )}
-        {section === RequestSection.Variables && (
+        {section === TabSection.Variables && (
           <KeyValueEditor
-            defaultValues={variables}
-            onChange={onVariablesChanged}
+            defaultValues={restRequest.variables}
+            onChange={(variables) => onValueChange({ variables })}
           />
         )}
       </div>

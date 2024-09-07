@@ -1,0 +1,23 @@
+.response {
+  border: 1px solid var(--color-neutral);
+  border-radius: 5px;
+  width: 520px;
+  height: 320px;
+  padding: 10px;
+
+  &__status {
+    padding: 10px;
+  }
+
+  textarea {
+    border-radius: 5px;
+    height: 260px;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    resize: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+}

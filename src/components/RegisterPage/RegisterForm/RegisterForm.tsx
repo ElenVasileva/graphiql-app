@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import Link from 'next/link';
+import { createSession, registerWithEmailAndPassword } from 'services/firebase';
 
 type Inputs = {
   name: string;
@@ -27,7 +28,17 @@ export const RegisterForm: FC = () => {
   });
   const password = watch('password');
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: Inputs) => {
+    const userUid = await registerWithEmailAndPassword(
+      data.name,
+      data.email,
+      data.password,
+    );
+
+    if (userUid) {
+      return createSession(userUid);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>

@@ -15,18 +15,21 @@ const addEmptyToTheEnd = (valuesArray: KeyValueEditable[], id?: number) => {
     valuesArray[valuesArray.length - 1].key ||
     valuesArray[valuesArray.length - 1].value
   ) {
+    const newId =
+      id || valuesArray.length
+        ? Math.max(...valuesArray.map((v) => v.id)) + 1
+        : 0;
     valuesArray.push({
-      id:
-        id || valuesArray.length
-          ? Math.max(...valuesArray.map((v) => v.id)) + 1
-          : 0,
+      id: newId,
       key: '',
       value: '',
     });
   }
 };
 
-const record2Array = (values: Record<string, string>): KeyValueEditable[] => {
+const record2Array = (
+  values: Record<string, string> | undefined,
+): KeyValueEditable[] => {
   const valuesArray: KeyValueEditable[] = [];
   let id = 0;
   for (const key in values) {
@@ -49,7 +52,7 @@ const KeyValueEditor = ({
   defaultValues,
   onChange,
 }: {
-  defaultValues: Record<string, string>;
+  defaultValues: Record<string, string> | undefined;
   onChange: (values: Record<string, string>) => void;
 }) => {
   const [values, setValues] = useState<KeyValueEditable[]>(
