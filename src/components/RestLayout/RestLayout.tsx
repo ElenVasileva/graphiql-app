@@ -5,7 +5,7 @@ import RestResponseComponent from './RestResponseComponent/RestResponseComponent
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { RestResponse } from 'types/RestResponse';
-import { url2RestRequest } from 'utils/restUrlConverter';
+import { url2RestRequest } from '@/utils/restUrlConverter';
 
 const RestLayout = () => {
   const path = usePathname();

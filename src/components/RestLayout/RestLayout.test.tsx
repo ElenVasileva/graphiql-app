@@ -3,6 +3,20 @@ import { render, screen } from '@testing-library/react';
 import RestLayout from './RestLayout';
 import userEvent from '@testing-library/user-event';
 
+const rawResponse = '{"name":"Luke Skywalker","height":"172","mass":"77"}';
+
+const goodResult = {
+  status: 200,
+  json: () => {
+    return {
+      status: 200,
+      body: rawResponse,
+    };
+  },
+};
+
+global.fetch = vi.fn().mockResolvedValue(goodResult);
+
 vi.mock('next/navigation', () => {
   const actual = vi.importActual('next/navigation');
   return {
@@ -29,8 +43,6 @@ it('RestLayout', async () => {
   );
   expect(screen.getByDisplayValue('new-url')).toBeDefined();
 
-  await user.click(screen.getByText('Send'));
-
   await user.type(screen.getByPlaceholderText('Key'), 'search');
   expect(screen.getByDisplayValue('search')).toBeDefined();
 
@@ -46,4 +58,7 @@ it('RestLayout', async () => {
   expect(screen.getByDisplayValue('search')).toBeDefined();
 
   await user.click(screen.getByText('Send'));
+  expect(
+    screen.getByDisplayValue('Luke Skywalker', { exact: false }),
+  ).toBeDefined();
 });
