@@ -1,15 +1,15 @@
 'use client';
-import { RootState } from '@store/store';
-import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import styles from './SignLinks.module.scss';
 
-const SignLinks = () => {
-  const userName = useSelector((state: RootState) => state.user.value);
+import Link from 'next/link';
+import styles from './SignLinks.module.scss';
+import useUserSession from 'hooks/useUserSession';
+
+const SignLinks = ({ session }: { session: string | null }) => {
+  const userSessionId = useUserSession(session);
 
   return (
     <>
-      {!userName && (
+      {!userSessionId && (
         <div className={styles.links}>
           <Link href="/auth/" className={styles.links__link}>
             Sign In

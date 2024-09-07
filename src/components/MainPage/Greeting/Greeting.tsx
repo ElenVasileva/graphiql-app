@@ -1,15 +1,11 @@
 'use client';
-import { RootState } from '@store/store';
 import PageHeader from 'components/PageHeader/PageHeader';
-import { useSelector } from 'react-redux';
 
-const Greeting = () => {
-  const userName = useSelector((state: RootState) => state.user.value);
-
+const Greeting = ({ session }: { session: string | null }) => {
   return (
     <>
-      {!userName && <PageHeader>Welcome!</PageHeader>}
-      {!!userName && <PageHeader>Welcome Back, {userName}!</PageHeader>}
+      {!session && <PageHeader>Welcome!</PageHeader>}
+      {!!session && <PageHeader>Welcome Back, userName!</PageHeader>}
     </>
   );
 };

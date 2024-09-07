@@ -4,7 +4,8 @@ interface RestRequest {
   method: HttpMethod;
   url: string;
   body?: string;
-  parameters?: Record<string, string>;
+  queryParams?: Record<string, string>;
   headers?: Record<string, string>;
+  variables?: Record<string, string>;
 }
 export type { RestRequest };

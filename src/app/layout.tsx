@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { Rubik, League_Gothic } from 'next/font/google';
 
 import './globals.css';
-import StoreProvider from 'app/storeProvider';
+import { cookies } from 'next/headers';
+import { SESSION_COOKIE_NAME } from 'constants/sessionCookie';
+import { Header } from 'components/Header';
 
 const rubik = Rubik({
   subsets: ['latin', 'cyrillic'],
@@ -26,10 +28,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = cookies().get(SESSION_COOKIE_NAME)?.value || null;
+
   return (
     <html lang="en" className={`${rubik.variable} ${league_gothic.variable}`}>
       <body>
-        <StoreProvider>{children}</StoreProvider>
+        <Header session={session} />
+        {children}
       </body>
     </html>
   );
