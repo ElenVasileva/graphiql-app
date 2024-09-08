@@ -2,32 +2,35 @@ import { HttpMethod } from 'constants/methodTypes';
 import { RestRequest } from 'types/RestRequest';
 
 const b64EncodeUnicode = (str: string | undefined) => {
-  if (str) {
-    return encodeURIComponent(btoa(str));
-  }
-  return '';
+  return str ? encodeURIComponent(btoa(str)) : '';
 };
 
 const b64DecodeUnicode = (str: string) => {
-  if (str) {
-    return atob(decodeURIComponent(str));
+  return str ? atob(decodeURIComponent(str)) : '';
+};
+
+const record2QueryParams = (
+  records: Record<string, string> | undefined,
+): string => {
+  const urlSearchParams = new URLSearchParams();
+  for (const key in records) {
+    urlSearchParams.append(key, records[key]);
   }
-  return '';
+
+  return urlSearchParams.size ? '?' + urlSearchParams.toString() : '';
+};
+
+const queryParams2Record = (queryParams: string): Record<string, string> => {
+  const urlSearchParams = new URLSearchParams(queryParams);
+  return Object.fromEntries(urlSearchParams.entries());
 };
 
 export const restRequest2Url = (request: RestRequest): string => {
-  const { method, url, queryParams, body } = request;
+  const { method, url, queryParams, body, headers } = request;
+  const queryParamString = record2QueryParams(queryParams);
+  const headersQueryParamsString = record2QueryParams(headers);
 
-  const urlSearchParams = new URLSearchParams();
-  for (const key in queryParams) {
-    urlSearchParams.append(key, queryParams[key]);
-  }
-
-  const queryParamString = urlSearchParams.size
-    ? '?' + urlSearchParams.toString()
-    : '';
-
-  return `/restful/${method}/${b64EncodeUnicode(url + queryParamString)}/${b64EncodeUnicode(body)}`;
+  return `/restful/${method}/${b64EncodeUnicode(url + queryParamString)}/${b64EncodeUnicode(body)}${headersQueryParamsString}`;
 };
 
 export const url2RestRequest = (
@@ -38,11 +41,7 @@ export const url2RestRequest = (
   const method = (pathNames[2] as HttpMethod) || HttpMethod.get;
   const urlAndQueryParam = b64DecodeUnicode(pathNames[3] || '');
   const [url] = urlAndQueryParam.split('?');
-
-  const urlSearchParams = new URLSearchParams(
-    urlAndQueryParam.split('?')[1] || '',
-  );
-  const queryParams = Object.fromEntries(urlSearchParams.entries());
+  const queryParams = queryParams2Record(urlAndQueryParam.split('?')[1] || '');
 
   const body = b64DecodeUnicode(pathNames[4]);
   if (extractQueryParams) {
