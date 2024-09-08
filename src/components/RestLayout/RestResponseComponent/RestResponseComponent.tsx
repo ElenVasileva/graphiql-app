@@ -1,29 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './RestResponseComponent.module.scss';
 import { RestResponse } from 'types/RestResponse';
 import { Button } from 'components/Button';
 
-enum TabSection {
-  Pretty = 'Pretty',
-  Raw = 'Raw',
-}
+type Tabs = {
+  Raw?: string;
+  Pretty?: string;
+};
+type Tab = keyof Tabs;
 
-const sectionList: TabSection[] = [TabSection.Pretty, TabSection.Raw];
+const tryParseJson = (text: string | undefined): string | undefined => {
+  try {
+    if (text) {
+      const numberOfSpaces = 4;
+      return JSON.stringify(JSON.parse(text), undefined, numberOfSpaces);
+    }
+  } catch {
+    return undefined;
+  }
+};
 
 const RestResponseComponent = ({
   response,
 }: {
   response: RestResponse | undefined;
 }) => {
-  const [section, setSection] = useState<TabSection>(TabSection.Pretty);
+  const [tabs, setTabs] = useState<Tabs>({});
+  const [selectedTab, setSelectedTab] = useState<Tab>('Raw');
 
-  const numberOfSpaces = 4;
-  const prettyBody =
-    response && response.body
-      ? JSON.stringify(JSON.parse(response.body), undefined, numberOfSpaces)
-      : '';
+  useEffect(() => {
+    let newTabs = {
+      Raw: response?.body,
+    };
+    const json = tryParseJson(response?.body);
+    if (json) {
+      newTabs = { ...newTabs, ...{ Pretty: json } };
+    }
+    setTabs(newTabs);
+    setSelectedTab(json ? 'Pretty' : 'Raw');
+  }, [response]);
 
   return (
     <div className={styles.response}>
@@ -35,26 +52,22 @@ const RestResponseComponent = ({
             </div>
             {!!response.body && (
               <div className={styles.response__sectionSelector}>
-                {sectionList.map((sec) => (
-                  <Button
-                    key={sec}
-                    className={section === sec ? styles.active : ''}
-                    onClick={() => setSection(sec)}
-                  >
-                    {sec.toString()}
-                  </Button>
-                ))}
+                {Object.keys(tabs).length > 1 &&
+                  Object.keys(tabs).map((tab) => (
+                    <Button
+                      key={tab}
+                      className={tab == selectedTab ? styles.active : ''}
+                      onClick={() => setSelectedTab(tab as Tab)}
+                    >
+                      {tab}
+                    </Button>
+                  ))}
               </div>
             )}
           </div>
           {!!response.body && (
             <div className={styles.response__textareaContainer}>
-              <textarea
-                readOnly
-                value={
-                  section === TabSection.Pretty ? prettyBody : response.body
-                }
-              />
+              <textarea readOnly value={tabs[selectedTab]} />
             </div>
           )}
         </>

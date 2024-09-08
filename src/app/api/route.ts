@@ -13,18 +13,17 @@ const callFetch = async (request: RestRequest): Promise<RestResponse> => {
     }
     fetch(url, init)
       .then(async (response) => {
-        if (response.status === 200) {
-          const json = await response.json();
-          const restResponse: RestResponse = {
-            status: 200,
-            body: JSON.stringify(json),
-          };
-          resolve(restResponse);
-        } else {
-          resolve({ status: response.status });
-        }
+        const text = await response.text();
+        const restResponse: RestResponse = {
+          status: response.status,
+          body: text,
+        };
+        resolve(restResponse);
       })
-      .catch(() => {
+      .catch((error) => {
+        if (error instanceof Error) {
+          resolve({ status: 500, body: error && JSON.stringify(error) });
+        }
         resolve({ status: 500 });
       });
   });
