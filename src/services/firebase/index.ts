@@ -8,3 +8,5 @@ export {
 } from './firebase';
 
 export { createSession, removeSession } from './authActions';
+
+export { getUserName } from './getUserName';
