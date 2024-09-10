@@ -7,6 +7,10 @@ import { logout, removeSession } from 'services/firebase';
 import { Button } from 'components/Button';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'constants/routes';
 import { ButtonLink } from 'components/ButtonLink';
+import { useAppDispatch } from '@/store/hooks';
+import { useEffect } from 'react';
+import { setUser } from '@/store/features/currentUserSlice';
+import { getUserName } from 'services/firebase';
 
 type Props = {
   session: string | null;
@@ -14,6 +18,14 @@ type Props = {
 
 export const Header: FC<Props> = (props) => {
   const userSessionId = useUserSession(props.session);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    (async () => {
+      const name = await getUserName(props.session);
+      dispatch(setUser(name));
+    })();
+  }, [props.session, dispatch]);
 
   const handleSignOut = async () => {
     await logout();
