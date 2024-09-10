@@ -12,7 +12,13 @@ const DeveloperCard = ({
   return (
     <div className={styles.developerCard}>
       <div className={styles.name}>{name}</div>
-      <a href={`https://github.com/${gitLink}`}>{gitLink}</a>
+      <a
+        href={`https://github.com/${gitLink}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {gitLink}
+      </a>
       <div>{location}</div>
     </div>
   );
