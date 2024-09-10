@@ -7,9 +7,21 @@ interface IGenerateUrlGraphQlParams {
 }
 
 export default function generateUrlGraphQl(params: IGenerateUrlGraphQlParams) {
-  let headers = '';
-  for (const key in params.headers) {
-    headers += `${encodeURIComponent(key)}=${encodeURIComponent(params.headers[key])}&`;
+  const { endpoint, body, headers } = params;
+
+  if (!endpoint) {
+    return '';
   }
-  return `/${encodeURIComponent(bytesToBase64(params.endpoint))}/${encodeURIComponent(bytesToBase64(params.body))}/?${headers.slice(0, -1)}`;
+
+  const endpointStr = encodeURIComponent(bytesToBase64(endpoint));
+  const bodyStr = encodeURIComponent(bytesToBase64(body));
+  let headersStr = '';
+  for (const key in params.headers) {
+    headersStr += `${encodeURIComponent(key)}=${encodeURIComponent(headers[key])}&`;
+  }
+
+  if (headersStr) {
+    return `/${endpointStr}/${bodyStr}/?${headersStr.slice(0, -1)}`;
+  }
+  return `/${endpointStr}/${bodyStr}`;
 }

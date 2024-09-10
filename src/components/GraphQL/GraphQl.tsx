@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import FunctionalEditor from 'components/GraphQL/FunctionalEditorGraphQl/FunctionalEditor';
-import ResponseSection from 'components/GraphQL/ResponseSectionGraphQl/ResponseSection';
+import FunctionalEditor from './FunctionalEditorGraphQl/FunctionalEditor';
+import ResponseSection from './ResponseSectionGraphQl/ResponseSection';
 import ButtonWithIcon from 'components/ButtonWithIcon/ButtonWithIcon';
 import { Loader } from 'components/Loader/Loader';
 

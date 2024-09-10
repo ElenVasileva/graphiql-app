@@ -12,14 +12,19 @@ export default function SimpleInput(props: InputProps) {
   const { label, value, name, onBlur } = props;
   const [text, setText] = useState(value);
 
+  const inputId = `simpleInput-${label}`;
+
   useEffect(() => {
     setText(value);
   }, [value]);
 
   return (
     <div className={styles.wrapper}>
-      <label className={styles.label}>{label}</label>
+      <label className={styles.label} htmlFor={inputId}>
+        {label}
+      </label>
       <input
+        id={inputId}
         name={name}
         onBlur={() => onBlur(text)}
         onChange={(event) => {

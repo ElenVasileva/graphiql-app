@@ -1,9 +1,13 @@
 import base64ToString from './base64ToString';
 
-function convertQueryStringToObject(searchParams: URLSearchParams) {
+function convertQueryStringToObject(
+  searchParams: URLSearchParams,
+): Record<string, string> {
   return Array.from(new Set(searchParams.keys())).reduce(
-    (accumulator, value) =>
-      (accumulator = { ...accumulator, [value]: searchParams.getAll(value) }),
+    (accumulator, key) => ({
+      ...accumulator,
+      [key]: searchParams.get(key) ?? '',
+    }),
     {},
   );
 }

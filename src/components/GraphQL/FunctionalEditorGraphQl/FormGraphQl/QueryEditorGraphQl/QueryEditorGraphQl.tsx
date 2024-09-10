@@ -1,12 +1,3 @@
-{
-  /* <QueryEditorGraphQl
-          visibleSection={visibleSection}
-          formData={formData}
-          setForm={setForm('query')}
-        ></QueryEditorGraphQl>
-         */
-}
-
 import { useState } from 'react';
 
 import Textarea from 'components/Textarea/Textarea';
