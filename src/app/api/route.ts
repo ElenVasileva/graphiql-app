@@ -1,6 +1,6 @@
-import { HttpMethod } from 'constants/methodTypes';
-import { RestRequest } from 'types/RestRequest';
-import { RestResponse } from 'types/RestResponse';
+import { HttpMethod } from '@/constants/methodTypes';
+import { RestRequest } from '@/types/RestRequest';
+import { RestResponse } from '@/types/RestResponse';
 
 const callFetch = async (request: RestRequest): Promise<RestResponse> => {
   return new Promise((resolve) => {

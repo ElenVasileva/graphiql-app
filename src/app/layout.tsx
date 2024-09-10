@@ -6,6 +6,7 @@ import { cookies } from 'next/headers';
 import { SESSION_COOKIE_NAME } from 'constants/sessionCookie';
 import { Header } from 'components/Header';
 import StoreProvider from 'app/storeProvider';
+import { Footer } from 'components/Footer';
 
 const rubik = Rubik({
   subsets: ['latin', 'cyrillic'],
@@ -37,6 +38,7 @@ export default function RootLayout({
         <StoreProvider>
           <Header session={session} />
           {children}
+        <Footer />
         </StoreProvider>
       </body>
     </html>
