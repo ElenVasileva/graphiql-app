@@ -25,7 +25,7 @@ vi.mock('next/navigation', () => {
       push: vi.fn(),
     })),
     useSearchParams: vi.fn(() => ({
-      get: vi.fn(),
+      entries: vi.fn(() => [['content-type', 'application/json']]),
     })),
     usePathname: vi.fn(() => '/restful/post/'),
   };

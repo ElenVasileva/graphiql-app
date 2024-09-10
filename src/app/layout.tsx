@@ -38,7 +38,7 @@ export default function RootLayout({
         <StoreProvider>
           <Header session={session} />
           {children}
-        <Footer />
+          <Footer />
         </StoreProvider>
       </body>
     </html>

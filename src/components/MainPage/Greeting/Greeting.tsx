@@ -1,6 +1,6 @@
 'use client';
-import { useAppSelector } from '@store/hooks';
-import { RootState } from '@store/store';
+import { useAppSelector } from '@/store/hooks';
+import { RootState } from '@/store/store';
 import PageHeader from 'components/PageHeader/PageHeader';
 
 const Greeting = () => {
