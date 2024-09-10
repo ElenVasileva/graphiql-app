@@ -10,6 +10,7 @@ export const Footer: FC = () => {
         target="_blank"
         href="https://github.com/ElenVasileva/graphiql-app"
         className={styles.link}
+        rel="noopener noreferrer"
       >
         GitHub
       </a>
