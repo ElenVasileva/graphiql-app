@@ -17,13 +17,7 @@ import styles from './GraphQl.module.scss';
 export default function GraphQl() {
   const { endpoint, query, variables, headers } = useUrl();
 
-  const [, setResponse] = useState<{
-    statusCode: number | null;
-    data: string | null;
-    error: string | null;
-  }>({ statusCode: null, data: null, error: null });
-
-  const [responseSdl, setResponseSdl] = useState<{
+  const [response, setResponse] = useState<{
     statusCode: number | null;
     data: string | null;
     error: string | null;
@@ -36,14 +30,6 @@ export default function GraphQl() {
     const response = await fetchGraphQL(endpoint, query, variables, headers);
     setResponse(response);
     setIsLoading(false);
-
-    const responseSdl = await fetchGraphQL(
-      'https://countries.trevorblades.com/?sdl',
-      `{__schema{types{name,fields{name}}}}`,
-      variables,
-      { 'Content-Type': 'application/json' },
-    );
-    setResponseSdl(responseSdl);
   }
 
   return (
@@ -57,7 +43,7 @@ export default function GraphQl() {
         />
         {isLoading && <Loader />}
       </div>
-      <ResponseSection response={responseSdl} />
+      <ResponseSection response={response} />
     </>
   );
 }

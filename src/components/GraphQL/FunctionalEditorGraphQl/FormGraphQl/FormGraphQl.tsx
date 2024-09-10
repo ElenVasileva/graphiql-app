@@ -4,14 +4,17 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import SimpleInput from 'components/SimpleInput/SimpleInput';
-import QueryEditorGraphQl from './QueryEditor/QueryEditorGraphQl';
 import NavigationRequest from 'components/NavigationRequest/NavigationRequest';
+import QueryEditorGraphQl from './QueryEditorGraphQl/QueryEditorGraphQl';
 import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
+import Documentation from './Documentation/Documentation';
 
 import generateUrlGraphQl from 'utils/generateUrlGraphQl';
 import useUrl from 'hooks/useUrl';
 
 import styles from './FormGraphQl.module.scss';
+
+type Section = 'query' | 'headers' | 'variables' | undefined;
 
 type FormData = {
   endpoint: string;
@@ -24,10 +27,9 @@ type FormData = {
 export default function FormGraphQl() {
   const router = useRouter();
   const { endpoint, query, variables, headers } = useUrl();
-
   const [formData, setFormData] = useState<FormData>({
     endpoint,
-    sdl: `${endpoint}?sdl`,
+    sdl: `${endpoint ? `${endpoint}?sdl` : ''}`,
     query,
     variables,
     headers:
@@ -35,35 +37,28 @@ export default function FormGraphQl() {
         ? { 'Content-Type': 'application/json' }
         : headers,
   });
-
-  const [visibleSection, setVisibleSection] = useState<
-    'query' | 'headers' | 'variables' | undefined
-  >(undefined);
-
+  const [visibleSection, setVisibleSection] = useState<Section>(undefined);
   const goPage = useCallback(
     function () {
       if (!formData.endpoint) {
         router.push(`/GRAPHQL/`);
         return;
       }
-      const body = JSON.stringify({
-        query: formData.query,
-        variables: formData.variables,
-      });
       const url = generateUrlGraphQl({
         endpoint: formData.endpoint,
-        body,
+        body: JSON.stringify({
+          query: formData.query,
+          variables: formData.variables,
+        }),
         headers: formData.headers,
       });
       router.push(`/GRAPHQL/${url}`);
     },
     [formData, router],
   );
-
   useEffect(() => {
     goPage();
   }, [formData, router, goPage]);
-
   function setForm(name: string) {
     return (value: string | Record<string, string>) => {
       if (name === 'endpoint' && typeof value === 'string') {
@@ -73,7 +68,6 @@ export default function FormGraphQl() {
       }
     };
   }
-
   function handlerClickNavigation(event: React.MouseEvent<HTMLButtonElement>) {
     if (
       event.target instanceof HTMLButtonElement &&
@@ -84,7 +78,6 @@ export default function FormGraphQl() {
       setVisibleSection(event.target.name);
     }
   }
-
   return (
     <form className={styles.form} autoComplete="off">
       <div className={styles['wrapper-inputs']}>
@@ -93,12 +86,6 @@ export default function FormGraphQl() {
           label="Endpoint URL:"
           value={formData.endpoint}
           onBlur={setForm('endpoint')}
-        ></SimpleInput>
-        <SimpleInput
-          name="sdl"
-          label="SDL URL:"
-          value={formData.sdl}
-          onBlur={setForm('sdl')}
         ></SimpleInput>
         <NavigationRequest
           visibleSection={visibleSection}
@@ -110,17 +97,22 @@ export default function FormGraphQl() {
             onChange={setForm('headers')}
           />
         )}
-        <QueryEditorGraphQl
-          visibleSection={visibleSection}
-          formData={formData}
-          setForm={setForm('query')}
-        ></QueryEditorGraphQl>
+        {visibleSection === 'query' && (
+          <QueryEditorGraphQl formData={formData} setForm={setForm('query')} />
+        )}
         {visibleSection === 'variables' && (
           <KeyValueEditor
             defaultValues={formData.variables}
             onChange={setForm('variables')}
           />
         )}
+        <SimpleInput
+          name="sdl"
+          label="SDL URL:"
+          value={formData.sdl}
+          onBlur={setForm('sdl')}
+        ></SimpleInput>
+        <Documentation endpoint={formData.sdl} />
       </div>
     </form>
   );
