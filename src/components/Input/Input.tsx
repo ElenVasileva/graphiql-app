@@ -2,7 +2,7 @@
 
 import styles from './Input.module.scss';
 import classNames from 'classnames';
-import { PasswordStrength } from 'components/PasswordStrength';
+import { PasswordStrength } from '@/components/PasswordStrength';
 import Image from 'next/image';
 import {
   FieldError,
@@ -10,8 +10,8 @@ import {
   Path,
   UseFormRegister,
 } from 'react-hook-form';
-import eye from 'assets/icons/eye.svg';
-import eyeOff from 'assets/icons/eye-off.svg';
+import eye from '@/assets/icons/eye.svg';
+import eyeOff from '@/assets/icons/eye-off.svg';
 import { useState } from 'react';
 
 type Props<T extends FieldValues> = {

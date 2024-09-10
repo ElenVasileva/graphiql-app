@@ -1,5 +1,5 @@
-import { HttpMethod } from 'constants/methodTypes';
-import { RestRequest } from 'types/RestRequest';
+import { HttpMethod } from '@/constants/methodTypes';
+import { RestRequest } from '@/types/RestRequest';
 
 const b64EncodeUnicode = (str: string | undefined) => {
   return str ? encodeURIComponent(btoa(str)) : '';
