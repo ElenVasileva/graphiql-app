@@ -1,0 +1,22 @@
+{
+  "Greeting": {
+    "Welcome": "Добро пожаловать!",
+    "WelcomeBack": "С возвращением"
+  },
+  "SignLinks": {
+    "SignIn": "Войти",
+    "SignUp": "Зарегистрироваться"
+  },
+  "ContentLinks": {
+    "Restful": "REST клиент",
+    "GraphiQL": "GraphiQL клиент",
+    "History": "История"
+  },
+  "InformationBlock": {
+    "Course": "Курс",
+    "CourseContent": "это бесплатный курс React от Rolling Scope School. В RS School могут обучаться все желающие. Но перед началом программы у вас должны быть достаточные базовые знания. После успешного прохождения курса слушатели получат электронный сертификат.",
+    "Project": "Проект",
+    "ProjectContent": "Этот проект `REST and GraphQL client` был выполнен в рамках заключительного задания курса.",
+    "Developers": "Разработчики"
+  }
+}

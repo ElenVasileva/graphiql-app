@@ -1,0 +1,22 @@
+{
+  "Greeting": {
+    "Welcome": "Welcome!",
+    "WelcomeBack": "Welcome Back"
+  },
+  "SignLinks": {
+    "SignIn": "Sign In",
+    "SignUp": "Sign Up"
+  },
+  "ContentLinks": {
+    "Restful": "REST Client",
+    "GraphiQL": "GraphiQL Client",
+    "History": "History"
+  },
+  "InformationBlock": {
+    "Course": "Course",
+    "CourseContent": "is a free React course from Rolling Scope School. Everyone can study at RS School. But you should have sufficient base knowledge before the program begins. After successful completion of the course, students will receive an electronic certificate.",
+    "Project": "Project",
+    "ProjectContent": "This project `REST and GraphQL client` was performed as part of the final assignment of the course.",
+    "Developers": "Developers"
+  }
+}
