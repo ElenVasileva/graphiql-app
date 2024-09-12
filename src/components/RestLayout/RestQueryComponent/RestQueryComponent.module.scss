@@ -5,6 +5,7 @@
   background-color: var(--color-base);
   border: 1px solid var(--color-neutral);
   border-radius: 5px;
+  flex-grow: 1;
 
   &__row {
     width: 500px;
