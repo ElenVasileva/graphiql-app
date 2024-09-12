@@ -1,9 +1,9 @@
 'use server';
 
+import { redirect } from '@/i18n/routing';
 import { ROOT_ROUTE } from 'constants/routes';
 import { SESSION_COOKIE_NAME } from 'constants/sessionCookie';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 export async function createSession(uid: string) {
   cookies().set(SESSION_COOKIE_NAME, uid, {

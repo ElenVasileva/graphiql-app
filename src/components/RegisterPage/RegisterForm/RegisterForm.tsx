@@ -7,8 +7,8 @@ import { RegisterValidationSchema } from './RegisterValidationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
-import Link from 'next/link';
 import { createSession, registerWithEmailAndPassword } from 'services/firebase';
+import { Link } from '@/i18n/routing';
 
 type Inputs = {
   name: string;

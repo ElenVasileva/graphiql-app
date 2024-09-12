@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import styles from './ContentLinks.module.scss';
 import useUserSession from 'hooks/useUserSession';
 import { useTranslations } from 'next-intl';

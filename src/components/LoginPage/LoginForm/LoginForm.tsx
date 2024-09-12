@@ -2,13 +2,13 @@
 
 import { Button } from 'components/Button';
 import { Input } from 'components/Input';
-import Link from 'next/link';
 import { FC } from 'react';
 import styles from './LoginForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginValidationSchema } from './LoginValidationSchema';
 import { createSession, logInWithEmailAndPassword } from 'services/firebase';
+import { Link } from '@/i18n/routing';
 
 type Inputs = {
   email: string;
