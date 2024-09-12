@@ -6,12 +6,15 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { RestResponse } from 'types/RestResponse';
 import { url2RestRequest } from 'utils/restUrlConverter';
+import RestResponseLoader from '@/components/RestLayout/RestResponseLoader/RestResponseLoader';
 
 const RestLayout = () => {
   const path = usePathname();
   const [response, setResponse] = useState<RestResponse | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>();
 
   const onSubmit = async () => {
+    setLoading(true);
     const requestFromUrl = url2RestRequest(path, true);
 
     const rawResponse = await fetch(`/api`, {
@@ -20,6 +23,7 @@ const RestLayout = () => {
     });
     const json = (await rawResponse.json()) as RestResponse;
     setResponse(json);
+    setLoading(false);
   };
   return (
     <div className={styles.restLayout}>
@@ -29,7 +33,8 @@ const RestLayout = () => {
           <RestQueryComponent onSubmit={onSubmit} />
         </div>
         <div className={styles.restLayout__item}>
-          <RestResponseComponent response={response} />
+          {loading && <RestResponseLoader />}
+          {!loading && <RestResponseComponent response={response} />}
         </div>
       </div>
     </div>

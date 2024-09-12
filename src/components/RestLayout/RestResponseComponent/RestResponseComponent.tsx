@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import styles from './RestResponseComponent.module.scss';
 import { RestResponse } from 'types/RestResponse';
-import { Button } from 'components/Button';
+import TabButtons from '@/components/RestLayout/TabButtons/TabButtons';
 
 type Tabs = {
   Raw?: string;
@@ -50,19 +50,12 @@ const RestResponseComponent = ({
             <div className={styles.response__status}>
               Status: {response.status}
             </div>
-            {!!response.body && (
-              <div className={styles.response__sectionSelector}>
-                {Object.keys(tabs).length > 1 &&
-                  Object.keys(tabs).map((tab) => (
-                    <Button
-                      key={tab}
-                      className={tab == selectedTab ? styles.active : ''}
-                      onClick={() => setSelectedTab(tab as Tab)}
-                    >
-                      {tab}
-                    </Button>
-                  ))}
-              </div>
+            {!!response.body && Object.keys(tabs).length > 1 && (
+              <TabButtons
+                nameList={Object.keys(tabs)}
+                defaultName={selectedTab}
+                onChange={(tab) => setSelectedTab(tab as Tab)}
+              />
             )}
           </div>
           {!!response.body && (
