@@ -1,0 +1,34 @@
+.tabButtons {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  & button {
+    width: 60px;
+    height: 30px;
+    border-radius: 0;
+    padding: 8px;
+    opacity: 0.5;
+
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &.active {
+      opacity: 1;
+      cursor: auto;
+    }
+
+    &:hover {
+      opacity: 1;
+      background-color: var(--color-tertiary);
+    }
+  }
+}

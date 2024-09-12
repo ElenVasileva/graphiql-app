@@ -3,8 +3,8 @@
 import KeyValueEditor from '@/components/KeyValueEditor/KeyValueEditor';
 import { useState } from 'react';
 import styles from './RestTabComponent.module.scss';
-import { Button } from '@/components/Button';
 import RestEditor from '@/components/RestLayout/RestQueryComponent/RestEditor/RestEditor';
+import TabButtons from '@/components/RestLayout/TabButtons/TabButtons';
 
 enum TabSection {
   QueryParams = 'Query parameters',
@@ -17,8 +17,6 @@ enum TextMode {
   Text = 'text',
   Json = 'json',
 }
-
-const modeList: TextMode[] = [TextMode.Text, TextMode.Json];
 
 const sectionList: TabSection[] = [
   TabSection.QueryParams,
@@ -59,17 +57,11 @@ const RestTabComponent = ({
         </div>
 
         {section === TabSection.Body && (
-          <div className={styles.tab__textMode}>
-            {modeList.map((mode) => (
-              <Button
-                className={languageMode === mode ? styles.active : ''}
-                onClick={() => setLanguageMode(mode)}
-                key={mode}
-              >
-                {mode.toString()}
-              </Button>
-            ))}
-          </div>
+          <TabButtons
+            nameList={[TextMode.Text, TextMode.Json]}
+            defaultName={languageMode}
+            onChange={(mode) => setLanguageMode(mode as TextMode)}
+          />
         )}
       </div>
       <div className={styles.tab__tabContainer}>
