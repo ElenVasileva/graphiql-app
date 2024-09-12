@@ -3,15 +3,18 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  flex-grow: 1;
 
   &__container {
     width: 100%;
     display: flex;
+    flex-grow: 1;
   }
 
   &__item {
     padding: 10px;
     width: 50%;
+    display: flex;
   }
 
   @media screen and (max-width: 1000px) {
@@ -25,8 +28,8 @@
   }
 }
 
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1500px) {
   .restLayout {
-    width: 1300px;
+    width: 1500px;
   }
 }
