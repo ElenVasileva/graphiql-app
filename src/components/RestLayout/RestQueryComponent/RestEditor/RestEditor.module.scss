@@ -1,0 +1,23 @@
+.restEditor {
+  height: 100%;
+  position: relative;
+
+  &__pretty {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 5px;
+    right: 8px;
+    z-index: 10;
+    & button {
+      padding: 5px;
+    }
+  }
+
+  &__editor {
+    > div,
+    > div > div {
+      border-radius: 5px;
+    }
+  }
+}

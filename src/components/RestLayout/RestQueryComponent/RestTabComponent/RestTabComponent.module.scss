@@ -1,0 +1,75 @@
+.tab {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__sectionSelector {
+    display: flex;
+    flex-grow: 1;
+
+    & button {
+      border-radius: 0;
+      padding: 0;
+      padding-bottom: 5px;
+      margin: 10px;
+      border: none;
+      color: var(--color-tertiary);
+      background-color: transparent;
+
+      &:hover {
+        background-color: transparent;
+        color: var(--color-secondary);
+      }
+
+      &.active {
+        color: var(--color-secondary);
+        border-bottom: 1px solid var(--color-secondary);
+      }
+    }
+  }
+
+  &__textMode {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    & button {
+      width: 60px;
+      height: 30px;
+      border-radius: 0;
+      padding: 8px;
+      opacity: 0.5;
+
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      &.active {
+        opacity: 1;
+        cursor: auto;
+      }
+
+      &:hover {
+        opacity: 1;
+        background-color: var(--color-tertiary);
+      }
+    }
+  }
+
+  &__tabContainer {
+    height: 200px;
+    position: relative;
+  }
+}
