@@ -1,5 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
-import { restRequest2Url, url2RestRequest } from '@/utils/restUrlConverter';
+import {
+  exportedForTesting,
+  restRequest2Url,
+  url2RestRequest,
+} from '@/utils/restUrlConverter';
+
+const { includeVariablesInBody } = exportedForTesting;
 
 describe('RestUrlConverter', () => {
   it('RestUrlConverter parses and creates paths correctly', async () => {
@@ -31,5 +37,44 @@ describe('RestUrlConverter', () => {
       '',
     );
     expect(urlForEmptyRequest).toEqual('/restful/get');
+  });
+
+  it('variables replace in body correctly', () => {
+    const cases = [
+      {
+        body: `some text with page="{{page}}" and search="{{search}}"`,
+        variables: { page: '12', search: 'ar', test: 'test' },
+        result: `some text with page="12" and search="ar"`,
+      },
+      {
+        body: `some text with page="{{page}}" and search="{{search}}" and one more page="{{page}}"`,
+        variables: { page: '12', search: 'ar', test: 'test' },
+        result: `some text with page="12" and search="ar" and one more page="12"`,
+      },
+      {
+        body: ``,
+        variables: { page: '12', search: 'ar', test: 'test' },
+        result: ``,
+      },
+      {
+        body: `"{{page}}""{{page}}""{{page}}""{{search}}""{{search}}"`,
+        variables: { page: '12', search: 'ar', test: 'test' },
+        result: `"12""12""12""ar""ar"`,
+      },
+      {
+        body: undefined,
+        variables: { page: '12', search: 'ar', test: 'test' },
+        result: undefined,
+      },
+      {
+        body: `"{{page}}""{{page}}""{{page}}""{{search}}""{{search}}"`,
+        variables: undefined,
+        result: `"{{page}}""{{page}}""{{page}}""{{search}}""{{search}}"`,
+      },
+    ];
+    cases.forEach((caseItem) => {
+      const result = includeVariablesInBody(caseItem.body, caseItem.variables);
+      expect(result).toEqual(caseItem.result);
+    });
   });
 });
