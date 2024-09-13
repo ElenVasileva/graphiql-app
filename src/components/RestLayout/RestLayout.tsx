@@ -6,8 +6,8 @@ import RestResponseComponent from './RestResponseComponent/RestResponseComponent
 import { useSearchParams, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { RestResponse } from 'types/RestResponse';
-import { url2RestRequest } from 'utils/restUrlConverter';
 import RestResponseLoader from '@/components/RestLayout/RestResponseLoader/RestResponseLoader';
+import { url2RestRequest } from '@/utils/restUrlConverter';
 
 const RestLayout = () => {
   const path = usePathname();

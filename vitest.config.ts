@@ -16,5 +16,6 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*.{ts,tsx}'],
     },
+    setupFiles: ['./tests/vitest-setup.ts'],
   },
 })
