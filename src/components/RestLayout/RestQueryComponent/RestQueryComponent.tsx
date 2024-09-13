@@ -41,10 +41,6 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
     setRestRequest({ ...restRequest, ...newValue });
   };
 
-  const onSectionClick = (sec: TabSection) => {
-    setSection(sec);
-  };
-
   return (
     <div className={styles.rest}>
       <div className={styles.rest__row}>
@@ -71,14 +67,13 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
       </div>
       <div className={styles.rest__sectionSelector}>
         {sectionList.map((sec) => (
-          <div key={sec}>
-            <button
-              className={section === sec ? styles.active : ''}
-              onClick={() => onSectionClick(sec)}
-            >
-              {sec.toString()}
-            </button>
-          </div>
+          <button
+            key={sec}
+            className={section === sec ? styles.active : ''}
+            onClick={() => setSection(sec)}
+          >
+            {sec.toString()}
+          </button>
         ))}
       </div>
       <div className={styles.rest__tabContainer}>
