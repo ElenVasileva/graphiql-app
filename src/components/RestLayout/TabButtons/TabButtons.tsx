@@ -1,6 +1,6 @@
 import styles from './TabButtons.module.scss';
 import { Button } from '@/components/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const TabButtons = ({
   nameList,
@@ -12,6 +12,10 @@ const TabButtons = ({
   onChange: (name: string) => void;
 }) => {
   const [name, setName] = useState<string>(defaultName || nameList[0]);
+
+  useEffect(() => {
+    if (defaultName) setName(defaultName);
+  }, [defaultName]);
 
   const onClick = (newName: string) => {
     setName(newName);

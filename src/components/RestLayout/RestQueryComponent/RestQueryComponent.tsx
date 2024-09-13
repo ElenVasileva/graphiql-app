@@ -53,7 +53,6 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
         />
         <Button onClick={onSubmit}>Send</Button>
       </div>
-
       <RestTabComponent
         queryParams={restRequest.queryParams}
         headers={restRequest.headers}
