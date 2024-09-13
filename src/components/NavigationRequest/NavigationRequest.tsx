@@ -4,8 +4,8 @@ const navigationList: {
   key: 'headers' | 'query' | 'variables' | undefined;
   value: string;
 }[] = [
-  { key: 'headers', value: 'Headers' },
   { key: 'query', value: 'Query' },
+  { key: 'headers', value: 'Headers' },
   { key: 'variables', value: 'Variables' },
 ];
 

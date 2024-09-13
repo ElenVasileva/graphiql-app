@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 10px;
   width: 45%;
+  padding: 10px;
 }
 
 .wrapper-button {
@@ -11,7 +12,7 @@
 }
 
 .h2 {
-  font: var(--text-header-l);
+  font: var(--text-header-s);
   color: var(--color-secondary);
   align-self: center;
 }

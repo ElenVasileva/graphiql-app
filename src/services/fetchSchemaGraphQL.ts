@@ -15,11 +15,7 @@ export default async function fetchGraphQL(endpoint: string): Promise<{
 
   let statusCode = null;
   try {
-    if (
-      !endpoint ||
-      !endpoint.startsWith('http://') ||
-      !endpoint.startsWith('https://')
-    ) {
+    if (endpoint.startsWith('http://') && endpoint.startsWith('https://')) {
       throw new Error('Invalid endpoint specified');
     }
 

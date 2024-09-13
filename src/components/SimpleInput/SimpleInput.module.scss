@@ -1,7 +1,7 @@
 .wrapper {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 .input {
@@ -15,4 +15,5 @@
 
 .label {
   font: var(--text-s);
+  white-space: nowrap;
 }

@@ -24,20 +24,27 @@ type FormData = {
   headers: Record<string, string>;
 };
 
+function initSdl(endpoint: string) {
+  return `${endpoint ? `${endpoint}?sdl` : ''}`;
+}
+
+function initHeaders(headers: Record<string, string>) {
+  return Object.keys(headers).length === 0
+    ? { 'Content-Type': 'application/json' }
+    : headers;
+}
+
 export default function FormGraphQl() {
   const router = useRouter();
   const { endpoint, query, variables, headers } = useUrl();
   const [formData, setFormData] = useState<FormData>({
     endpoint,
-    sdl: `${endpoint ? `${endpoint}?sdl` : ''}`,
+    sdl: initSdl(endpoint),
     query,
     variables,
-    headers:
-      Object.keys(headers).length === 0
-        ? { 'Content-Type': 'application/json' }
-        : headers,
+    headers: initHeaders(headers),
   });
-  const [visibleSection, setVisibleSection] = useState<Section>(undefined);
+  const [visibleSection, setVisibleSection] = useState<Section>('query');
   const goPage = useCallback(
     function () {
       if (!formData.endpoint) {
@@ -91,21 +98,26 @@ export default function FormGraphQl() {
           visibleSection={visibleSection}
           onClick={handlerClickNavigation}
         />
-        {visibleSection === 'headers' && (
-          <KeyValueEditor
-            defaultValues={formData.headers}
-            onChange={setForm('headers')}
-          />
-        )}
-        {visibleSection === 'query' && (
-          <QueryEditorGraphQl formData={formData} setForm={setForm('query')} />
-        )}
-        {visibleSection === 'variables' && (
-          <KeyValueEditor
-            defaultValues={formData.variables}
-            onChange={setForm('variables')}
-          />
-        )}
+        <div className={styles['param-section']}>
+          {visibleSection === 'headers' && (
+            <KeyValueEditor
+              defaultValues={formData.headers}
+              onChange={setForm('headers')}
+            />
+          )}
+          {visibleSection === 'query' && (
+            <QueryEditorGraphQl
+              formData={formData}
+              setForm={setForm('query')}
+            />
+          )}
+          {visibleSection === 'variables' && (
+            <KeyValueEditor
+              defaultValues={formData.variables}
+              onChange={setForm('variables')}
+            />
+          )}
+        </div>
         <SimpleInput
           name="sdl"
           label="SDL URL:"

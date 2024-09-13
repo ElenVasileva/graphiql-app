@@ -4,13 +4,11 @@ import { useState } from 'react';
 
 import FunctionalEditor from './FunctionalEditorGraphQl/FunctionalEditor';
 import ResponseSection from './ResponseSectionGraphQl/ResponseSection';
-import ButtonWithIcon from 'components/ButtonWithIcon/ButtonWithIcon';
+import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 
 import fetchGraphQL from 'services/fetchGraphQL';
 import useUrl from 'hooks/useUrl';
-
-import play from 'assets/icons/play.svg';
 
 import styles from './GraphQl.module.scss';
 
@@ -36,11 +34,9 @@ export default function GraphQl() {
     <>
       <FunctionalEditor />
       <div className={styles['wrapper-button']}>
-        <ButtonWithIcon
-          icon={play}
-          onClick={handleSubmit}
-          disabled={!endpoint}
-        />
+        <Button onClick={handleSubmit} disabled={!endpoint}>
+          Send
+        </Button>
         {isLoading && <Loader />}
       </div>
       <ResponseSection response={response} />

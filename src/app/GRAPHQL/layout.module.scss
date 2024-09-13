@@ -1,3 +1,8 @@
+.client {
+  width: 100%;
+  flex: 1;
+}
+
 .content {
   padding: 40px;
 
@@ -16,8 +21,8 @@
 }
 
 .h1 {
-  font: var(--text-header-xl);
-  color: var(--color-primary);
+  text-align: center;
+  font: var(--text-bold-xl);
 }
 
 @media (width< 800px) {
