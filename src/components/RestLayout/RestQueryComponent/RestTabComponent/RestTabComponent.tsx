@@ -5,6 +5,7 @@ import { useState } from 'react';
 import styles from './RestTabComponent.module.scss';
 import RestEditor from '@/components/RestLayout/RestQueryComponent/RestEditor/RestEditor';
 import TabButtons from '@/components/RestLayout/TabButtons/TabButtons';
+import VariablesMessage from '@/components/RestLayout/RestQueryComponent/RestTabComponent/VariablesMessage/VariablesMessage';
 
 enum TabSection {
   QueryParams = 'Query parameters',
@@ -87,10 +88,15 @@ const RestTabComponent = ({
           />
         )}
         {section === TabSection.Variables && (
-          <KeyValueEditor
-            defaultValues={variables}
-            onChange={(variables) => onChange({ variables })}
-          />
+          <div className={styles.tab__variablesTabContainer}>
+            <div className={styles.tab__variablesContainer}>
+              <KeyValueEditor
+                defaultValues={variables}
+                onChange={(variables) => onChange({ variables })}
+              />
+            </div>
+            <VariablesMessage />
+          </div>
         )}
       </div>
     </>

@@ -36,5 +36,14 @@
   &__tabContainer {
     height: 200px;
     position: relative;
+    display: flex;
+  }
+
+  &__variablesTabContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  &__variablesContainer {
+    flex-grow: 1;
   }
 }
