@@ -15,10 +15,10 @@ vi.mock('next/image', () => ({
 
 describe('ButtonWithIcon component', () => {
   test('renders button with an icon', () => {
-    render(<ButtonWithIcon icon="/icon.png" />);
+    render(<ButtonWithIcon icon="/icon.png" alt={'icon'} />);
 
     const button = screen.getByRole('button');
-    const icon = screen.getByAltText('Play');
+    const icon = screen.getByAltText('icon');
 
     expect(button).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('ButtonWithIcon component', () => {
 
   test('calls onClick when clicked', () => {
     const onClick = vi.fn();
-    render(<ButtonWithIcon icon="/icon.png" onClick={onClick} />);
+    render(<ButtonWithIcon icon="/icon.png" alt={'icon'} onClick={onClick} />);
 
     const button = screen.getByRole('button');
     fireEvent.click(button);
@@ -36,14 +36,14 @@ describe('ButtonWithIcon component', () => {
   });
 
   test('disables button when disabled prop is true', () => {
-    render(<ButtonWithIcon icon="/icon.png" disabled />);
+    render(<ButtonWithIcon icon="/icon.png" alt={'icon'} disabled />);
 
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
   });
 
   test('button is not disabled by default', () => {
-    render(<ButtonWithIcon icon="/icon.png" />);
+    render(<ButtonWithIcon icon="/icon.png" alt={'icon'} />);
 
     const button = screen.getByRole('button');
     expect(button).not.toBeDisabled();

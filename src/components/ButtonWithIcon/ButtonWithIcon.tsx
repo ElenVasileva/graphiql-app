@@ -6,10 +6,11 @@ interface IButtonWithIcon {
   onClick?: () => void;
   disabled?: boolean;
   icon: string;
+  alt: string;
 }
 
 export default function ButtonWithIcon(props: IButtonWithIcon) {
-  const { icon, disabled, onClick } = props;
+  const { icon, disabled, alt, onClick } = props;
 
   return (
     <button
@@ -18,7 +19,7 @@ export default function ButtonWithIcon(props: IButtonWithIcon) {
       type="button"
       disabled={disabled}
     >
-      <Image width="16" src={icon} alt="Play" />
+      <Image width="25" src={icon} alt={alt} />
     </button>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import ButtonWithIcon from 'components/ButtonWithIcon/ButtonWithIcon';
-import play from 'assets/icons/pretty.svg';
+import pretty from 'assets/icons/pretty.svg';
 
 import prettyPrintGraphQl from 'utils/prettyPrintGraphQl';
 
@@ -26,7 +26,7 @@ export default function QueryEditorGraphQl(props: IQueryEditorGraphQlProps) {
   const [text, setText] = useState(formData.query);
   const [error, setError] = useState<string | null>(null);
 
-  async function handlerBlur(str: string) {
+  async function formatText(str: string) {
     const formattedText = await prettyPrintGraphQl(str);
     setText(formattedText.str);
     setError(formattedText.error);
@@ -35,15 +35,17 @@ export default function QueryEditorGraphQl(props: IQueryEditorGraphQlProps) {
   return (
     <div className={styles['query-editor']}>
       <div className={styles['button-wrapper']}>
-        <ButtonWithIcon icon={play} onClick={() => handlerBlur(text)} />
+        <ButtonWithIcon
+          icon={pretty}
+          alt={'prettify'}
+          onClick={() => formatText(text)}
+        />
       </div>
       <textarea
         className={`${styles.textarea}`}
         onChange={(event) => setText(event.target.value)}
         onBlur={(event) => {
-          if (handlerBlur !== undefined) {
-            handlerBlur(event.target.value);
-          }
+          formatText(event.target.value);
         }}
         value={text}
         rows={10}
