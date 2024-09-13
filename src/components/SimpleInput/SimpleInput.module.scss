@@ -1,16 +1,21 @@
 .wrapper {
   width: 100%;
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
 .input {
-  width: 100%;
-  max-width: 400px;
-  background-color: #b7c2d712;
-  color: var(--color-neutral);
-  border: none;
+  flex: 1;
+  padding: 10px;
   font: var(--text-s);
+  border: 1px solid var(--color-neutral);
+  border-radius: 5px;
+  outline: none;
+
+  &:focus {
+    outline: 1px solid var(--color-tertiary);
+  }
 }
 
 .label {

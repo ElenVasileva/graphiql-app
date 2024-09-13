@@ -14,7 +14,6 @@ interface ITextareaProps {
 
 export default function Textarea(props: ITextareaProps) {
   const { value, className, readOnly, rows, handlerBlur } = props;
-
   const [text, setText] = useState(value);
 
   useEffect(() => {
