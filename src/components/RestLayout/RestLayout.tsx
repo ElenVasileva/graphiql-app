@@ -1,8 +1,9 @@
+'use client';
 import RestQueryComponent from './RestQueryComponent/RestQueryComponent';
 import styles from './RestLayout.module.scss';
-import PageHeader from 'components/PageHeader/PageHeader';
+import PageHeader from '@/components/PageHeader/PageHeader';
 import RestResponseComponent from './RestResponseComponent/RestResponseComponent';
-import { usePathname } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { RestResponse } from 'types/RestResponse';
 import { url2RestRequest } from 'utils/restUrlConverter';
@@ -10,12 +11,14 @@ import RestResponseLoader from '@/components/RestLayout/RestResponseLoader/RestR
 
 const RestLayout = () => {
   const path = usePathname();
+  const headers = Object.fromEntries(useSearchParams().entries());
   const [response, setResponse] = useState<RestResponse | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>();
 
   const onSubmit = async () => {
     setLoading(true);
     const requestFromUrl = url2RestRequest(path, true);
+    requestFromUrl.headers = headers;
 
     const rawResponse = await fetch(`/api`, {
       method: 'POST',

@@ -27,4 +27,13 @@ module.exports = {
     ],
     'react-compiler/react-compiler': 'error',
   },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['@', './src'],
+        ]
+      }
+    }
+  }
 };

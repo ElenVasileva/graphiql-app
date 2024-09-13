@@ -1,14 +1,14 @@
 'use client';
 
-import { httpMethodsList } from 'constants/methodTypes';
+import { httpMethodsList } from '@/constants/methodTypes';
 import { useEffect, useState } from 'react';
 import styles from './RestQueryComponent.module.scss';
 import { usePathname, useRouter } from 'next/navigation';
-import KeyValueEditor from 'components/KeyValueEditor/KeyValueEditor';
-import { Input } from 'components/Input';
-import { RestRequest } from 'types/RestRequest';
-import { restRequest2Url, url2RestRequest } from 'utils/restUrlConverter';
-import { Button } from 'components/Button';
+import KeyValueEditor from '@/components/KeyValueEditor/KeyValueEditor';
+import { Input } from '@/components/Input';
+import { RestRequest } from '@/types/RestRequest';
+import { restRequest2Url, url2RestRequest } from '@/utils/restUrlConverter';
+import { Button } from '@/components/Button';
 
 enum TabSection {
   QueryParams = 'Query parameters',

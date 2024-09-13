@@ -22,23 +22,27 @@
     }
   }
 
-  input:read-only {
-    font-weight: bold;
-    padding-left: 6px;
-  }
-
   &__row {
     display: flex;
     border: 1px solid var(--color-neutral);
     border-top: none;
 
     &__value,
-    &__key {
+    &__key,
+    &__valueHeader,
+    &__keyHeader {
       padding: 3px;
       width: 47%;
     }
 
-    &__key {
+    &__valueHeader,
+    &__keyHeader {
+      font-weight: bold;
+      padding-left: 6px;
+    }
+
+    &__key,
+    &__keyHeader {
       border-right: 1px solid var(--color-neutral);
     }
 
