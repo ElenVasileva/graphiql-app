@@ -8,12 +8,18 @@ import { useState } from 'react';
 import { RestResponse } from 'types/RestResponse';
 import RestResponseLoader from '@/components/RestLayout/RestResponseLoader/RestResponseLoader';
 import { url2RestRequest } from '@/utils/restUrlConverter';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { addRestRequest } from '@/store/features/restRequestsSlice';
+import { RootState } from '@/store/store';
+import { RestRequestToStore } from '@/types/RestRequestToStore';
 
 const RestLayout = () => {
   const path = usePathname();
   const headers = Object.fromEntries(useSearchParams().entries());
   const [response, setResponse] = useState<RestResponse | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state: RootState) => state.currentUser.value);
 
   const onSubmit = async () => {
     setLoading(true);
@@ -27,7 +33,14 @@ const RestLayout = () => {
     const json = (await rawResponse.json()) as RestResponse;
     setResponse(json);
     setLoading(false);
+    const newRequest: RestRequestToStore = {
+      ...requestFromUrl,
+      date: Date.now(),
+      user: user || 'noname',
+    };
+    dispatch(addRestRequest(newRequest));
   };
+
   return (
     <div className={styles.restLayout}>
       <PageHeader>REST client</PageHeader>
