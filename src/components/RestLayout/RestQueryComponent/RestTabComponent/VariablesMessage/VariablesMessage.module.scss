@@ -1,0 +1,42 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+
+  &__text {
+    padding: 5px;
+  }
+
+  &__code {
+    padding: 5px 15px;
+    margin: 0px 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+
+    span {
+      font-family:
+        IBM Plex Mono,
+        SFMono-Regular,
+        Consolas,
+        Liberation Mono,
+        Menlo,
+        monospace !important;
+    }
+  }
+
+  &__grey {
+    color: #ccc;
+  }
+
+  &__yellow {
+    color: #f8c555;
+  }
+
+  &__blue {
+    color: #67cdcc;
+  }
+
+  &__green {
+    color: #7ec699;
+  }
+}
