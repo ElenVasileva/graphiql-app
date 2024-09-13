@@ -34,14 +34,15 @@
   }
 
   &__tabContainer {
-    height: 200px;
     position: relative;
     display: flex;
+    flex-grow: 1;
   }
 
   &__variablesTabContainer {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
   }
   &__variablesContainer {
     flex-grow: 1;
