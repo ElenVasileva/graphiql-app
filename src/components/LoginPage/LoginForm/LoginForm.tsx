@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginValidationSchema } from './LoginValidationSchema';
 import { createSession, logInWithEmailAndPassword } from 'services/firebase';
 import { Link } from '@/i18n/routing';
+import { REGISTRATION_ROUTE } from '@/constants/routes';
 
 type Inputs = {
   email: string;
@@ -58,7 +59,7 @@ export const LoginForm: FC = () => {
         className={styles.submitButton}
       />
 
-      <Link href="/auth/sign-up" className={styles.link}>
+      <Link href={REGISTRATION_ROUTE} className={styles.link}>
         Don&apos;t have an account?
       </Link>
     </form>

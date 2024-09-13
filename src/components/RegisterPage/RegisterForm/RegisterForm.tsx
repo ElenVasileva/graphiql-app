@@ -9,6 +9,7 @@ import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { createSession, registerWithEmailAndPassword } from 'services/firebase';
 import { Link } from '@/i18n/routing';
+import { LOGIN_ROUTE } from '@/constants/routes';
 
 type Inputs = {
   name: string;
@@ -84,7 +85,7 @@ export const RegisterForm: FC = () => {
         className={styles.submitButton}
       />
 
-      <Link href="/auth" className={styles.link}>
+      <Link href={LOGIN_ROUTE} className={styles.link}>
         Already have an account?
       </Link>
     </form>
