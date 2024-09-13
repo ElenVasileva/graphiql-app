@@ -17,10 +17,6 @@ export default async function fetchGraphQL(endpoint: string): Promise<{
 
   let statusCode = null;
   try {
-    if (endpoint.startsWith('http://') && endpoint.startsWith('https://')) {
-      throw new Error('Invalid endpoint specified');
-    }
-
     const response = await fetch(endpoint, requestOptions);
 
     statusCode = response.status;
@@ -33,7 +29,7 @@ export default async function fetchGraphQL(endpoint: string): Promise<{
   } catch (error) {
     if (error instanceof Error) {
       return {
-        error: error.message,
+        error: error.message.includes('<!DOCTYPE html>') ? '' : error.message,
         statusCode: statusCode,
         data: null,
       };

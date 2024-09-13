@@ -66,6 +66,7 @@ export default function FormGraphQl() {
   useEffect(() => {
     goPage();
   }, [formData, router, goPage]);
+
   function setForm(name: string) {
     return (value: string | Record<string, string>) => {
       if (name === 'endpoint' && typeof value === 'string') {
