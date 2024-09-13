@@ -1,3 +1,5 @@
+'use server';
+
 export default async function fetchGraphQL(
   endpoint: string,
   query: string,

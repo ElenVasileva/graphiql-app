@@ -1,3 +1,5 @@
+'use server';
+
 import { getIntrospectionQuery } from 'graphql';
 
 export default async function fetchGraphQL(endpoint: string): Promise<{

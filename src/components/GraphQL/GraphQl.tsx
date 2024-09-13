@@ -8,6 +8,7 @@ import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 
 import fetchGraphQL from 'services/fetchGraphQL';
+// import fetchGraphQL from 'app/actions';
 import useUrl from 'hooks/useUrl';
 
 import styles from './GraphQl.module.scss';
