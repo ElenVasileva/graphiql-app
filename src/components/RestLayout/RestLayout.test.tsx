@@ -2,6 +2,7 @@ import { expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import RestLayout from './RestLayout';
 import userEvent from '@testing-library/user-event';
+import { NextIntlClientProvider } from 'next-intl';
 
 const rawResponse = '{"name":"Luke Skywalker","height":"172","mass":"77"}';
 
@@ -21,18 +22,31 @@ vi.mock('next/navigation', () => {
   const actual = vi.importActual('next/navigation');
   return {
     ...actual,
-    useRouter: vi.fn(() => ({
-      push: vi.fn(),
-    })),
     useSearchParams: vi.fn(() => ({
       entries: vi.fn(() => [['content-type', 'application/json']]),
+    })),
+  };
+});
+
+vi.mock('@/i18n/routing', () => {
+  const actual = vi.importActual('@/i18n/routing');
+  return {
+    ...actual,
+    useRouter: vi.fn(() => ({
+      push: vi.fn(),
     })),
     usePathname: vi.fn(() => '/restful/post/'),
   };
 });
 
+const customRender = (ui: React.ReactElement) => {
+  return render(
+    <NextIntlClientProvider locale="en">{ui}</NextIntlClientProvider>,
+  );
+};
+
 it('RestLayout', async () => {
-  render(<RestLayout />);
+  customRender(<RestLayout />);
   const user = userEvent.setup();
 
   await user.selectOptions(screen.getByRole('combobox'), ['get']);

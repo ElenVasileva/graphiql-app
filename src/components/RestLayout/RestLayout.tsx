@@ -3,10 +3,11 @@ import RestQueryComponent from './RestQueryComponent/RestQueryComponent';
 import styles from './RestLayout.module.scss';
 import PageHeader from '@/components/PageHeader/PageHeader';
 import RestResponseComponent from './RestResponseComponent/RestResponseComponent';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { RestResponse } from 'types/RestResponse';
 import { url2RestRequest } from '@/utils/restUrlConverter';
+import { usePathname } from '@/i18n/routing';
 
 const RestLayout = () => {
   const path = usePathname();
