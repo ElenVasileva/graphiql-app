@@ -1,0 +1,14 @@
+.restHistory {
+  padding: 0 10%;
+
+  h3 {
+    padding-bottom: 15px;
+    padding-left: 15px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
