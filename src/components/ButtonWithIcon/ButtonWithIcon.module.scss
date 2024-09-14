@@ -1,12 +1,11 @@
 .button {
-  font: var(--text-xs);
-  padding: 10px;
+  width: 30px;
+  padding: 3px 3px 0px 3px;
   border: none;
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: var(--color-tertiary);
   color: var(--color-base);
   cursor: pointer;
-  transition: 0.3s;
 
   &:hover {
     background-color: var(--color-secondary);
