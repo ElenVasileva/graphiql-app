@@ -2,7 +2,7 @@
 
 import { getIntrospectionQuery } from 'graphql';
 
-export default async function fetchGraphQL(endpoint: string): Promise<{
+export default async function fetchSchemaGraphQL(endpoint: string): Promise<{
   statusCode: number | null;
   data: string | null;
   error: string | null;
