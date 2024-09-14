@@ -46,4 +46,5 @@ body {
   align-items: center;
   color: var(--color-neutral);
   background-color: var(--color-base);
+  height: 100vh;
 }
