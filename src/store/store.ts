@@ -1,6 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import currentUserReducer from './features/currentUserSlice';
 import restRequestsReducer from './features/restRequestsSlice';
+import clickedRestReducer from './features/clickedRestSlice';
+
 import {
   FLUSH,
   PAUSE,
@@ -18,6 +20,7 @@ export const makeStore = () => {
   const reducers = combineReducers({
     restRequests: restRequestsReducer,
     currentUser: currentUserReducer,
+    clickedRestId: clickedRestReducer,
   });
 
   const persistedReducer = persistReducer(persistConfig, reducers);
