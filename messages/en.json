@@ -18,5 +18,24 @@
     "Project": "Project",
     "ProjectContent": "This project `REST and GraphQL client` was performed as part of the final assignment of the course.",
     "Developers": "Developers"
+  },
+  "LoginPage": {
+    "Title": "Sign in"
+  },
+  "LoginForm": {
+    "Email": "Email:",
+    "Password": "Password:",
+    "Submit": "Submit",
+    "SignUp": "Don't have an account?"
+  },
+  "LoginValidation": {
+    "email": {
+      "required": "Email is required",
+      "pattern": "Invalid email address"
+    },
+    "password": {
+      "required": "Password is required",
+      "min": "Password must be at least 8 characters long"
+    }
   }
 }

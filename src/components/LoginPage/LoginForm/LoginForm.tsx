@@ -6,10 +6,11 @@ import { FC } from 'react';
 import styles from './LoginForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginValidationSchema } from './LoginValidationSchema';
 import { createSession, logInWithEmailAndPassword } from 'services/firebase';
 import { Link } from '@/i18n/routing';
 import { REGISTRATION_ROUTE } from '@/constants/routes';
+import { useTranslations } from 'next-intl';
+import { useLoginValidationSchema } from './useLoginValidationSchema';
 
 type Inputs = {
   email: string;
@@ -17,12 +18,14 @@ type Inputs = {
 };
 
 export const LoginForm: FC = () => {
+  const t = useTranslations('LoginForm');
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
-    resolver: yupResolver(LoginValidationSchema),
+    resolver: yupResolver(useLoginValidationSchema()),
   });
 
   const onSubmit = async (data: Inputs) => {
@@ -40,7 +43,7 @@ export const LoginForm: FC = () => {
         register={register}
         error={errors.email}
         type="email"
-        label="Email:"
+        label={t('Email')}
         autoComplete="off"
       />
 
@@ -49,18 +52,18 @@ export const LoginForm: FC = () => {
         type="password"
         register={register}
         error={errors.password}
-        label="Password:"
+        label={t('Password')}
       />
 
       <Button
         type="submit"
-        text="Submit"
+        text={t('Submit')}
         disabled={Object.keys(errors).length > 0}
         className={styles.submitButton}
       />
 
       <Link href={REGISTRATION_ROUTE} className={styles.link}>
-        Don&apos;t have an account?
+        {t('SignUp')}
       </Link>
     </form>
   );
