@@ -29,7 +29,11 @@ export default async function fetchGraphQL(
 
     statusCode = response.status;
     if (!response.ok) {
-      throw new Error(await response.text());
+      let message = await response.text();
+      if (!message || message.includes('<!DOCTYPE html>')) {
+        message = response.statusText;
+      }
+      throw new Error(message);
     }
 
     const data = await response.text();

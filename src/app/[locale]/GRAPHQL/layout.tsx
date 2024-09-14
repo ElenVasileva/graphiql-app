@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import GraphQl from 'components/GraphQL/GraphQl';
+import GraphQl from '@/components/GraphQL/GraphQl';
 
 import styles from './layout.module.scss';
 

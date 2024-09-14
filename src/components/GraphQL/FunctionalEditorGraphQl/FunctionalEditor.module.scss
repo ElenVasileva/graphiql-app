@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 45%;
+  width: 50%;
   padding: 10px;
 }
 
@@ -13,8 +13,15 @@
 
 .h2 {
   font: var(--text-bold-m);
+  font: var(--text-bold-m);
   color: var(--color-secondary);
   align-self: center;
+}
+
+@media (width<800px) {
+  .functional-editor {
+    width: 100%;
+  }
 }
 
 @media (width<800px) {
