@@ -71,5 +71,11 @@
       "required": "Confirm password is required",
       "match": "Passwords do not match"
     }
+  },
+  "Header": {
+    "Home": "Home",
+    "SignOut": "Sign out",
+    "SignIn": "Sign in",
+    "SignUp": "Sign up"
   }
 }

@@ -11,12 +11,15 @@ import { useAppDispatch } from '@/store/hooks';
 import { useEffect } from 'react';
 import { setUser } from '@/store/features/currentUserSlice';
 import { getUserName } from 'services/firebase';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   session: string | null;
 };
 
 export const Header: FC<Props> = (props) => {
+  const t = useTranslations('Header');
+
   const userSessionId = useUserSession(props.session);
   const dispatch = useAppDispatch();
 
@@ -34,14 +37,14 @@ export const Header: FC<Props> = (props) => {
 
   return (
     <header className={styles.wrapper}>
-      <ButtonLink text="Home" href="/" />
+      <ButtonLink text={t('Home')} href="/" />
 
       {userSessionId ? (
-        <Button text="Sign out" onClick={handleSignOut} />
+        <Button text={t('SignOut')} onClick={handleSignOut} />
       ) : (
         <div className={styles.buttons}>
-          <ButtonLink text="Sign in" href={LOGIN_ROUTE} />
-          <ButtonLink text="Sign up" href={REGISTRATION_ROUTE} />
+          <ButtonLink text={t('SignIn')} href={LOGIN_ROUTE} />
+          <ButtonLink text={t('SignUp')} href={REGISTRATION_ROUTE} />
         </div>
       )}
     </header>
