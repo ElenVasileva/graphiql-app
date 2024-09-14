@@ -1,6 +1,8 @@
 import { HttpMethod } from '@/constants/methodTypes';
 import { RestRequest } from '@/types/RestRequest';
 
+const EMPTY_URL = 'empty';
+
 const b64EncodeUnicode = (str: string | undefined) => {
   return str ? encodeURIComponent(btoa(str)) : '';
 };
@@ -27,10 +29,12 @@ const queryParams2Record = (queryParams: string): Record<string, string> => {
 
 export const restRequest2Url = (request: RestRequest): string => {
   const { method, url, queryParams, body, headers } = request;
+
+  const nonEmptyUrl = body && !url ? EMPTY_URL : url;
   const queryParamString = record2QueryParams(queryParams);
   const headersQueryParamsString = record2QueryParams(headers);
 
-  return `/restful/${method}/${b64EncodeUnicode(url + queryParamString)}/${b64EncodeUnicode(body)}${headersQueryParamsString}`;
+  return `/restful/${method}/${b64EncodeUnicode(nonEmptyUrl + queryParamString)}/${b64EncodeUnicode(body)}${headersQueryParamsString}`;
 };
 
 export const url2RestRequest = (
@@ -41,6 +45,9 @@ export const url2RestRequest = (
   const method = (pathNames[2] as HttpMethod) || HttpMethod.get;
   const urlAndQueryParam = b64DecodeUnicode(pathNames[3] || '');
   const [url] = urlAndQueryParam.split('?');
+  const possibleEmptyUrl = url.startsWith(EMPTY_URL)
+    ? url.replace(EMPTY_URL, '')
+    : url;
   const queryParams = queryParams2Record(urlAndQueryParam.split('?')[1] || '');
 
   const body = b64DecodeUnicode(pathNames[4]);
@@ -48,5 +55,5 @@ export const url2RestRequest = (
     return { method, url: urlAndQueryParam, body };
   }
 
-  return { method, url, queryParams, body };
+  return { method, url: possibleEmptyUrl, queryParams, body };
 };

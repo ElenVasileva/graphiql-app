@@ -20,7 +20,7 @@ module.exports = {
       },
     ],
     'no-comments/disallowComments': [
-      'warn',
+      'error',
       {
         'allow': ['TODO', 'FIXME', 'NOTE', 'DEBUG'],
       },

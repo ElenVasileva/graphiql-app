@@ -55,17 +55,17 @@ it('RestLayout', async () => {
     screen.getByPlaceholderText('Enter URL or paste the text'),
     'new-url',
   );
-  expect(screen.getByDisplayValue('new-url')).toBeDefined();
+  expect(screen.getByDisplayValue('new-url', { exact: false })).toBeDefined();
 
   await user.type(screen.getByPlaceholderText('Key'), 'search');
   expect(screen.getByDisplayValue('search')).toBeDefined();
 
   await user.click(screen.getByText('Headers'));
-  await user.type(screen.getByPlaceholderText('Key'), 'search');
-  expect(screen.getByDisplayValue('search')).toBeDefined();
+  await user.type(screen.getByDisplayValue('content-type'), 'Test');
+  expect(screen.getByDisplayValue('content-typeTest')).toBeDefined();
 
   await user.click(screen.getByText('Body'));
-  await user.type(screen.getAllByRole('textbox')[1], 'qwerty');
+  await user.click(screen.getByAltText('Prettify'));
 
   await user.click(screen.getByText('Variables'));
   await user.type(screen.getByPlaceholderText('Key'), 'search');
