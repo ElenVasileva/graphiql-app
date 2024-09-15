@@ -3,6 +3,10 @@ import { describe, it, expect, vi } from 'vitest';
 import NavigationRequest from './NavigationRequest';
 import styles from './NavigationRequest.module.scss';
 
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 const navigationList = [
   { key: 'headers', value: 'Headers' },
   { key: 'query', value: 'Query' },

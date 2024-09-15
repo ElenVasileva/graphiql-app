@@ -7,13 +7,12 @@ import styles from './Textarea.module.scss';
 interface ITextareaProps {
   value: string;
   readOnly?: boolean;
-  rows?: number;
   className?: string;
   handlerBlur?: (str: string) => void;
 }
 
 export default function Textarea(props: ITextareaProps) {
-  const { value, className, readOnly, rows, handlerBlur } = props;
+  const { value, className, readOnly, handlerBlur } = props;
   const [text, setText] = useState(value);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export default function Textarea(props: ITextareaProps) {
       }}
       value={text}
       readOnly={readOnly || false}
-      rows={rows || 10}
+      data-testid="documentation-textarea"
     />
   );
 }

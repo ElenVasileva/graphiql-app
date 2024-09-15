@@ -6,7 +6,13 @@ import prettyPrintJson from 'utils/prettyPrintJson';
 
 vi.mock('services/fetchSchemaGraphQL');
 
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 describe('Documentation component', () => {
+  const mockSetFormSdl = vi.fn();
+
   it('should display loading message initially', () => {
     vi.mocked(fetchSchemaGraphQL).mockResolvedValue({
       statusCode: null,
@@ -14,7 +20,7 @@ describe('Documentation component', () => {
       error: null,
     });
 
-    render(<Documentation endpoint="test-endpoint" />);
+    render(<Documentation sdl="test-endpoint" setFormSdl={mockSetFormSdl} />);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
@@ -26,7 +32,7 @@ describe('Documentation component', () => {
       error: 'Error message',
     });
 
-    render(<Documentation endpoint="test-endpoint" />);
+    render(<Documentation sdl="test-endpoint" setFormSdl={mockSetFormSdl} />);
 
     await waitFor(() => {
       expect(screen.getByText('Error: 500 Error message')).toBeInTheDocument();
@@ -43,10 +49,10 @@ describe('Documentation component', () => {
       error: null,
     });
 
-    render(<Documentation endpoint="test-endpoint" />);
+    render(<Documentation sdl="test-endpoint" setFormSdl={mockSetFormSdl} />);
 
     await waitFor(() => {
-      const textarea = screen.getByRole('textbox');
+      const textarea = screen.getByTestId('documentation-textarea');
       expect(textarea).toBeInTheDocument();
       expect(textarea).toHaveValue(prettyPrintedData);
     });
