@@ -5,7 +5,7 @@ import pretty from '@/assets/icons/pretty.svg';
 import { Button } from '@/components/Button';
 import styles from './RestEditor.module.scss';
 import { useState } from 'react';
-import prettyPrintJson from '@/utils/prettyPrintJson';
+import { tryParseJson } from '@/utils/prettyPrintJson';
 
 const RestEditor = ({
   text,
@@ -19,8 +19,8 @@ const RestEditor = ({
   const [currentText, setCurrentText] = useState<string>(text);
 
   const formatText = () => {
-    const newText = prettyPrintJson(currentText);
-    if (newText && newText !== currentText) {
+    const newText = tryParseJson(currentText);
+    if (newText) {
       setCurrentText(newText);
       onChange(newText);
     }

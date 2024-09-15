@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from './KeyValueEditor.module.scss';
 import trash from '../../assets/icons/trash.svg';
+import { useTranslations } from 'next-intl';
 
 interface KeyValueEditable {
   id: number;
@@ -55,6 +56,8 @@ const KeyValueEditor = ({
   defaultValues: Record<string, string> | undefined;
   onChange: (values: Record<string, string>) => void;
 }) => {
+  const t = useTranslations('KeyValue');
+
   const [values, setValues] = useState<KeyValueEditable[]>(
     record2Array(defaultValues),
   );
@@ -90,7 +93,7 @@ const KeyValueEditor = ({
       <div className={styles.keyValue__row__key}>
         <input
           type="text"
-          placeholder="Key"
+          placeholder={t('Key')}
           defaultValue={pair.key}
           onChange={(e) => {
             onKeyChange(pair.id, e.target.value);
@@ -100,7 +103,7 @@ const KeyValueEditor = ({
       <div className={styles.keyValue__row__value}>
         <input
           type="text"
-          placeholder="Value"
+          placeholder={t('Value')}
           defaultValue={pair.value}
           onChange={(e) => {
             onValueChange(pair.id, e.target.value);
@@ -117,8 +120,8 @@ const KeyValueEditor = ({
   return (
     <div className={styles.keyValue}>
       <div className={styles.keyValue__row}>
-        <div className={styles.keyValue__row__keyHeader}>Key</div>
-        <div className={styles.keyValue__row__valueHeader}>Value</div>
+        <div className={styles.keyValue__row__keyHeader}>{t('Key')}</div>
+        <div className={styles.keyValue__row__valueHeader}>{t('Value')}</div>
         <div className={styles.keyValue__row__trash}></div>
       </div>
       {rows}

@@ -29,6 +29,7 @@ const RestLayout = () => {
     setResponse(json);
     setLoading(false);
   };
+
   return (
     <div className={styles.restLayout}>
       <PageHeader>REST client</PageHeader>
