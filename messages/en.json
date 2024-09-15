@@ -78,6 +78,10 @@
     "SignIn": "Sign in",
     "SignUp": "Sign up"
   },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ru {🇷🇺 Russian} en {🇺🇸 English} other {Unknown}}"
+  },
   "Rest":{    
     "RestClient": "REST client",
     "Send": "Send",
