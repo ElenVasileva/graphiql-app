@@ -78,6 +78,9 @@
     "SignIn": "Sign in",
     "SignUp": "Sign up"
   },
+  "NotFoundPage": {
+    "Title": "404 Page not found..."
+  },
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {🇷🇺 Russian} en {🇺🇸 English} other {Unknown}}"

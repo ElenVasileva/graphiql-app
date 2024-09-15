@@ -78,6 +78,9 @@
     "SignIn": "Вход",
     "SignUp": "Регистрация"
   },
+  "NotFoundPage": {
+    "Title": "404 Страница не найдена..."
+  },
   "LocaleSwitcher": {
     "label": "Изменить язык",
     "locale": "{locale, select, ru {🇷🇺 Русский} en {🇺🇸 Английский} other {Неизвестный}}"
@@ -110,7 +113,7 @@
     "Response": "Ответ"
   },
   "LayoutGRAPHQL": { "GraphQL Client": "GraphQL клиент" },
-  "NavigationRequest":{
+  "NavigationRequest": {
     "Query": "Запрос",
     "Headers": "Заголовки",
     "Variables": "Переменные"
