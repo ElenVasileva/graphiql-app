@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import SimpleInput from 'components/SimpleInput/SimpleInput';
 import NavigationRequest from 'components/NavigationRequest/NavigationRequest';
@@ -13,6 +12,7 @@ import generateUrlGraphQl from 'utils/generateUrlGraphQl';
 import useUrl from 'hooks/useUrl';
 
 import styles from './FormGraphQl.module.scss';
+import { useRouter } from '@/i18n/routing';
 
 type Section = 'query' | 'headers' | 'variables' | undefined;
 

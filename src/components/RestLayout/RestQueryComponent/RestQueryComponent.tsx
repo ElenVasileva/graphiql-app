@@ -3,11 +3,12 @@
 import { httpMethodsList } from '@/constants/methodTypes';
 import { useEffect, useState } from 'react';
 import styles from './RestQueryComponent.module.scss';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Input } from '@/components/Input';
 import { RestRequest } from '@/types/RestRequest';
 import { restRequest2Url, url2RestRequest } from '@/utils/restUrlConverter';
 import { Button } from '@/components/Button';
+import { usePathname, useRouter } from '@/i18n/routing';
 
 import React from 'react';
 import RestTabComponent from '@/components/RestLayout/RestQueryComponent/RestTabComponent/RestTabComponent';

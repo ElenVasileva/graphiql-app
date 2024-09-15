@@ -3,12 +3,14 @@
 import { FC } from 'react';
 import styles from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
-import { RegisterValidationSchema } from './RegisterValidationSchema';
+import { useRegisterValidationSchema } from './useRegisterValidationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
-import Link from 'next/link';
 import { createSession, registerWithEmailAndPassword } from 'services/firebase';
+import { Link } from '@/i18n/routing';
+import { LOGIN_ROUTE } from '@/constants/routes';
+import { useTranslations } from 'next-intl';
 
 type Inputs = {
   name: string;
@@ -18,13 +20,15 @@ type Inputs = {
 };
 
 export const RegisterForm: FC = () => {
+  const t = useTranslations('RegisterForm');
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm<Inputs>({
-    resolver: yupResolver(RegisterValidationSchema),
+    resolver: yupResolver(useRegisterValidationSchema()),
   });
   const password = watch('password');
 
@@ -47,7 +51,7 @@ export const RegisterForm: FC = () => {
         register={register}
         error={errors.name}
         type="text"
-        label="Name:"
+        label={t('Name')}
         autoComplete="off"
       />
 
@@ -56,7 +60,7 @@ export const RegisterForm: FC = () => {
         register={register}
         error={errors.email}
         type="email"
-        label="Email:"
+        label={t('Email')}
         autoComplete="off"
       />
 
@@ -65,7 +69,7 @@ export const RegisterForm: FC = () => {
         register={register}
         error={errors.password}
         type="password"
-        label="Password:"
+        label={t('Password')}
         password={password}
       />
 
@@ -74,18 +78,18 @@ export const RegisterForm: FC = () => {
         register={register}
         error={errors.confirmPassword}
         type="password"
-        label="Confirm password:"
+        label={t('ConfirmPassword')}
       />
 
       <Button
         type="submit"
-        text="Submit"
+        text={t('Submit')}
         disabled={Object.keys(errors).length > 0}
         className={styles.submitButton}
       />
 
-      <Link href="/auth" className={styles.link}>
-        Already have an account?
+      <Link href={LOGIN_ROUTE} className={styles.link}>
+        {t('SignIn')}
       </Link>
     </form>
   );
