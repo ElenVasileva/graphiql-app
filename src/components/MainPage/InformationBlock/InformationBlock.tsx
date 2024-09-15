@@ -1,4 +1,4 @@
-import DeveloperCard from '@/components/MainPage/InformationBlock/DeveloperCard/DeveloperCard';
+import DeveloperCard from 'components/MainPage/InformationBlock/DeveloperCard/DeveloperCard';
 import styles from './InformationBlock.module.scss';
 
 const InformationBlock = () => {
