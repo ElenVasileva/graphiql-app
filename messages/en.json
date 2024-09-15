@@ -81,5 +81,38 @@
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {🇷🇺 Russian} en {🇺🇸 English} other {Unknown}}"
+  },
+  "Rest":{    
+    "RestClient": "REST client",
+    "Send": "Send",
+    "EnterUrlOrPasteTheText": "Enter URL or paste the text",
+    "QueryParameters": "Query parameters",
+    "Headers": "Headers",
+    "Body": "Body",
+    "Variables": "Variables",
+    "WrapVariablesMessage": "Wrap variables reference in double-quotes to access it from within a request body:",
+    "Status": "Status"
+  },
+  "KeyValue":{    
+    "Key": "Key",
+    "Value": "Value"
+  },
+  "FunctionalEditor": {
+    "Editor": "Editor"
+  },
+  "FormGraphQl": {
+    "Send": "Send"
+  },
+  "Documentation": {
+    "Documentation": "Documentation"
+  },
+  "ResponseSection": {
+    "Response": "Response"
+  },
+  "LayoutGRAPHQL": { "GraphQL Client": "GraphQL Client" },
+  "NavigationRequest": {
+    "Query": "Query",
+    "Headers": "Headers",
+    "Variables": "Variables"
   }
 }

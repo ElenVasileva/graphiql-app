@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'services/firebase';
+import { onAuthStateChanged } from '@/services/firebase';
 
 const useUserSession = (InitSession: string | null) => {
   const [userUid, setUserUid] = useState<string | null>(InitSession);

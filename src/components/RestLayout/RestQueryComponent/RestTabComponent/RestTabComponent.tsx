@@ -6,9 +6,10 @@ import styles from './RestTabComponent.module.scss';
 import RestEditor from '@/components/RestLayout/RestQueryComponent/RestEditor/RestEditor';
 import TabButtons from '@/components/RestLayout/TabButtons/TabButtons';
 import VariablesMessage from '@/components/RestLayout/RestQueryComponent/RestTabComponent/VariablesMessage/VariablesMessage';
+import { useTranslations } from 'next-intl';
 
 enum TabSection {
-  QueryParams = 'Query parameters',
+  QueryParams = 'QueryParameters',
   Headers = 'Headers',
   Body = 'Body',
   Variables = 'Variables',
@@ -39,6 +40,8 @@ const RestTabComponent = ({
   variables: Record<string, string> | undefined;
   onChange: (newValue: object) => void;
 }) => {
+  const t = useTranslations('Rest');
+
   const [section, setSection] = useState<TabSection>(TabSection.QueryParams);
   const [languageMode, setLanguageMode] = useState<TextMode>(TextMode.Json);
 
@@ -52,7 +55,7 @@ const RestTabComponent = ({
               onClick={() => setSection(sec)}
               key={sec}
             >
-              {sec.toString()}
+              {t(sec.toString())}
             </button>
           ))}
         </div>

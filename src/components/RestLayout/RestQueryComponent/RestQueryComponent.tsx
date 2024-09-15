@@ -10,14 +10,33 @@ import { restRequest2Url, url2RestRequest } from '@/utils/restUrlConverter';
 import { Button } from '@/components/Button';
 import { usePathname, useRouter } from '@/i18n/routing';
 
-import React from 'react';
 import RestTabComponent from '@/components/RestLayout/RestQueryComponent/RestTabComponent/RestTabComponent';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { RestRequestToStore } from '@/types/RestRequestToStore';
+import { addRequest } from '@/store/features/requestListSlice';
+import { setRequest } from '@/store/features/clickedRestSlice';
+import { useTranslations } from 'next-intl';
 
 const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
+  const t = useTranslations('Rest');
+
   const path = usePathname();
   const requestFromUrl = url2RestRequest(path);
-
   requestFromUrl.headers = Object.fromEntries(useSearchParams().entries());
+
+  const dispatch = useAppDispatch();
+
+  const restRequestId = useAppSelector((state) => state.clickedRestId.value);
+  const user = useAppSelector((state) => state.currentUser.value);
+  const restRequests = useAppSelector((state) => state.restRequests.value);
+  if (restRequestId && user && restRequests) {
+    const requestInfo = restRequests.find(
+      (r) => r.user == user && r.date === restRequestId,
+    );
+    requestFromUrl.body = requestInfo?.body;
+    requestFromUrl.variables = requestInfo?.variables;
+    dispatch(setRequest(undefined));
+  }
 
   const [restRequest, setRestRequest] = useState<RestRequest>(requestFromUrl);
 
@@ -28,6 +47,16 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
 
   const onValueChange = (newValue: object) => {
     setRestRequest({ ...restRequest, ...newValue });
+  };
+
+  const onSubmitClick = () => {
+    const newRequest: RestRequestToStore = {
+      ...restRequest,
+      date: Date.now(),
+      user: user || 'noname',
+    };
+    dispatch(addRequest(newRequest));
+    onSubmit();
   };
 
   return (
@@ -50,9 +79,9 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
           name="requestUrl"
           defaultValue={restRequest.url}
           onChange={(e) => onValueChange({ url: e.target.value })}
-          placeholder="Enter URL or paste the text"
+          placeholder={t('EnterUrlOrPasteTheText')}
         />
-        <Button onClick={onSubmit}>Send</Button>
+        <Button onClick={onSubmitClick}>{t('Send')}</Button>
       </div>
       <RestTabComponent
         queryParams={restRequest.queryParams}

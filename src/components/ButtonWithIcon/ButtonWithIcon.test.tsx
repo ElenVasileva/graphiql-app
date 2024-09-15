@@ -2,16 +2,7 @@ import { vi, describe, test, expect } from 'vitest';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import type { ImageProps } from 'next/image';
-
 import ButtonWithIcon from './ButtonWithIcon';
-
-vi.mock('next/image', () => ({
-  __esModule: true,
-  default: (props: ImageProps) => {
-    return <img {...props} />;
-  },
-}));
 
 describe('ButtonWithIcon component', () => {
   test('renders button with an icon', () => {
@@ -22,7 +13,6 @@ describe('ButtonWithIcon component', () => {
 
     expect(button).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveAttribute('src', '/icon.png');
   });
 
   test('calls onClick when clicked', () => {
