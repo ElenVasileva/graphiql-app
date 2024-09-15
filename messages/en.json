@@ -117,5 +117,12 @@
     "Query": "Query",
     "Headers": "Headers",
     "Variables": "Variables"
+  },
+  "Error": {
+    "Something went wrong!": "Something went wrong!",
+    "Return to": "Return to",
+    "main page": "main page",
+    "or": "or",
+    "Try again": "Try again"
   }
 }
