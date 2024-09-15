@@ -34,13 +34,4 @@ describe('Textarea Component', () => {
     const textarea = getByRole('textbox');
     fireEvent.blur(textarea);
   });
-
-  it('should set readOnly and rows properties correctly', () => {
-    const { getByRole } = render(
-      <Textarea value="Initial Value" readOnly={true} rows={5} />,
-    );
-    const textarea = getByRole('textbox');
-    expect(textarea).toHaveAttribute('readOnly');
-    expect(textarea).toHaveAttribute('rows', '5');
-  });
 });

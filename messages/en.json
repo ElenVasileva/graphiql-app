@@ -79,6 +79,24 @@
     "SignUp": "Sign up"
   },
   "NotFoundPage": {
-    "Title": "404 Page not found..."
+    "Title": "404 Page not found...",
+  }
+  "FunctionalEditor": {
+    "Editor": "Editor"
+  },
+  "FormGraphQl": {
+    "Send": "Send"
+  },
+  "Documentation": {
+    "Documentation": "Documentation"
+  },
+  "ResponseSection": {
+    "Response": "Response"
+  },
+  "LayoutGRAPHQL": { "GraphQL Client": "GraphQL Client" },
+  "NavigationRequest": {
+    "Query": "Query",
+    "Headers": "Headers",
+    "Variables": "Variables"
   }
 }
