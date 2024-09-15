@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import currentUserReducer from './features/currentUserSlice';
-import restRequestsReducer from './features/restRequestsSlice';
+import restRequestsReducer from './features/requestListSlice';
 import clickedRestReducer from './features/clickedRestSlice';
 
 import {

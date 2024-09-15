@@ -1,15 +1,12 @@
-.restHistory {
-  padding: 0 10%;
+.historyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 
-  h3 {
-    padding-bottom: 15px;
-    padding-left: 15px;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  &__message {
+    padding-top: 30px;
+    font-size: 18px;
   }
 
   a {

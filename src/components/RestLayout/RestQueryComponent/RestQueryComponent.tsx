@@ -11,9 +11,8 @@ import { Button } from '@/components/Button';
 
 import RestTabComponent from '@/components/RestLayout/RestQueryComponent/RestTabComponent/RestTabComponent';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { RootState } from '@/store/store';
 import { RestRequestToStore } from '@/types/RestRequestToStore';
-import { addRestRequest } from '@/store/features/restRequestsSlice';
+import { addRequest } from '@/store/features/requestListSlice';
 import { setRequest } from '@/store/features/clickedRestSlice';
 
 const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
@@ -23,13 +22,9 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
 
   const dispatch = useAppDispatch();
 
-  const restRequestId = useAppSelector(
-    (state: RootState) => state.clickedRestId.value,
-  );
-  const user = useAppSelector((state: RootState) => state.currentUser.value);
-  const restRequests = useAppSelector(
-    (state: RootState) => state.restRequests.value,
-  );
+  const restRequestId = useAppSelector((state) => state.clickedRestId.value);
+  const user = useAppSelector((state) => state.currentUser.value);
+  const restRequests = useAppSelector((state) => state.restRequests.value);
   if (restRequestId && user && restRequests) {
     const requestInfo = restRequests.find(
       (r) => r.user == user && r.date === restRequestId,
@@ -56,7 +51,7 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
       date: Date.now(),
       user: user || 'noname',
     };
-    dispatch(addRestRequest(newRequest));
+    dispatch(addRequest(newRequest));
     onSubmit();
   };
 

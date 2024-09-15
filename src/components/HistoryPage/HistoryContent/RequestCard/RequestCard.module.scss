@@ -1,7 +1,7 @@
 .restCard {
   border: 1px solid var(--color-neutral);
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 20px;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 5%);
   transition: 0.1s;
@@ -13,16 +13,34 @@
   &__row {
     display: flex;
     flex-direction: row;
+    padding-bottom: 20px;
   }
 
   &__method {
+    text-align: center;
     font-size: 20px;
     flex-grow: 1;
   }
+  &__method,
   &__url {
-    font-size: 18px;
+    font-size: 20px;
+    flex-grow: 1;
   }
-  &__bold {
+
+  &__body,
+  &__variables,
+  &__headers {
+    padding: 3px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__rowHeader {
     font-weight: bold;
+    min-width: 90px;
+    width: 90px;
+  }
+  &__rowContent {
+    flex-grow: 1;
   }
 }
