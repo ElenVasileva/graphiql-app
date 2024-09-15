@@ -77,5 +77,23 @@
     "SignOut": "Sign out",
     "SignIn": "Sign in",
     "SignUp": "Sign up"
+  },
+  "FunctionalEditor": {
+    "Editor": "Editor"
+  },
+  "FormGraphQl": {
+    "Send": "Send"
+  },
+  "Documentation": {
+    "Documentation": "Documentation"
+  },
+  "ResponseSection": {
+    "Response": "Response"
+  },
+  "LayoutGRAPHQL": { "GraphQL Client": "GraphQL Client" },
+  "NavigationRequest": {
+    "Query": "Query",
+    "Headers": "Headers",
+    "Variables": "Variables"
   }
 }

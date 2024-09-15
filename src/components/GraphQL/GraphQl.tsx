@@ -4,42 +4,37 @@ import { useState } from 'react';
 
 import FunctionalEditor from './FunctionalEditorGraphQl/FunctionalEditor';
 import ResponseSection from './ResponseSectionGraphQl/ResponseSection';
-import { Button } from 'components/Button/Button';
-import { Loader } from 'components/Loader/Loader';
 
 import fetchGraphQL from 'services/fetchGraphQL';
 
-import useUrl from 'hooks/useUrl';
-
-import styles from './GraphQl.module.scss';
-
 export default function GraphQl() {
-  const { endpoint, query, variables, headers } = useUrl();
-
   const [response, setResponse] = useState<{
     statusCode: number | null;
     data: string | null;
     error: string | null;
   }>({ statusCode: null, data: null, error: null });
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  async function handleSubmit() {
-    setIsLoading(true);
-    const response = await fetchGraphQL(endpoint, query, variables, headers);
-    setResponse(response);
-    setIsLoading(false);
+  async function handleSubmit(
+    endpoint: string,
+    query: string,
+    variables: Record<string, string>,
+    headers: Record<string, string>,
+  ) {
+    try {
+      const response = await fetchGraphQL(endpoint, query, variables, headers);
+      setResponse(response);
+    } catch (error) {
+      setResponse({
+        statusCode: 500,
+        data: null,
+        error: 'Internal server error',
+      });
+    }
   }
 
   return (
     <>
-      <FunctionalEditor />
-      <div className={styles['wrapper-button']}>
-        <Button onClick={handleSubmit} disabled={!endpoint}>
-          Send
-        </Button>
-        {isLoading && <Loader />}
-      </div>
+      <FunctionalEditor onSubmit={handleSubmit} />
       <ResponseSection response={response} />
     </>
   );

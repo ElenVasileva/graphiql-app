@@ -19,17 +19,19 @@ export default async function fetchGraphQL(
     }),
     redirect: 'follow',
   };
-
   let statusCode = null;
   try {
     if (!endpoint) {
       throw new Error('Invalid endpoint specified');
     }
     const response = await fetch(endpoint, requestOptions);
-
     statusCode = response.status;
     if (!response.ok) {
-      throw new Error(await response.text());
+      let message = await response.text();
+      if (!message || message.includes('<!DOCTYPE html>')) {
+        message = response.statusText || 'Error';
+      }
+      throw new Error(message);
     }
 
     const data = await response.text();
@@ -43,7 +45,7 @@ export default async function fetchGraphQL(
       };
     }
     return {
-      error: `{"errors":[{"message":"Something went wrong."}]}`,
+      error: `{"errors":[{"message":"Error"}]}`,
       statusCode,
       data: null,
     };

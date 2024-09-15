@@ -77,5 +77,23 @@
     "SignOut": "Выход",
     "SignIn": "Вход",
     "SignUp": "Регистрация"
+  },
+  "FunctionalEditor": {
+    "Editor": "Редактор"
+  },
+  "FormGraphQl": {
+    "Send": "Отправить"
+  },
+  "Documentation": {
+    "Documentation": "Документация"
+  },
+  "ResponseSection": {
+    "Response": "Ответ"
+  },
+  "LayoutGRAPHQL": { "GraphQL Client": "GraphQL клиент" },
+  "NavigationRequest":{
+    "Query": "Запрос",
+    "Headers": "Заголовки",
+    "Variables": "Переменные"
   }
 }
