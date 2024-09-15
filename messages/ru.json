@@ -78,6 +78,21 @@
     "SignIn": "Вход",
     "SignUp": "Регистрация"
   },
+  "Rest":{    
+    "RestClient": "REST клиент",
+    "Send": "Отправить",
+    "EnterUrlOrPasteTheText": "Введите URL или вставьте текст",
+    "QueryParameters": "Параметры запроса",
+    "Headers": "Заголовки",
+    "Body": "Тело запроса",
+    "Variables": "Переменные",
+    "WrapVariablesMessage": "Чтобы получить доступ к переменной из тела запроса, заключите ссылку на переменную в двойные кавычки:",
+    "Status": "Статус"
+  },
+  "KeyValue":{    
+    "Key": "Ключ",
+    "Value": "Значение"
+  },
   "FunctionalEditor": {
     "Editor": "Редактор"
   },

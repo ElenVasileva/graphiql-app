@@ -15,8 +15,11 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { RestRequestToStore } from '@/types/RestRequestToStore';
 import { addRequest } from '@/store/features/requestListSlice';
 import { setRequest } from '@/store/features/clickedRestSlice';
+import { useTranslations } from 'next-intl';
 
 const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
+  const t = useTranslations('Rest');
+
   const path = usePathname();
   const requestFromUrl = url2RestRequest(path);
   requestFromUrl.headers = Object.fromEntries(useSearchParams().entries());
@@ -76,9 +79,9 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
           name="requestUrl"
           defaultValue={restRequest.url}
           onChange={(e) => onValueChange({ url: e.target.value })}
-          placeholder="Enter URL or paste the text"
+          placeholder={t('EnterUrlOrPasteTheText')}
         />
-        <Button onClick={onSubmitClick}>Send</Button>
+        <Button onClick={onSubmitClick}>{t('Send')}</Button>
       </div>
       <RestTabComponent
         queryParams={restRequest.queryParams}
