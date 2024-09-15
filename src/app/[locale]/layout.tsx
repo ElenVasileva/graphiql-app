@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Rubik, League_Gothic } from 'next/font/google';
+import { Rubik } from 'next/font/google';
 
 import './globals.css';
 import { cookies } from 'next/headers';
@@ -13,12 +13,6 @@ import { NextIntlClientProvider } from 'next-intl';
 const rubik = Rubik({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-rubik',
-  display: 'swap',
-});
-
-const league_gothic = League_Gothic({
-  subsets: ['latin'],
-  variable: '--font-league-gothic',
   display: 'swap',
 });
 
@@ -38,10 +32,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${rubik.variable} ${league_gothic.variable}`}
-    >
+    <html lang={locale} className={rubik.variable}>
       <body>
         <StoreProvider>
           <NextIntlClientProvider messages={messages}>

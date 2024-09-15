@@ -22,19 +22,30 @@ const record2QueryParams = (
   return urlSearchParams.size ? '?' + urlSearchParams.toString() : '';
 };
 
+const includeVariablesInBody = (
+  body: string | undefined,
+  variables: Record<string, string> | undefined,
+) => {
+  if (!variables || !body) return body;
+  for (const key in variables) {
+    body = body.replaceAll(`"{{${key}}}"`, `"${variables[key]}"`);
+  }
+  return body;
+};
+
 const queryParams2Record = (queryParams: string): Record<string, string> => {
   const urlSearchParams = new URLSearchParams(queryParams);
   return Object.fromEntries(urlSearchParams.entries());
 };
 
 export const restRequest2Url = (request: RestRequest): string => {
-  const { method, url, queryParams, body, headers } = request;
-
+  const { method, url, queryParams, body, headers, variables } = request;
+  const bodyWithIncludedVariables = includeVariablesInBody(body, variables);
   const nonEmptyUrl = body && !url ? EMPTY_URL : url;
   const queryParamString = record2QueryParams(queryParams);
   const headersQueryParamsString = record2QueryParams(headers);
 
-  return `/restful/${method}/${b64EncodeUnicode(nonEmptyUrl + queryParamString)}/${b64EncodeUnicode(body)}${headersQueryParamsString}`;
+  return `/restful/${method}/${b64EncodeUnicode(nonEmptyUrl + queryParamString)}/${b64EncodeUnicode(bodyWithIncludedVariables)}${headersQueryParamsString}`;
 };
 
 export const url2RestRequest = (
@@ -56,4 +67,8 @@ export const url2RestRequest = (
   }
 
   return { method, url: possibleEmptyUrl, queryParams, body };
+};
+
+export const exportedForTesting = {
+  includeVariablesInBody,
 };

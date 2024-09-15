@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styles from './LoginPage.module.scss';
 import { LoginForm } from './LoginForm';
+import PageHeader from '@/components/PageHeader/PageHeader';
 import { useTranslations } from 'next-intl';
 
 export const LoginPage: FC = () => {
@@ -8,8 +9,7 @@ export const LoginPage: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>{t('Title')}</h1>
-
+      <PageHeader>{t('Title')}</PageHeader>
       <LoginForm />
     </div>
   );
