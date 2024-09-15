@@ -14,21 +14,24 @@ vi.mock('next/link', () => ({
 
 describe('GlobalError component', () => {
   it('renders the error message and buttons', () => {
-    const mockReset = vi.fn();
-    render(<GlobalError error={new Error('Test error')} reset={mockReset} />);
+    render(<GlobalError error={new Error('Test error')} reset={vi.fn()} />);
 
-    expect(screen.getByText('Something went wrong!')).toBeInTheDocument();
-    expect(screen.getByText('Return to')).toBeInTheDocument();
-    expect(screen.getByText('main page')).toBeInTheDocument();
-    expect(screen.getByText('or')).toBeInTheDocument();
-    expect(screen.getByText('Try again')).toBeInTheDocument();
+    const titleElement = screen.getByText(/Something went wrong!/i);
+    expect(titleElement).toBeInTheDocument();
+
+    const linkElement = screen.getByRole('link', { name: /main page/i });
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute('href', '/');
+
+    const buttonElement = screen.getByRole('button', { name: /Try again/i });
+    expect(buttonElement).toBeInTheDocument();
   });
 
   it('calls the reset function when the "Try again" button is clicked', () => {
     const mockReset = vi.fn();
     render(<GlobalError error={new Error('Test error')} reset={mockReset} />);
 
-    const tryAgainButton = screen.getByText('Try again');
+    const tryAgainButton = screen.getByText(/Try again/i);
     fireEvent.click(tryAgainButton);
 
     expect(mockReset).toHaveBeenCalledTimes(1);
@@ -37,7 +40,7 @@ describe('GlobalError component', () => {
   it('contains a link to the main page', () => {
     render(<GlobalError error={new Error('Test error')} reset={vi.fn()} />);
 
-    const mainPageLink = screen.getByText('main page');
+    const mainPageLink = screen.getByText(/main page/i);
 
     expect(mainPageLink.closest('a')).toHaveAttribute('href', '/');
   });

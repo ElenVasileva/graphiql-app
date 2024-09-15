@@ -118,7 +118,7 @@
     "Headers": "Headers",
     "Variables": "Variables"
   },
-  "Error": {
+  "ErrorBoundary": {
     "Something went wrong!": "Something went wrong!",
     "Return to": "Return to",
     "main page": "main page",
