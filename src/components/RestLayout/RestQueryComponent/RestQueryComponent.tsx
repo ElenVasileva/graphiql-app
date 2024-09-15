@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
 import { RestRequestToStore } from '@/types/RestRequestToStore';
 import { addRestRequest } from '@/store/features/restRequestsSlice';
+import { setRequest } from '@/store/features/clickedRestSlice';
 
 const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
   const path = usePathname();
@@ -35,6 +36,7 @@ const RestQueryComponent = ({ onSubmit }: { onSubmit: () => void }) => {
     );
     requestFromUrl.body = requestInfo?.body;
     requestFromUrl.variables = requestInfo?.variables;
+    dispatch(setRequest(undefined));
   }
 
   const [restRequest, setRestRequest] = useState<RestRequest>(requestFromUrl);

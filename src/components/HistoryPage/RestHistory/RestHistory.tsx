@@ -20,10 +20,16 @@ const RestHistory = () => {
     <div className={styles.restHistory}>
       <h3>REST</h3>
       <div className={styles.restHistory__content}>
-        {userRequests &&
+        {!!(userRequests && userRequests.length) &&
           userRequests.map((request) => (
             <RestCard request={request} key={request.date} />
           ))}
+        {!userRequests.length && (
+          <>
+            <div>There are no REST requests in the local storage</div>
+            <a href="/restful">Create the first one</a>
+          </>
+        )}
       </div>
     </div>
   );

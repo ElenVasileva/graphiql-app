@@ -1,7 +1,7 @@
 'use client';
 import { useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
-import PageHeader from 'components/PageHeader/PageHeader';
+import PageHeader from '@/components/PageHeader/PageHeader';
 
 const Greeting = () => {
   const userName = useAppSelector(

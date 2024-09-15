@@ -11,4 +11,16 @@
     flex-direction: column;
     gap: 20px;
   }
+
+  a {
+    font-size: 18px;
+    color: var(--color-tertiary);
+    text-decoration: none;
+    cursor: pointer;
+    text-wrap: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

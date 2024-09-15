@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import styles from './SignLinks.module.scss';
-import useUserSession from 'hooks/useUserSession';
+import useUserSession from '@/hooks/useUserSession';
 
 const SignLinks = ({ session }: { session: string | null }) => {
   const userSessionId = useUserSession(session);

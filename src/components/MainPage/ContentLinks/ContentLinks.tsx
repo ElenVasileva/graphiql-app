@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import styles from './ContentLinks.module.scss';
-import useUserSession from 'hooks/useUserSession';
+import useUserSession from '@/hooks/useUserSession';
 
 const ContentLinks = ({ session }: { session: string | null }) => {
   const userSessionId = useUserSession(session);

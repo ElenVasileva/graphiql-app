@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation';
 import { restRequest2Url } from '@/utils/restUrlConverter';
 import { HttpMethod } from '@/constants/methodTypes';
 import { RestRequestToStore } from '@/types/RestRequestToStore';
-import { useAppDispatch } from '@store/hooks';
-import { setRequest } from '@store/features/clickedRestSlice';
+import { useAppDispatch } from '@/store/hooks';
+import { setRequest } from '@/store/features/clickedRestSlice';
 
 const RestCard = ({ request }: { request: RestRequestToStore }) => {
   const { push } = useRouter();
