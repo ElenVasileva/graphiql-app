@@ -1,0 +1,19 @@
+.response-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 45%;
+  padding: 10px;
+}
+
+.h2 {
+  font: var(--text-bold-m);
+  color: var(--color-secondary);
+  align-self: center;
+}
+
+@media (width<800px) {
+  .response-section {
+    width: 100%;
+  }
+}

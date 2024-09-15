@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import prettyPrintJson, { tryParseJson } from './prettyPrintJson';
-
 describe('prettyPrintJson', () => {
   it('should return a pretty-printed JSON string when given a valid JSON string', () => {
     const input = '{"name":"John","age":30,"city":"New York"}';
