@@ -79,8 +79,8 @@
     "SignUp": "Регистрация"
   },
   "NotFoundPage": {
-    "Title": "404 Страница не найдена...",
-  }
+    "Title": "404 Страница не найдена..."
+  },
   "FunctionalEditor": {
     "Editor": "Редактор"
   },
@@ -94,7 +94,7 @@
     "Response": "Ответ"
   },
   "LayoutGRAPHQL": { "GraphQL Client": "GraphQL клиент" },
-  "NavigationRequest":{
+  "NavigationRequest": {
     "Query": "Запрос",
     "Headers": "Заголовки",
     "Variables": "Переменные"
