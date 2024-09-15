@@ -77,5 +77,20 @@
     "SignOut": "Sign out",
     "SignIn": "Sign in",
     "SignUp": "Sign up"
+  },
+  "Rest":{    
+    "RestClient": "REST client",
+    "Send": "Send",
+    "EnterUrlOrPasteTheText": "Enter URL or paste the text",
+    "QueryParameters": "Query parameters",
+    "Headers": "Headers",
+    "Body": "Body",
+    "Variables": "Variables",
+    "WrapVariablesMessage": "Wrap variables reference in double-quotes to access it from within a request body:",
+    "Status": "Status"
+  },
+  "KeyValue":{    
+    "Key": "Key",
+    "Value": "Value"
   }
 }

@@ -66,26 +66,32 @@ it('RestLayout', async () => {
   await user.selectOptions(screen.getByRole('combobox'), ['get']);
 
   await user.type(
-    screen.getByPlaceholderText('Enter URL or paste the text'),
+    screen.getByPlaceholderText('EnterUrlOrPasteTheText', { exact: false }),
     'new-url',
   );
   expect(screen.getByDisplayValue('new-url', { exact: false })).toBeDefined();
 
-  await user.type(screen.getByPlaceholderText('Key'), 'search');
+  await user.type(
+    screen.getByPlaceholderText('.Key', { exact: false }),
+    'search',
+  );
   expect(screen.getByDisplayValue('search')).toBeDefined();
 
-  await user.click(screen.getByText('Headers'));
+  await user.click(screen.getByText('Headers', { exact: false }));
   await user.type(screen.getByDisplayValue('content-type'), 'Test');
   expect(screen.getByDisplayValue('content-typeTest')).toBeDefined();
 
-  await user.click(screen.getByText('Body'));
+  await user.click(screen.getByText('Body', { exact: false }));
   await user.click(screen.getByAltText('Prettify'));
 
-  await user.click(screen.getByText('Variables'));
-  await user.type(screen.getByPlaceholderText('Key'), 'search');
+  await user.click(screen.getByText('Variables', { exact: false }));
+  await user.type(
+    screen.getByPlaceholderText('.Key', { exact: false }),
+    'search',
+  );
   expect(screen.getByDisplayValue('search')).toBeDefined();
 
-  await user.click(screen.getByText('Send'));
+  await user.click(screen.getByText('Send', { exact: false }));
   expect(
     screen.getByDisplayValue('Luke Skywalker', { exact: false }),
   ).toBeDefined();

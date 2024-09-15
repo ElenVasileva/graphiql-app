@@ -5,6 +5,7 @@ import styles from './RestResponseComponent.module.scss';
 import { RestResponse } from 'types/RestResponse';
 import TabButtons from '@/components/RestLayout/TabButtons/TabButtons';
 import { tryParseJson } from '@/utils/prettyPrintJson';
+import { useTranslations } from 'next-intl';
 
 type Tabs = {
   Raw?: string;
@@ -17,6 +18,8 @@ const RestResponseComponent = ({
 }: {
   response: RestResponse | undefined;
 }) => {
+  const t = useTranslations('Rest');
+
   const [tabs, setTabs] = useState<Tabs>({});
   const [selectedTab, setSelectedTab] = useState<Tab>('Raw');
 
@@ -38,7 +41,7 @@ const RestResponseComponent = ({
         <>
           <div className={styles.response__statusAndSection}>
             <div className={styles.response__status}>
-              Status: {response.status}
+              {t('Status')}: {response.status}
             </div>
             {!!response.body && Object.keys(tabs).length > 1 && (
               <TabButtons

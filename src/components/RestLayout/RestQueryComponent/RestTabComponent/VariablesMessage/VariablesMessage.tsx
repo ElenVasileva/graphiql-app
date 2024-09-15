@@ -1,13 +1,13 @@
+import { useTranslations } from 'next-intl';
 import styles from './VariablesMessage.module.scss';
 
 const VariablesMessage = () => {
+  const t = useTranslations('Rest');
+
   return (
     <div className={styles.message}>
       {' '}
-      <div className={styles.message__text}>
-        Wrap variables reference in double-quotes to access it from within a
-        request body:
-      </div>
+      <div className={styles.message__text}>{t('WrapVariablesMessage')}</div>
       <code className={styles.message__code}>
         <span className={styles.message__grey}>{`{`}</span>{' '}
         <span className={styles.message__yellow}>{`"customer_id"`}</span>{' '}

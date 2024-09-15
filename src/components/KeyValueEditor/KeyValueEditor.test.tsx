@@ -2,20 +2,30 @@ import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import KeyValueEditor from './KeyValueEditor';
 import userEvent from '@testing-library/user-event';
+import { NextIntlClientProvider } from 'next-intl';
+
+const customRender = (ui: React.ReactElement) => {
+  return render(
+    <NextIntlClientProvider locale="en">{ui}</NextIntlClientProvider>,
+  );
+};
+
 describe('KeyValueEditor', () => {
   const initialValue = { search: 'sk' };
   const onChange = (): void => {};
 
   it('rendered with empty default values', async () => {
-    render(<KeyValueEditor defaultValues={{}} onChange={onChange} />);
-    const keyInput = screen.getByPlaceholderText('Key');
+    customRender(<KeyValueEditor defaultValues={{}} onChange={onChange} />);
+    const keyInput = screen.getByPlaceholderText('.Key', { exact: false });
     expect(keyInput).toBeDefined();
-    const valueInput = screen.getByPlaceholderText('Value');
+    const valueInput = screen.getByPlaceholderText('.Value', { exact: false });
     expect(valueInput).toBeDefined();
   });
 
   it('rendered with default values', async () => {
-    render(<KeyValueEditor defaultValues={initialValue} onChange={onChange} />);
+    customRender(
+      <KeyValueEditor defaultValues={initialValue} onChange={onChange} />,
+    );
     const firstKeyInput = screen.getByDisplayValue('search');
     expect(firstKeyInput).toBeDefined();
     const firstValueInput = screen.getByDisplayValue('sk');
