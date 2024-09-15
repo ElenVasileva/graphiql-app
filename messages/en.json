@@ -81,6 +81,10 @@
   "NotFoundPage": {
     "Title": "404 Page not found..."
   },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ru {🇷🇺 Russian} en {🇺🇸 English} other {Unknown}}"
+  },
   "Rest":{    
     "RestClient": "REST client",
     "Send": "Send",
