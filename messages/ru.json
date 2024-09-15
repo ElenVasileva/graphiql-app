@@ -117,5 +117,12 @@
     "Query": "Запрос",
     "Headers": "Заголовки",
     "Variables": "Переменные"
+  },
+  "ErrorBoundary": {
+    "Something went wrong!": "Что-то пошло не так!",
+    "Return to": "Вернуться на",
+    "main page": "главную страницу",
+    "or": "или",
+    "Try again": "попробовать еще раз"
   }
 }
