@@ -1,4 +1,5 @@
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
+import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import parseUrl from 'utils/parseUrl';
