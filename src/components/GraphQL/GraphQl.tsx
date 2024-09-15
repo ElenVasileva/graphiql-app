@@ -6,11 +6,9 @@ import FunctionalEditor from './FunctionalEditorGraphQl/FunctionalEditor';
 import ResponseSection from './ResponseSectionGraphQl/ResponseSection';
 
 import fetchGraphQL from 'services/fetchGraphQL';
-
-import styles from './GraphQl.module.scss';
 import { RestRequestToStore } from '@/types/RestRequestToStore';
-import { addRequest } from '@store/features/requestListSlice';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { addRequest } from '@/store/features/requestListSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 export default function GraphQl() {
   const [response, setResponse] = useState<{
@@ -21,7 +19,7 @@ export default function GraphQl() {
 
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.currentUser.value);
-      
+
   async function handleSubmit(
     endpoint: string,
     query: string,
