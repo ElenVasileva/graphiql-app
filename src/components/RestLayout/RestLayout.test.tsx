@@ -2,6 +2,10 @@ import { expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import RestLayout from './RestLayout';
 import userEvent from '@testing-library/user-event';
+import { makeStore } from '@/store/store';
+import { persistStore } from 'redux-persist';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { NextIntlClientProvider } from 'next-intl';
 
 const rawResponse = '{"name":"Luke Skywalker","height":"172","mass":"77"}';
@@ -39,6 +43,9 @@ vi.mock('@/i18n/routing', () => {
   };
 });
 
+const store = makeStore();
+const persistor = persistStore(store);
+
 const customRender = (ui: React.ReactElement) => {
   return render(
     <NextIntlClientProvider locale="en">{ui}</NextIntlClientProvider>,
@@ -46,7 +53,14 @@ const customRender = (ui: React.ReactElement) => {
 };
 
 it('RestLayout', async () => {
-  customRender(<RestLayout />);
+  customRender(
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RestLayout />
+      </PersistGate>
+    </Provider>,
+  );
+
   const user = userEvent.setup();
 
   await user.selectOptions(screen.getByRole('combobox'), ['get']);

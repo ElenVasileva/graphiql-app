@@ -4,23 +4,13 @@ import { useEffect, useState } from 'react';
 import styles from './RestResponseComponent.module.scss';
 import { RestResponse } from 'types/RestResponse';
 import TabButtons from '@/components/RestLayout/TabButtons/TabButtons';
+import { tryParseJson } from '@/utils/prettyPrintJson';
 
 type Tabs = {
   Raw?: string;
   Pretty?: string;
 };
 type Tab = keyof Tabs;
-
-const tryParseJson = (text: string | undefined): string | undefined => {
-  try {
-    if (text) {
-      const numberOfSpaces = 4;
-      return JSON.stringify(JSON.parse(text), undefined, numberOfSpaces);
-    }
-  } catch {
-    return undefined;
-  }
-};
 
 const RestResponseComponent = ({
   response,
