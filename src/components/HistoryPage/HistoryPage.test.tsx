@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { setUser } from '@/store/features/currentUserSlice';
 import userEvent from '@testing-library/user-event';
 import HistoryPage from '@/components/HistoryPage/HistoryPage';
+import { NextIntlClientProvider } from 'next-intl';
 
 const store = makeStore();
 const persistor = persistStore(store);
@@ -22,9 +23,15 @@ vi.mock('next/navigation', () => {
   };
 });
 
+const customRender = (ui: React.ReactElement) => {
+  return render(
+    <NextIntlClientProvider locale="en">{ui}</NextIntlClientProvider>,
+  );
+};
+
 describe('History', () => {
   it('Shows message and two links when history is empty', async () => {
-    render(
+    customRender(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <HistoryPage />
@@ -69,7 +76,7 @@ describe('History', () => {
     );
     store.dispatch(setUser(user));
 
-    render(
+    customRender(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <HistoryPage />

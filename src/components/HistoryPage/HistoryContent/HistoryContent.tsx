@@ -1,9 +1,11 @@
 'use client';
 
+import { Link } from '@/i18n/routing';
 import RequestCard from '@/components/HistoryPage/HistoryContent/RequestCard/RequestCard';
 import styles from './HistoryContent.module.scss';
 import { useAppSelector } from '@/store/hooks';
 import { RestRequestToStore } from '@/types/RestRequestToStore';
+import { RESTFUL_ROUTE, GRAPHIQL_ROUTE } from '@/constants/routes';
 
 const HistoryContent = () => {
   const user = useAppSelector((state) => state.currentUser.value);
@@ -27,8 +29,8 @@ const HistoryContent = () => {
           <div className={styles.historyContent__message}>
             There are no requests in the local storage
           </div>
-          <a href="/restful">Create the first REST one</a>
-          <a href="/GRAPHQL">Create the first GRAPHQL one</a>
+          <Link href={RESTFUL_ROUTE}>Create the first REST one</Link>
+          <Link href={GRAPHIQL_ROUTE}>Create the first GRAPHQL one</Link>
         </>
       )}
     </div>

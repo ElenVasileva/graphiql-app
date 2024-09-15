@@ -40,7 +40,7 @@ const RequestCard = ({ request }: { request: RestRequestToStore }) => {
           headers: request.headers,
           variables: request.variables,
           queryParams: request.queryParams,
-        }),
+        }).substring(1),
       );
     }
   };
