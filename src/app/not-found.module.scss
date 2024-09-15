@@ -1,0 +1,21 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.link {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-tertiary);
+  color: var(--color-base);
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--color-secondary);
+  }
+}
