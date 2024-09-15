@@ -8,6 +8,7 @@ import { setUser } from '@/store/features/currentUserSlice';
 import MainPage from '@/components/MainPage/MainPage';
 import useUserSession from '@/hooks/useUserSession';
 import { describe } from 'node:test';
+import { NextIntlClientProvider } from 'next-intl';
 
 const store = makeStore();
 const persistor = persistStore(store);
@@ -25,51 +26,54 @@ vi.mock('next/navigation', () => {
 vi.mock('@/hooks/useUserSession', () => ({
   default: vi.fn(),
 }));
+
+const customRender = (ui: React.ReactElement) => {
+  return render(
+    <NextIntlClientProvider locale="en">{ui}</NextIntlClientProvider>,
+  );
+};
+
 describe('Main Page', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('MainPage', async () => {
+  it('Main Page shows 7 links when user entered', async () => {
     vi.mocked(useUserSession).mockImplementation(() => 'ok');
-    render(
+    customRender(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <MainPage session={null} />
         </PersistGate>
       </Provider>,
     );
-    expect(screen.getByText('Welcome!')).toBeDefined();
-    expect(screen.getByText('Developers')).toBeDefined();
+    expect(screen.getByText('Welcome', { exact: false })).toBeDefined();
     expect(screen.getAllByRole('link').length).toEqual(7);
   });
 
-  it('MainPage', async () => {
+  it('Main Page shows user name when user entered', async () => {
     const user = 'name';
     store.dispatch(setUser(user));
     vi.mocked(useUserSession).mockImplementation(() => 'ok');
-    render(
+    customRender(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <MainPage session={null} />
         </PersistGate>
       </Provider>,
     );
-    expect(screen.getByText('Welcome Back', { exact: false })).toBeDefined();
-    expect(screen.getByText('Developers')).toBeDefined();
-    expect(screen.getAllByRole('link').length).toEqual(7);
+    expect(screen.getByText(user, { exact: false })).toBeDefined();
   });
 
-  it('MainPage', async () => {
+  it(`Main Page shows 6 links when user didn't enter`, async () => {
     vi.mocked(useUserSession).mockImplementation(() => null);
-    render(
+    customRender(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <MainPage session={null} />
         </PersistGate>
       </Provider>,
     );
-    expect(screen.getByText('Developers')).toBeDefined();
     expect(screen.getAllByRole('link').length).toEqual(6);
   });
 });

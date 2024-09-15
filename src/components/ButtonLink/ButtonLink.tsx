@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './ButtonLink.module.scss';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 type Props = {
   href: string;

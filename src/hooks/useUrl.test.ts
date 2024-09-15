@@ -2,18 +2,22 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { vi, describe, test, expect, beforeEach } from 'vitest';
 
 import { renderHook } from '@testing-library/react';
-import {
-  usePathname,
-  useSearchParams,
-  ReadonlyURLSearchParams,
-} from 'next/navigation';
+import { useSearchParams, ReadonlyURLSearchParams } from 'next/navigation';
 import useUrl from 'hooks/useUrl';
 import parseUrl from 'utils/parseUrl';
+import { usePathname } from '@/i18n/routing';
 
 vi.mock('next/navigation', () => ({
-  usePathname: vi.fn(),
   useSearchParams: vi.fn(),
 }));
+
+vi.mock('@/i18n/routing', () => {
+  const actual = vi.importActual('@/i18n/routing');
+  return {
+    ...actual,
+    usePathname: vi.fn(),
+  };
+});
 
 vi.mock('utils/parseUrl', () => ({
   default: vi.fn(),
