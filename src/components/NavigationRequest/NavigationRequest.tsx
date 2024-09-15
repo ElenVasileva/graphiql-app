@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import styles from './NavigationRequest.module.scss';
 
 const navigationList: {
@@ -16,6 +18,7 @@ interface INavigationRequestProps {
 
 export default function NavigationRequest(props: INavigationRequestProps) {
   const { onClick, visibleSection } = props;
+  const t = useTranslations('NavigationRequest');
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     onClick(event);
@@ -31,7 +34,7 @@ export default function NavigationRequest(props: INavigationRequestProps) {
           onClick={handleClick}
           name={item.key}
         >
-          {item.value}
+          {t(`${item.value}`)}
         </button>
       ))}
     </div>

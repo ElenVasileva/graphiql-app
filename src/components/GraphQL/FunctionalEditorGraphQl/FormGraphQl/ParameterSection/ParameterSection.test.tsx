@@ -8,12 +8,14 @@ vi.mock('./QueryEditorGraphQl/QueryEditorGraphQl', () => ({
     <div data-testid="query-editor-mock">QueryEditorGraphQl Mock</div>
   ),
 }));
-
 vi.mock('components/KeyValueEditor/KeyValueEditor', () => ({
   __esModule: true,
   default: () => (
     <div data-testid="key-value-editor-mock">KeyValueEditor Mock</div>
   ),
+}));
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
 }));
 
 describe('ParameterSection', () => {

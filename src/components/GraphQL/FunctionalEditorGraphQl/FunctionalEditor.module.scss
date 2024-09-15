@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 10px;
   width: 50%;
+  height: 100%;
   padding: 10px;
 }
 
@@ -12,7 +13,6 @@
 }
 
 .h2 {
-  font: var(--text-bold-m);
   font: var(--text-bold-m);
   color: var(--color-secondary);
   align-self: center;

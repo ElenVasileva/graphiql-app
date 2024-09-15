@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import Textarea from 'components/Textarea/Textarea';
 
 import prettyPrintJson from 'utils/prettyPrintJson';
@@ -16,6 +18,8 @@ interface IResponseSectionProps {
 
 export default function ResponseSection(props: IResponseSectionProps) {
   const { response } = props;
+  const t = useTranslations('ResponseSection');
+
   const { data, statusCode, error } = response;
 
   let str = '';
@@ -30,7 +34,7 @@ export default function ResponseSection(props: IResponseSectionProps) {
 
   return (
     <div className={styles['response-section']}>
-      <h2 className={styles.h2}>Response</h2>
+      <h2 className={styles.h2}>{t('Response')}</h2>
       <Textarea value={str} readOnly={true} />
     </div>
   );

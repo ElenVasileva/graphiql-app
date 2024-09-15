@@ -48,7 +48,6 @@ export default function QueryEditorGraphQl(props: IQueryEditorGraphQlProps) {
           formatText(event.target.value);
         }}
         value={text}
-        rows={10}
       />
       {error && (
         <textarea

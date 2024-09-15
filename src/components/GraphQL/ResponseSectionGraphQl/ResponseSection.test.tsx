@@ -6,6 +6,9 @@ vi.mock('utils/prettyPrintJson', () => ({
   __esModule: true,
   default: (str: string | null) => JSON.stringify(str, null, 4),
 }));
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
 
 describe('ResponseSection', () => {
   it('renders data correctly', () => {

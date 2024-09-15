@@ -1,12 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { useRouter } from 'next/navigation';
+
+import { useRouter } from '@/i18n/routing';
 import FormGraphQl from './FormGraphQl';
 
 import generateUrlGraphQl from 'utils/generateUrlGraphQl';
 import useUrl from 'hooks/useUrl';
 
-vi.mock('next/navigation', () => ({
+vi.mock('@/i18n/routing', () => ({
   useRouter: vi.fn(),
 }));
 vi.mock('utils/generateUrlGraphQl', () => ({
@@ -18,18 +19,26 @@ vi.mock('hooks/useUrl', () => ({
 vi.mock('./Documentation/Documentation', () => ({
   default: () => <div data-testid="documentation">Mocked Documentation</div>,
 }));
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
 
 const mockOnSubmit = vi.fn();
-const mockPush = vi.fn();
 
 const mockRouter = {
-  push: mockPush,
+  push: vi.fn(),
+  locale: 'en',
+  route: '/some-route',
+  pathname: '/some-route',
+  query: {},
+  asPath: '/some-route',
   back: vi.fn(),
+  reload: vi.fn(),
   forward: vi.fn(),
   refresh: vi.fn(),
   replace: vi.fn(),
   prefetch: vi.fn(),
-} as unknown as ReturnType<typeof useRouter>;
+};
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -48,7 +57,7 @@ describe('FormGraphQl', () => {
   it('renders correctly', () => {
     render(<FormGraphQl onSubmit={mockOnSubmit} />);
 
-    expect(screen.getByLabelText(/Endpoint URL:/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/URL:/)).toBeInTheDocument();
     expect(screen.getByText(/Send/)).toBeInTheDocument();
   });
 
@@ -68,7 +77,7 @@ describe('FormGraphQl', () => {
   it('passes form data correctly to ParameterSection and Documentation components', () => {
     render(<FormGraphQl onSubmit={mockOnSubmit} />);
 
-    expect(screen.getByLabelText(/Endpoint URL:/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/URL:/)).toBeInTheDocument();
     expect(screen.getByText(/Send/)).toBeInTheDocument();
 
     expect(screen.getByTestId('parameter-section')).toBeInTheDocument();

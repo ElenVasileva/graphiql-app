@@ -6,6 +6,9 @@ import FormGraphQl from './FormGraphQl/FormGraphQl';
 vi.mock('./FormGraphQl/FormGraphQl', () => ({
   default: vi.fn(() => <div>Mock FormGraphQl</div>),
 }));
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
 
 describe('FunctionalEditor', () => {
   it('renders correctly', () => {

@@ -20,8 +20,16 @@ export default function GraphQl() {
     variables: Record<string, string>,
     headers: Record<string, string>,
   ) {
-    const response = await fetchGraphQL(endpoint, query, variables, headers);
-    setResponse(response);
+    try {
+      const response = await fetchGraphQL(endpoint, query, variables, headers);
+      setResponse(response);
+    } catch (error) {
+      setResponse({
+        statusCode: 500,
+        data: null,
+        error: 'Internal server error',
+      });
+    }
   }
 
   return (

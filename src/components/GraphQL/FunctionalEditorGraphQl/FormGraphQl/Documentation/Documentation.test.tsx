@@ -6,6 +6,10 @@ import prettyPrintJson from 'utils/prettyPrintJson';
 
 vi.mock('services/fetchSchemaGraphQL');
 
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 describe('Documentation component', () => {
   const mockSetFormSdl = vi.fn();
 

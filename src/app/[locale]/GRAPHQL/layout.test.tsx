@@ -5,6 +5,9 @@ import Layout from './layout';
 vi.mock('@/components/GraphQL/GraphQl', () => ({
   default: () => <div>Mocked GraphQL Component</div>,
 }));
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
 
 describe('Layout component', () => {
   it('renders the heading and content container', () => {

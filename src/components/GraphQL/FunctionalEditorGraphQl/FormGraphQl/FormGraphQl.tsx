@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 import SimpleInput from 'components/SimpleInput/SimpleInput';
 import { Button } from 'components/Button/Button';
@@ -43,6 +44,8 @@ interface IFormGraphQlProps {
 
 export default function FormGraphQl(props: IFormGraphQlProps) {
   const { onSubmit } = props;
+  const t = useTranslations('FormGraphQl');
+
   const router = useRouter();
   const { endpoint, query, variables, headers } = useUrl();
   const [formData, setFormData] = useState<FormData>({
@@ -91,7 +94,7 @@ export default function FormGraphQl(props: IFormGraphQlProps) {
         <div className={styles['wrapper-url']}>
           <SimpleInput
             name="endpoint"
-            label="Endpoint URL:"
+            label="URL:"
             value={formData.endpoint}
             onBlur={setForm('endpoint')}
           ></SimpleInput>
@@ -107,7 +110,7 @@ export default function FormGraphQl(props: IFormGraphQlProps) {
             type="button"
             className={styles['btn-send']}
           >
-            Send
+            {t('Send')}
           </Button>
         </div>
         <ParameterSection formData={formData} setForm={setForm} />

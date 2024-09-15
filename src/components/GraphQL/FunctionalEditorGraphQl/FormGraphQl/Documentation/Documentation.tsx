@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 import SimpleInput from 'components/SimpleInput/SimpleInput';
 import Textarea from 'components/Textarea/Textarea';
@@ -15,6 +16,7 @@ interface IDocumentationProps {
 
 export default function Documentation(props: IDocumentationProps) {
   const { sdl, setFormSdl } = props;
+  const t = useTranslations('Documentation');
 
   const [doc, setDoc] = useState<string | null>(null);
   const [error, setError] = useState<{
@@ -47,7 +49,7 @@ export default function Documentation(props: IDocumentationProps) {
         value={sdl}
         onBlur={setFormSdl}
       ></SimpleInput>
-      <h3>Documentation</h3>
+      <h3>{t('Documentation')}</h3>
       {loading && <div>Loading...</div>}
       {error && (
         <div>{`Error: ${error.statusCode ? error.statusCode : ''} ${error.error}`}</div>
