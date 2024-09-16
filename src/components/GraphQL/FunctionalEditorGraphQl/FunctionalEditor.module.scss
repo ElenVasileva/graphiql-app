@@ -1,0 +1,31 @@
+.functional-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+}
+
+.wrapper-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.h2 {
+  font: var(--text-bold-m);
+  color: var(--color-secondary);
+  align-self: center;
+}
+
+@media (width<800px) {
+  .functional-editor {
+    width: 100%;
+  }
+}
+
+@media (width<800px) {
+  .functional-editor {
+    width: 100%;
+  }
+}

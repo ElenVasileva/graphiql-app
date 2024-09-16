@@ -1,0 +1,36 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
+import styles from './Textarea.module.scss';
+
+interface ITextareaProps {
+  value: string;
+  readOnly?: boolean;
+  className?: string;
+  handlerBlur?: (str: string) => void;
+}
+
+export default function Textarea(props: ITextareaProps) {
+  const { value, className, readOnly, handlerBlur } = props;
+  const [text, setText] = useState(value);
+
+  useEffect(() => {
+    setText(value);
+  }, [value]);
+
+  return (
+    <textarea
+      className={`${styles.textarea} ${className}`}
+      onChange={(event) => setText(event.target.value)}
+      onBlur={(event) => {
+        if (handlerBlur !== undefined) {
+          handlerBlur(event.target.value);
+        }
+      }}
+      value={text}
+      readOnly={readOnly || false}
+      data-testid="documentation-textarea"
+    />
+  );
+}

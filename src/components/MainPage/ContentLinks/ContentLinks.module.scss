@@ -1,0 +1,33 @@
+.links {
+  padding: 20px;
+  display: inline;
+  margin: 0 auto;
+
+  &__link {
+    padding: 0 40px;
+    font-size: 26px;
+    color: var(--color-tertiary);
+    text-decoration: none;
+    cursor: pointer;
+    text-wrap: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .links__link {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .links {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 5px;
+  }
+}

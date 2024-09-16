@@ -1,0 +1,13 @@
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  flex: 1;
+}
+
+@media screen and (min-width: 1100px) {
+  .mainPage {
+    width: 1100px;
+  }
+}

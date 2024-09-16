@@ -1,0 +1,19 @@
+.developerCard {
+  padding: 16px 30px;
+  margin: 8px;
+  flex-grow: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+
+  a {
+    font-size: 16px;
+    color: var(--color-tertiary);
+    text-decoration: none;
+    cursor: pointer;
+    text-wrap: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

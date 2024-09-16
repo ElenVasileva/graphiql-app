@@ -1,0 +1,17 @@
+.links {
+  padding: 20px;
+  display: inline;
+  margin: 0 auto;
+
+  &__link {
+    padding: 0 40px;
+    font-size: 26px;
+    color: var(--color-tertiary);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

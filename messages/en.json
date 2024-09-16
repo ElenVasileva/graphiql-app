@@ -1,0 +1,128 @@
+{
+  "Greeting": {
+    "Welcome": "Welcome!",
+    "WelcomeBack": "Welcome Back"
+  },
+  "SignLinks": {
+    "SignIn": "Sign In",
+    "SignUp": "Sign Up"
+  },
+  "ContentLinks": {
+    "Restful": "REST Client",
+    "GraphiQL": "GraphiQL Client",
+    "History": "History"
+  },
+  "InformationBlock": {
+    "Course": "Course",
+    "CourseContent": "is a free React course from Rolling Scope School. Everyone can study at RS School. But you should have sufficient base knowledge before the program begins. After successful completion of the course, students will receive an electronic certificate.",
+    "Project": "Project",
+    "ProjectContent": "This project `REST and GraphQL client` was performed as part of the final assignment of the course.",
+    "Developers": "Developers"
+  },
+  "LoginPage": {
+    "Title": "Sign in"
+  },
+  "LoginForm": {
+    "Email": "Email:",
+    "Password": "Password:",
+    "Submit": "Submit",
+    "SignUp": "Don't have an account?"
+  },
+  "LoginValidation": {
+    "email": {
+      "required": "Email is required",
+      "pattern": "Invalid email address"
+    },
+    "password": {
+      "required": "Password is required",
+      "min": "Password must be at least 8 characters long"
+    }
+  },
+  "RegisterPage": {
+    "Title": "Sign up"
+  },
+  "RegisterForm": {
+    "Name": "Name:",
+    "Email": "Email:",
+    "Password": "Password:",
+    "ConfirmPassword": "Confirm password:",
+    "Submit": "Submit",
+    "SignIn": "Already have an account?"
+  },
+  "RegisterValidation": {
+    "name": {
+      "required": "Name is required",
+      "pattern": "First letter must be uppercase"
+    },
+    "email": {
+      "required": "Email is required",
+      "pattern": "Invalid email address"
+    },
+    "password": {
+      "required": "Password is required",
+      "cyrillic": "Password must not contain cyrillic letters",
+      "min": "Password must be at least 8 characters long",
+      "number": "Password must contain at least one digit",
+      "lowercase": "Password must contain at least one lowercase letter",
+      "uppercase": "Password must contain at least one uppercase letter",
+      "special": "Password must contain at least one special character"
+    },
+    "confirmPassword": {
+      "required": "Confirm password is required",
+      "match": "Passwords do not match"
+    }
+  },
+  "Header": {
+    "Home": "Home",
+    "SignOut": "Sign out",
+    "SignIn": "Sign in",
+    "SignUp": "Sign up"
+  },
+  "NotFoundPage": {
+    "Title": "404 Page not found..."
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ru {🇷🇺 Russian} en {🇺🇸 English} other {Unknown}}"
+  },
+  "Rest":{    
+    "RestClient": "REST client",
+    "Send": "Send",
+    "EnterUrlOrPasteTheText": "Enter URL or paste the text",
+    "QueryParameters": "Query parameters",
+    "Headers": "Headers",
+    "Body": "Body",
+    "Variables": "Variables",
+    "WrapVariablesMessage": "Wrap variables reference in double-quotes to access it from within a request body:",
+    "Status": "Status"
+  },
+  "KeyValue":{    
+    "Key": "Key",
+    "Value": "Value"
+  },
+  "FunctionalEditor": {
+    "Editor": "Editor"
+  },
+  "FormGraphQl": {
+    "Send": "Send"
+  },
+  "Documentation": {
+    "Documentation": "Documentation"
+  },
+  "ResponseSection": {
+    "Response": "Response"
+  },
+  "LayoutGRAPHQL": { "GraphQL Client": "GraphQL Client" },
+  "NavigationRequest": {
+    "Query": "Query",
+    "Headers": "Headers",
+    "Variables": "Variables"
+  },
+  "ErrorBoundary": {
+    "Something went wrong!": "Something went wrong!",
+    "Return to": "Return to",
+    "main page": "main page",
+    "or": "or",
+    "Try again": "Try again"
+  }
+}
