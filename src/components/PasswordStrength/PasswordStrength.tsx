@@ -5,7 +5,7 @@ type Props = {
   password: string;
 };
 
-const evaluatePasswordStrength = (password: string) => {
+export const evaluatePasswordStrength = (password: string) => {
   let score = 0;
   if (!password) return 0;
 
@@ -37,7 +37,11 @@ export const PasswordStrength: FC<Props> = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      <svg viewBox="0 0 24 24" className={styles.svg}>
+      <svg
+        viewBox="0 0 24 24"
+        className={styles.svg}
+        data-testid="password-strength-svg"
+      >
         <circle r={R} cx="50%" cy="50%" opacity={0.2} />
         <circle
           r={R}
@@ -46,6 +50,7 @@ export const PasswordStrength: FC<Props> = (props) => {
           strokeDasharray={LENGTH}
           strokeDashoffset={offset}
           className={styles.strength}
+          data-testid="strength-circle"
         />
       </svg>
     </div>

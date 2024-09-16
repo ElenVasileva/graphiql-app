@@ -71,6 +71,8 @@ export const Input = <T extends FieldValues>(props: Props<T>) => {
             <Image
               src={showPassword ? eyeOff : eye}
               alt={showPassword ? 'Hide password' : 'Show password'}
+              height={24}
+              width={24}
               priority
             />
           </button>
